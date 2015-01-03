@@ -7,7 +7,7 @@
 #' @docType package
 #' @name PP
 #' @author Manuel Reif
-#' @seealso \link{PP_gpcm}, \link{PP_4pl}, \link{PPall}
+#' @seealso \link{PP_gpcm}, \link{PP_4pl}, \link{PPall}, link{sim_4pl}
 #' @references 
 #' 
 #' Barton, M. A., & Lord, F. M. (1981). An Upper Asymptote for the Three-Parameter Logistic Item-Response Model.
