@@ -24,6 +24,11 @@ resgpcmeap <- PP_gpcm(respm = awmatrix,thres = THRES, slopes = sl,type = "eap")
 resgpcmrob <- PP_gpcm(respm = awmatrix,thres = THRES, slopes = sl,type = "robust")
 
 
+## Input is a data.frame:
+
+mydat2df <- data.frame(sex=sample(c("m","w"),5,replace=TRUE),awmatrix)
+resgpcmwle_df <- PP_gpcm(respm = mydat2df,whit=2:7,thres = THRES, slopes = sl,type = "wle")
+
 ## PCM model ##### 
 
 # MLE

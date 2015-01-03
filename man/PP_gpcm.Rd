@@ -3,12 +3,14 @@
 \alias{PP_gpcm}
 \title{Estimate Person Parameters for the GPCM}
 \usage{
-PP_gpcm(respm, thres, slopes, theta_start = NULL, mu = NULL,
+PP_gpcm(respm, whit = NULL, thres, slopes, theta_start = NULL, mu = NULL,
   sigma2 = NULL, type = "wle", maxsteps = 100, exac = 0.001, H = 1,
   ctrl = list())
 }
 \arguments{
-\item{respm}{An integer matrix, which contains the examinees responses. A persons x items matrix is expected.}
+\item{respm}{An integer matrix or a \code{data.frame}, which contains the examinees responses. In the case of a matrix, a persons x items matrix is expected. Make sure that the responses are numeric (integer)! If a \code{data.frame} is submitted, \code{whit} must be set.}
+
+\item{whit}{A numeric vector which indicates the positions of the items. Setting this argument is only necessary if the input in \code{respm} is a \code{data.frame}. For a matrix, every column is supposed to be an item.}
 
 \item{thres}{A numeric matrix which contains the threshold parameter for each item. If the first row of the matrix is not set to zero (only zeroes in the first row) - then a row-vector with zeroes is added by default.}
 

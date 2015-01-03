@@ -15,7 +15,8 @@
 #'The model simplifies to the Partial Credit Model by setting \eqn{\alpha_{i} = 1, \forall i}.
 #'
 #' 
-#'@param respm An integer matrix, which contains the examinees responses. A persons x items matrix is expected.
+#'@param respm An integer matrix or a \code{data.frame}, which contains the examinees responses. In the case of a matrix, a persons x items matrix is expected. Make sure that the responses are numeric (integer)! If a \code{data.frame} is submitted, \code{whit} must be set.
+#'@param whit A numeric vector which indicates the positions of the items. Setting this argument is only necessary if the input in \code{respm} is a \code{data.frame}. For a matrix, every column is supposed to be an item.
 #'@param thres A numeric matrix which contains the threshold parameter for each item. If the first row of the matrix is not set to zero (only zeroes in the first row) - then a row-vector with zeroes is added by default.
 #'@param slopes A numeric vector, which contains the slope parameters for each item - one parameter per item is expected.
 #'@param theta_start A vector which contains a starting value for each person. Currently this is necessary to supply, but soon it will be set automatically if nothing is committed.
@@ -67,7 +68,7 @@
 
 
 
-PP_gpcm <- function(respm, thres, slopes, theta_start=NULL,
+PP_gpcm <- function(respm, whit=NULL, thres, slopes, theta_start=NULL,
                     mu = NULL, sigma2 = NULL, type="wle", maxsteps=100, exac=0.001,H=1,ctrl=list())
 {
   
@@ -76,6 +77,24 @@ PP_gpcm <- function(respm, thres, slopes, theta_start=NULL,
   attr(call, "date") <- date() 
   attr(call,"version") <- packageVersion("PP")
   ###
+  
+  mat_resp  <- is.matrix(respm)  
+  null_whit <- is.null(whit)  
+  
+  # 
+  if(!mat_resp & null_whit) stop("Submit a matrix, or submit a valid vector for whit.\n")
+  
+  if(!mat_resp) 
+  {
+    # if not a matrix, extract the items and convert to matrix
+    rest  <- respm[ , -whit, drop=FALSE]
+    respm <- as.matrix(respm[ , whit, drop=FALSE])
+    
+    # check if first element is character
+    if(is.character(respm[1,1])) stop("At least one response is of type character!\n")
+  } else {
+    rest <- data.frame()  
+  }
   
   
   ## --------- user controls
@@ -208,7 +227,7 @@ if(type %in% c("mle","wle","map"))
   colnames(resPP$resPP) <- c("estimate","SE")
   
 
-  ipar <- list(respm=respm,thres=thres,slopes=slopes,theta_start=theta_start,mu=mu,sigma2=sigma2,cont=cont,H=H)
+  ipar <- list(respm=respm,whit=whit,thres=thres,slopes=slopes,theta_start=theta_start,mu=mu,sigma2=sigma2,cont=cont,H=H,rest=rest)
   
   
   if(cont$killdupli)
