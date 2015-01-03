@@ -34,7 +34,8 @@
 #' \deqn{w(r_i) =  1 \rightarrow if\, |r_i| \leq H}
 #' \deqn{w(r_i) = H/|r| \rightarrow if\, |r_i| > H}
 #' 
-#'@param respm An integer matrix, which contains the examinees responses. A persons x items matrix is expected.
+#'@param respm An integer matrix or a \code{data.frame}, which contains the examinees responses. In the case of a matrix, a persons x items matrix is expected. Make sure that the responses are numeric (integer)! If a \code{data.frame} is submitted, \code{whit} must be set.
+#'@param whit A numeric vector which indicates the positions of the items. Setting this argument is only necessary if the input in \code{respm} is a \code{data.frame}. For a matrix, every column is supposed to be an item.
 #'@param thres A numeric vector or a numeric matrix which contains the threshold parameter for each item. If a matrix is submitted, the first row must contain only \bold{zeroes}!
 #'@param slopes A numeric vector, which contains the slope parameters for each item - one parameter per item is expected.
 #'@param lowerA A numeric vector, which contains the lower asymptote parameters (kind of guessing parameter) for each item.
@@ -92,8 +93,7 @@
 
 
 
-PP_4pl <- function(respm, thres, slopes=NULL, lowerA=NULL, upperA=NULL, theta_start=NULL,
-                   mu = NULL, sigma2 = NULL, type="wle", maxsteps=40, exac=0.001,H=1,ctrl=list())
+PP_4pl <- function(respm, whit=NULL ,thres, slopes=NULL, lowerA=NULL, upperA=NULL, theta_start=NULL, mu = NULL, sigma2 = NULL, type="wle", maxsteps=40, exac=0.001,H=1,ctrl=list())
 {
   
   ### 
@@ -102,6 +102,27 @@ PP_4pl <- function(respm, thres, slopes=NULL, lowerA=NULL, upperA=NULL, theta_st
   attr(call,"version") <- packageVersion("PP")
   ###
 
+mat_resp  <- is.matrix(respm)  
+null_whit <- is.null(whit)  
+
+# 
+if(!mat_resp & null_whit) stop("Submit a matrix, or submit a valid vector for whit.\n")
+
+if(!mat_resp) 
+  {
+  # if not a matrix, extract the items and convert to matrix
+  rest  <- respm[ , -whit, drop=FALSE]
+  respm <- as.matrix(respm[ , whit, drop=FALSE])
+  
+  # check if first element is character
+  if(is.character(respm[1,1])) stop("At least one response is of type character!\n")
+  } else {
+  rest <- data.frame()  
+  }
+  
+  
+  
+  
 nitem <- ncol(respm)  
   
 ## --------- user controls
@@ -323,8 +344,8 @@ if(type=="mle" | type=="robust")
 
 colnames(resPP$resPP) <- c("estimate","SE")
 
-ipar <- list(respm=respm,thres=thres,slopes=slopes,lowerA=lowerA,
-             upperA=upperA,theta_start=theta_start,mu=mu,sigma2=sigma2,cont=cont,H=H)
+ipar <- list(respm=respm,whit=whit,thres=thres,slopes=slopes,lowerA=lowerA,
+             upperA=upperA,theta_start=theta_start,mu=mu,sigma2=sigma2,cont=cont,H=H,rest=rest)
 
 
 if(cont$killdupli)
