@@ -5,16 +5,18 @@
 \alias{summary.ppeo}
 \title{Estimate Person Parameters}
 \usage{
-PPall(respm, thres, slopes, lowerA, upperA, theta_start = NULL, mu = NULL,
-  sigma2 = NULL, type = "wle", model2est, maxsteps = 100, exac = 0.001,
-  H = 1, ctrl = list())
+PPall(respm, whit = NULL, thres, slopes, lowerA, upperA, theta_start = NULL,
+  mu = NULL, sigma2 = NULL, type = "wle", model2est, maxsteps = 100,
+  exac = 0.001, H = 1, ctrl = list())
 
 \method{print}{ppeo}(x, ...)
 
 \method{summary}{ppeo}(object, nrowmax = 15, ...)
 }
 \arguments{
-\item{respm}{An integer matrix, which contains the examinees responses. A persons x items matrix is expected.}
+\item{respm}{An integer matrix or a \code{data.frame}, which contains the examinees responses. In the case of a matrix, a persons x items matrix is expected. Make sure that the responses are numeric (integer)! If a \code{data.frame} is submitted, \code{whit} must be set.}
+
+\item{whit}{A numeric vector which indicates the positions of the items. Setting this argument is only necessary if the input in \code{respm} is a \code{data.frame}. For a matrix, every column is supposed to be an item.}
 
 \item{thres}{A numeric matrix which contains the threshold parameter for each item. If the first row of the matrix is not set to zero (only zeroes in the first row) - then a row-vector with zeroes is added by default.}
 
@@ -59,6 +61,9 @@ PPall(respm, thres, slopes, lowerA, upperA, theta_start = NULL, mu = NULL,
 }
 \value{
 The function returns a list with the estimation results and pretty much everything which has been submitted to fit the model. The estimation results can be found in \code{OBJ$resPP}. The core result is a number_of_persons x 2 matrix, which contains the ability estimate and the SE for each submitted person.
+
+
+Note that the returned \code{respm} in \code{resPP$ipar$respm} is always a matrix which contains the extracted responses and not a data.frame - if a data.frame was submitted in the first place! Any further columns are stored in \code{resPP$ipar$rest}.
 }
 \description{
 Compute person parameters for the 1,2,3,4-PL model and for the GPCM. Choose between ML, WL, MAP, EAP and robust estimation. Use this function if 4-PL items and GPCM items are mixed for each person.

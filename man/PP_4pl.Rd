@@ -44,6 +44,9 @@ PP_4pl(respm, whit = NULL, thres, slopes = NULL, lowerA = NULL,
 }
 \value{
 The function returns a list with the estimation results and pretty much everything which has been submitted to fit the model. The estimation results can be found in \code{OBJ$resPP}. The core result is a number_of_persons x 2 matrix, which contains the ability estimate and the SE for each submitted person.
+
+
+Note that the returned \code{respm} in \code{resPP$ipar$respm} is always a matrix which contains the extracted responses and not a data.frame - if a data.frame was submitted in the first place! Any further columns are stored in \code{resPP$ipar$rest}.
 }
 \description{
 Compute Person Parameters for the 1/2/3/4-PL model and choose between five common estimation techniques: ML, WL, MAP, EAP and a robust estimation. All item parameters are treated as fixed.

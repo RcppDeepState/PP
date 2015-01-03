@@ -39,6 +39,9 @@ PP_gpcm(respm, whit = NULL, thres, slopes, theta_start = NULL, mu = NULL,
 }
 \value{
 The function returns a list with the estimation results and pretty much everything which has been submitted to fit the model. The estimation results can be found in \code{OBJ$resPP}. The core result is a number_of_persons x 2 matrix, which contains the ability estimate and the SE for each submitted person.
+
+
+Note that the returned \code{respm} in \code{resPP$ipar$respm} is always a matrix which contains the extracted responses and not a data.frame - if a data.frame was submitted in the first place! Any further columns are stored in \code{resPP$ipar$rest}.
 }
 \description{
 Compute person parameters for the GPCM and choose between five common estimation techniques: ML, WL, MAP, EAP and a robust estimation. All item parameters are treated as fixed.
@@ -80,6 +83,11 @@ resgpcmeap <- PP_gpcm(respm = awmatrix,thres = THRES, slopes = sl,type = "eap")
 # robust estimation
 resgpcmrob <- PP_gpcm(respm = awmatrix,thres = THRES, slopes = sl,type = "robust")
 
+
+## Input is a data.frame:
+
+mydat2df <- data.frame(sex=sample(c("m","w"),5,replace=TRUE),awmatrix)
+resgpcmwle_df <- PP_gpcm(respm = mydat2df,whit=2:7,thres = THRES, slopes = sl,type = "wle")
 
 ## PCM model ##### 
 
