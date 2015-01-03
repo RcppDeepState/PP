@@ -3,12 +3,14 @@
 \alias{PP_4pl}
 \title{Estimate Person Parameters for the 4-PL model}
 \usage{
-PP_4pl(respm, thres, slopes = NULL, lowerA = NULL, upperA = NULL,
-  theta_start = NULL, mu = NULL, sigma2 = NULL, type = "wle",
-  maxsteps = 40, exac = 0.001, H = 1, ctrl = list())
+PP_4pl(respm, whit = NULL, thres, slopes = NULL, lowerA = NULL,
+  upperA = NULL, theta_start = NULL, mu = NULL, sigma2 = NULL,
+  type = "wle", maxsteps = 40, exac = 0.001, H = 1, ctrl = list())
 }
 \arguments{
-\item{respm}{An integer matrix, which contains the examinees responses. A persons x items matrix is expected.}
+\item{respm}{An integer matrix or a \code{data.frame}, which contains the examinees responses. In the case of a matrix, a persons x items matrix is expected. Make sure that the responses are numeric (integer)! If a \code{data.frame} is submitted, \code{whit} must be set.}
+
+\item{whit}{A numeric vector which indicates the positions of the items. Setting this argument is only necessary if the input in \code{respm} is a \code{data.frame}. For a matrix, every column is supposed to be an item.}
 
 \item{thres}{A numeric vector or a numeric matrix which contains the threshold parameter for each item. If a matrix is submitted, the first row must contain only \bold{zeroes}!}
 
@@ -114,6 +116,12 @@ res1plrob <- PP_4pl(respm = awm,thres = diffpar,type = "robust")
 summary(res1plmle)
 summary(res1plwle)
 summary(res1plmap)
+
+
+## Input is a data.frame:
+
+mydat2df <- data.frame(sex=sample(c("m","w"),10,replace=TRUE),awm)
+res1plwle_df <- PP_4pl(respm = mydat2df,whit=2:13,thres = diffpar,type = "wle")
 
 
 ## 2PL model ##### 

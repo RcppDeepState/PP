@@ -34,9 +34,9 @@ res234pl_dup2 <- vector(mode="list",length=length(estmod))
 
 for(a in 1:length(estmod))
   {
-    res234pl_dup1[[a]]  <- PP_4pl(awmatrix,THRESx,slopes = sl,type = estmod[[a]],ctrl = list(killdupli=TRUE),upperA = UA[[a]],lowerA = LA[[a]])
+    res234pl_dup1[[a]]  <- PP_4pl(awmatrix,thres=THRESx,slopes = sl,type = estmod[[a]],ctrl = list(killdupli=TRUE),upperA = UA[[a]],lowerA = LA[[a]])
   
-    res234pl_dup2[[a]] <- PP_4pl(awmatrix,THRESx,slopes = sl,type = estmod[[a]],ctrl = list(killdupli=FALSE),upperA = UA[[a]],lowerA = LA[[a]])
+    res234pl_dup2[[a]] <- PP_4pl(awmatrix,thres=THRESx,slopes = sl,type = estmod[[a]],ctrl = list(killdupli=FALSE),upperA = UA[[a]],lowerA = LA[[a]])
     
   }
 

@@ -35,6 +35,12 @@ summary(res1plwle)
 summary(res1plmap)
 
 
+## Input is a data.frame:
+
+mydat2df <- data.frame(sex=sample(c("m","w"),10,replace=TRUE),awm)
+res1plwle_df <- PP_4pl(respm = mydat2df,whit=2:13,thres = diffpar,type = "wle")
+
+
 ## 2PL model ##### 
 
 # MLE
