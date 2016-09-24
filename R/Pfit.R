@@ -76,12 +76,7 @@ Pfit <- function(respm,pp,fitindices) UseMethod("Pfit")
   #' @method pfit gpcm
   #' @export
   Pfit.gpcm <- function(respm,pp,fitindices){
-    out <- list("InfitOutfitpoly" = InfitOutfit( 
-                                    data=resmp, 
-                                    thetas=pp$resPP$resPP$estimate, 
-                                    betas, 
-                                    slope=pp$ipar$slopes
-                                    ))  
+    cat("the mixed method for person fits is not yet implemented \n")
   }
   
   #' @rdname pfit
