@@ -22,7 +22,8 @@ Depends:
 Suggests:
     testthat,
     roxygen2,
-    knitr
+    knitr,
+    eRm
 Imports:
     Rcpp (>= 0.11.2)
 LinkingTo: Rcpp
