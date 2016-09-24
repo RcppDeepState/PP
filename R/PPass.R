@@ -36,7 +36,7 @@ PPass <- function(...) UseMethod("PPass")
 #' @seealso \link{PP_4pl}, \link{PP_gpcm}, \link{PPall}
 #' 
 
-PPass.default <- function(respdf, items="all", mod=c("1PL","2PL","3PL","4PL","PCM","GPCM","MIXED"), fitindices= c("lz","lz_star"), ...)
+PPass.default <- function(respdf, items="all", mod=c("1PL","2PL","3PL","4PL","PCM","GPCM","MIXED"), fitindices= c("lz","lzstar"), ...)
 {
 
   
@@ -115,7 +115,7 @@ pp_est <- PP_4pl(respm=RMobj$X, thres=RMobj$betapar * (-1), ...)
   
 ########### PUT IT ALL TOGETHER ###############################
   
-  
+pp_est  
 }
 
 
