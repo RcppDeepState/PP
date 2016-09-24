@@ -79,7 +79,46 @@ if(mod %in% c("1PL","2PL","3PL","4PL"))
   
   
   
-  
+########### PUT IT ALL TOGETHER ############################### 
   
   
 }
+
+
+
+
+
+# ================= for eRm input =================================
+
+
+#' @param RMobj A fitted Rasch Model (\code{RM()}) object which stems from the \code{eRm} package.
+#' 
+#' @rdname PPass
+#' 
+#' @export
+#' 
+#' @method PPass Rm
+#' 
+#' 
+PPass.Rm <- function(RMobj, fitindices= c("lz","lz_star"), ...)
+{
+  
+########### ESTIMATE PERSON PARAMETERS ###############################  
+  
+pp_est <- PP_4pl(respm=RMobj$X, thres=RMobj$betapar * (-1), ...)
+
+  
+########### ESTIMATE PERSON FIT ###############################
+  
+  
+  
+  
+########### PUT IT ALL TOGETHER ###############################
+  
+  
+}
+
+
+
+
+

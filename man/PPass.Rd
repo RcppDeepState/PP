@@ -2,6 +2,7 @@
 % Please edit documentation in R/PPass.R
 \name{PPass}
 \alias{PPass}
+\alias{PPass.Rm}
 \alias{PPass.default}
 \title{Person Assessment function}
 \usage{
@@ -9,6 +10,8 @@ PPass(...)
 
 \method{PPass}{default}(respdf, items = "all", mod = c("1PL", "2PL", "3PL",
   "4PL", "PCM", "GPCM", "MIXED"), fitindices = c("lz", "lz_star"), ...)
+
+\method{PPass}{Rm}(RMobj, fitindices = c("lz", "lz_star"), ...)
 }
 \arguments{
 \item{respdf}{A data.frame which contains the items, and perhaps other informations. Each row is a person related resonse patter. Each column denotes a variable.}
@@ -18,6 +21,8 @@ PPass(...)
 \item{mod}{Choose your data generating model. This argument switches between the three person parameter estimating functions \code{PP_4pl}, \code{PP_gpcm} and \code{PPall}.}
 
 \item{fitindices}{A character vector which denotes the fit indices to compute.}
+
+\item{RMobj}{A fitted Rasch Model (\code{RM()}) object which stems from the \code{eRm} package.}
 
 \item{\ldots}{Submit arguments to the underlying functions: \code{PP_4pl}, \code{PP_gpcm} and \code{PPall} (see documentation files).}
 }
