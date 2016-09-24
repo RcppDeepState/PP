@@ -4,11 +4,12 @@
 #' 
 #' Estimate Person Paramters and estimate Person Fit in one step to gain resonse pattern assessment.
 #' 
-#' @param ... Submit arguments to the underlying functions: \code{PP\_4pl}, \code{PP\_gpcm} and \code{PPall} (see documentation files).
+#' @param \ldots Submit arguments to the underlying functions: \code{PP_4pl}, \code{PP_gpcm} and \code{PPall} (see documentation files).
 #' 
-#' @rdname ppass
+#' @rdname PPass
 #' 
 #' @export
+#'
 
 PPass <- function(...) UseMethod("PPass")
 
@@ -18,15 +19,17 @@ PPass <- function(...) UseMethod("PPass")
 
 #' @param respdf A data.frame which contains the items, and perhaps other informations. Each row is a person related resonse patter. Each column denotes a variable.
 #' 
-#' @param items A numeric (integer) vector which indicates the positions of the items in the data.frame (\code{"respdf}). If \code{items} = "all", \bold{all columns} are treated as items.
+#' @param items A numeric (integer) vector which indicates the positions of the items in the data.frame (\code{respdf}). If \code{items} = 'all', \bold{all columns} are treated as items.
 #' 
-#' @param mod Choose your data generating model. This argument switches between the three person parameter estimating functions \code{PP\_4pl}, \code{PP\_gpcm} and \code{PPall}.
+#' @param mod Choose your data generating model. This argument switches between the three person parameter estimating functions \code{PP_4pl}, \code{PP_gpcm} and \code{PPall}.
 #' 
 #' @param fitindices A character vector which denotes the fit indices to compute.
 #' 
 #' @author Manuel Reif, Jan Steinfeld
 #' 
 #' @method PPass default
+#' 
+#' @rdname PPass
 #' 
 #' @export
 #' 

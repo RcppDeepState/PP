@@ -26,3 +26,4 @@ Suggests:
 Imports:
     Rcpp (>= 0.11.2)
 LinkingTo: Rcpp
+RoxygenNote: 5.0.1
