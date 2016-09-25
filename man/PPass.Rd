@@ -4,14 +4,17 @@
 \alias{PPass}
 \alias{PPass.Rm}
 \alias{PPass.default}
+\alias{PPass.eRm}
 \title{Person Assessment function}
 \usage{
 PPass(...)
 
 \method{PPass}{default}(respdf, items = "all", mod = c("1PL", "2PL", "3PL",
-  "4PL", "PCM", "GPCM", "MIXED"), fitindices = c("lz", "lz_star"), ...)
+  "4PL", "PCM", "GPCM", "MIXED"), fitindices = c("lz", "lzstar"), ...)
 
 \method{PPass}{Rm}(RMobj, fitindices = c("lz", "lz_star"), ...)
+
+\method{PPass}{eRm}(PCMobj, fitindices = c("lz", "lz_star"), ...)
 }
 \arguments{
 \item{respdf}{A data.frame which contains the items, and perhaps other informations. Each row is a person related resonse patter. Each column denotes a variable.}
@@ -24,10 +27,57 @@ PPass(...)
 
 \item{RMobj}{A fitted Rasch Model (\code{RM()}) object which stems from the \code{eRm} package.}
 
-\item{\ldots}{Submit arguments to the underlying functions: \code{PP_4pl}, \code{PP_gpcm} and \code{PPall} (see documentation files).}
+\item{PCMobj}{A fitted Partial Credit Model (\code{PCM()}) object which stems from the \code{eRm} package.}
+
+\item{\ldots}{Submit arguments to the underlying functions: \code{PP_4pl}, \code{PP_gpcm} and \code{PPall} (see documentation files) for person parameter estimation.}
+}
+\value{
+The original data.frame and
+
+\itemize{
+
+\item The Person Parameter estimates incl. Standard Errors (2 columns)
+
+\item Person Fit Indices you chose (1 or more)
+
+}
 }
 \description{
-Estimate Person Paramters and estimate Person Fit in one step to gain resonse pattern assessment.
+Estimate Person Paramters and estimate Person Fit in one step to gain resonse pattern assessment. Submit a data.frame which contains item responses, or an fitted model (Rasch Model and Partial Credit Model are supported) of the \code{eRm} package.
+}
+\details{
+PPass fuses Person Parameter estimation and Person Fit computation into a single function.
+}
+\examples{
+
+library(eRm)
+
+
+## ========== RM - eRm 
+my_data <- eRm::sim.rasch(200, 12)
+my_rm <- eRm::RM(my_data)
+
+res_pp1 <- PPass(my_rm)
+
+
+
+## ========== PCM - eRm
+
+set.seed(2751)
+
+THRES  <- matrix(c(-2,-1.23,1.11,3.48,1
+                   ,2,-1,-0.2,0.5,1.3,-0.8,1.5),nrow=2)
+THRES <- rbind(THRES,c(-0.2,NA,NA,NA,NA,NA))
+
+sl          <- rep(1,6)
+THRESx      <- rbind(0,THRES)
+THETA       <- rnorm(200)
+simdat_gpcm <- sim_gpcm(thres = THRESx,alpha = sl,theta = THETA)
+
+my_pcm <- eRm::PCM(simdat_gpcm)
+
+res_pp2 <- PPass(my_pcm)
+
 }
 \author{
 Manuel Reif, Jan Steinfeld

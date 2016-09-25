@@ -2,11 +2,13 @@
 
 #' Person Assessment function
 #' 
-#' Estimate Person Paramters and estimate Person Fit in one step to gain resonse pattern assessment.
+#' Estimate Person Paramters and estimate Person Fit in one step to gain resonse pattern assessment. Submit a data.frame which contains item responses, or an fitted model (Rasch Model and Partial Credit Model are supported) of the \code{eRm} package.
 #' 
-#' @param \ldots Submit arguments to the underlying functions: \code{PP_4pl}, \code{PP_gpcm} and \code{PPall} (see documentation files).
+#' @param \ldots Submit arguments to the underlying functions: \code{PP_4pl}, \code{PP_gpcm} and \code{PPall} (see documentation files) for person parameter estimation.
 #' 
 #' @rdname PPass
+#' 
+#' @example R/.example_ppass.R
 #' 
 #' @export
 #'
@@ -25,6 +27,19 @@ PPass <- function(...) UseMethod("PPass")
 #' 
 #' @param fitindices A character vector which denotes the fit indices to compute.
 #' 
+#' 
+#' @details PPass fuses Person Parameter estimation and Person Fit computation into a single function.
+#' 
+#' @return The original data.frame and
+#' 
+#' \itemize{
+#' 
+#' \item The Person Parameter estimates incl. Standard Errors (2 columns)
+#' 
+#' \item Person Fit Indices you chose (1 or more)
+#' 
+#' }
+#' 
 #' @author Manuel Reif, Jan Steinfeld
 #' 
 #' @method PPass default
@@ -33,7 +48,7 @@ PPass <- function(...) UseMethod("PPass")
 #' 
 #' @export
 #' 
-#' @seealso \link{PP_4pl}, \link{PP_gpcm}, \link{PPall}
+#' @seealso \link{PP_4pl}, \link{PP_gpcm}, \link{PPall}, \link{Pfit}
 #' 
 
 PPass.default <- function(respdf, items="all", mod=c("1PL","2PL","3PL","4PL","PCM","GPCM","MIXED"), fitindices= c("lz","lzstar"), ...)
@@ -119,6 +134,57 @@ pp_est
 }
 
 
+##### PCM ----------------
 
+
+#' @param PCMobj A fitted Partial Credit Model (\code{PCM()}) object which stems from the \code{eRm} package.
+#' 
+#' @rdname PPass
+#' 
+#' @export
+#' 
+#' @method PPass eRm
+#' 
+#' 
+PPass.eRm <- function(PCMobj, fitindices= c("lz","lz_star"), ...)
+{
+  
+  # Unfortunately there is no class PCM in eRm ... 
+  stopifnot(PCMobj$model == "PCM")
+  
+  # get threshold parameters:
+  
+  # create threshold matrix:
+  tps <- eRm::thresholds(PCMobj)$threshpar
+  
+  len1        <- apply(PCMobj$X, 2, function(x) length(unique(x))-1)
+  itemss      <- unlist(lapply(1:length(len1), function(x) rep(x, each=len1[x])))
+  wohin_zeile <- unlist(lapply(len1, function(x) 1:x))
+  
+  names(wohin_zeile) <- NULL
+  
+  thres <- matrix(NA,ncol=ncol(PCMobj$X), nrow=max(len1))
+  
+  for(i in 1:length(tps))
+    {
+      thres[wohin_zeile[i], itemss[i]] <- tps[i]
+    }
+  
+  thres <- rbind(0,thres)
+  
+  ########### ESTIMATE PERSON PARAMETERS ###############################  
+  
+  pp_est <- PP_GPCM(respm=PCMobj$X, thres=thres, ...)
+  
+  
+  ########### ESTIMATE PERSON FIT ###############################
+  
+  
+  
+  
+  ########### PUT IT ALL TOGETHER ###############################
+  
+  pp_est  
+}
 
 
