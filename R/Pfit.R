@@ -39,7 +39,7 @@ Pfit <- function(respm,pp,fitindices) UseMethod("Pfit")
 #'@param pp 		      object of the class PP with estimated personparameter
 #'@param fitindices		character vector of desired person fit statistics. Currently the following fit statistics are provided c("lz","lzstar","infitoutfit")
 #' 
-#'@method pfit fourpl
+#'@method Pfit fourpl
 #'@export
   Pfit.fourpl <- function(respm,pp,fitindices){
     pfitfunctions <- list("lz" = lz,
@@ -73,7 +73,7 @@ Pfit <- function(respm,pp,fitindices) UseMethod("Pfit")
   #'@param pp 		      object of the class PP with estimated personparameter
   #'@param fitindices		character vector of desired person fit statistics. c("lz","lzstar","infitoutfit")
   #' 
-  #' @method pfit gpcm
+  #' @method Pfit gpcm
   #' @export
   Pfit.gpcm <- function(respm,pp,fitindices){
     cat("the mixed method for person fits is not yet implemented \n")
@@ -84,7 +84,7 @@ Pfit <- function(respm,pp,fitindices) UseMethod("Pfit")
   #'@param pp 		      object of the class PP with estimated personparameter
   #'@param fitindices		character vector of desired person fit statistics. c("lz","lzstar","infitoutfit")
   #' 
-  #' @method pfit gpcm4pl
+  #' @method Pfit gpcm4pl
   #' @export
   Pfit.gpcm4pl <- function(respm,pp,fitindices){
       cat("the mixed method for person fits is not yet implemented \n")
