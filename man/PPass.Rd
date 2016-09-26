@@ -4,7 +4,6 @@
 \alias{PPass}
 \alias{PPass.Rm}
 \alias{PPass.default}
-\alias{PPass.eRm}
 \title{Person Assessment function}
 \usage{
 PPass(...)
@@ -13,8 +12,6 @@ PPass(...)
   "4PL", "PCM", "GPCM", "MIXED"), fitindices = c("lz", "lzstar"), ...)
 
 \method{PPass}{Rm}(RMobj, fitindices = c("lz", "lz_star"), ...)
-
-\method{PPass}{eRm}(PCMobj, fitindices = c("lz", "lz_star"), ...)
 }
 \arguments{
 \item{respdf}{A data.frame which contains the items, and perhaps other informations. Each row is a person related resonse patter. Each column denotes a variable.}
@@ -26,8 +23,6 @@ PPass(...)
 \item{fitindices}{A character vector which denotes the fit indices to compute.}
 
 \item{RMobj}{A fitted Rasch Model (\code{RM()}) object which stems from the \code{eRm} package.}
-
-\item{PCMobj}{A fitted Partial Credit Model (\code{PCM()}) object which stems from the \code{eRm} package.}
 
 \item{\ldots}{Submit arguments to the underlying functions: \code{PP_4pl}, \code{PP_gpcm} and \code{PPall} (see documentation files) for person parameter estimation.}
 }
@@ -83,6 +78,6 @@ res_pp2 <- PPass(my_pcm)
 Manuel Reif, Jan Steinfeld
 }
 \seealso{
-\link{PP_4pl}, \link{PP_gpcm}, \link{PPall}
+\link{PP_4pl}, \link{PP_gpcm}, \link{PPall}, \link{Pfit}
 }
 

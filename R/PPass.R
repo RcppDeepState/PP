@@ -117,74 +117,53 @@ if(mod %in% c("1PL","2PL","3PL","4PL"))
 #' 
 PPass.Rm <- function(RMobj, fitindices= c("lz","lz_star"), ...)
 {
-  
-########### ESTIMATE PERSON PARAMETERS ###############################  
-  
-pp_est <- PP_4pl(respm=RMobj$X, thres=RMobj$betapar * (-1), ...)
 
+  # geht leider nicht anders weil sowohl PCM als auch RM die Klassen Rm als auch eRm haben.
   
-########### ESTIMATE PERSON FIT ###############################
-  
-  
-  
-  
-########### PUT IT ALL TOGETHER ###############################
+  if(RMobj$model == "RM")
+    {
+    
+    pp_est <- PP_4pl(respm=RMobj$X, thres=RMobj$betapar * (-1), ...)
+    
+
+    
+    } else if(RMobj$model == "PCM")
+      {
+       
+      # get threshold parameters:
+      
+      # create threshold matrix:
+      tps <- eRm::thresholds(RMobj)$threshpar
+      
+      len1        <- apply(RMobj$X, 2, function(x) length(unique(x))-1)
+      itemss      <- unlist(lapply(1:length(len1), function(x) rep(x, each=len1[x])))
+      wohin_zeile <- unlist(lapply(len1, function(x) 1:x))
+      
+      names(wohin_zeile) <- NULL
+      
+      thres <- matrix(NA,ncol=ncol(RMobj$X), nrow=max(len1))
+      
+      for(i in 1:length(tps))
+      {
+        thres[wohin_zeile[i], itemss[i]] <- tps[i]
+      }
+      
+      thres <- rbind(0,thres)
+      
+      ########### ESTIMATE PERSON PARAMETERS ###############################  
+      
+      pp_est <- PP_GPCM(respm=RMobj$X, thres=thres, ...)
+       
+      
+      } else {
+        
+        stop("I don't know this model!")
+        
+      }
+
   
 pp_est  
 }
 
-
-##### PCM ----------------
-
-
-#' @param PCMobj A fitted Partial Credit Model (\code{PCM()}) object which stems from the \code{eRm} package.
-#' 
-#' @rdname PPass
-#' 
-#' @export
-#' 
-#' @method PPass eRm
-#' 
-#' 
-PPass.eRm <- function(PCMobj, fitindices= c("lz","lz_star"), ...)
-{
-  
-  # Unfortunately there is no class PCM in eRm ... 
-  stopifnot(PCMobj$model == "PCM")
-  
-  # get threshold parameters:
-  
-  # create threshold matrix:
-  tps <- eRm::thresholds(PCMobj)$threshpar
-  
-  len1        <- apply(PCMobj$X, 2, function(x) length(unique(x))-1)
-  itemss      <- unlist(lapply(1:length(len1), function(x) rep(x, each=len1[x])))
-  wohin_zeile <- unlist(lapply(len1, function(x) 1:x))
-  
-  names(wohin_zeile) <- NULL
-  
-  thres <- matrix(NA,ncol=ncol(PCMobj$X), nrow=max(len1))
-  
-  for(i in 1:length(tps))
-    {
-      thres[wohin_zeile[i], itemss[i]] <- tps[i]
-    }
-  
-  thres <- rbind(0,thres)
-  
-  ########### ESTIMATE PERSON PARAMETERS ###############################  
-  
-  pp_est <- PP_GPCM(respm=PCMobj$X, thres=thres, ...)
-  
-  
-  ########### ESTIMATE PERSON FIT ###############################
-  
-  
-  
-  
-  ########### PUT IT ALL TOGETHER ###############################
-  
-  pp_est  
-}
 
 
