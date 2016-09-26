@@ -58,6 +58,6 @@ lzstar <- function(
   tau2          <- rowSums(widach^2 * Pi * Qi) / ncol(data)
   
   lzstern       <- (Wn + cn*r0) / sqrt(ncol(data) * tau2)
-
-  return(data.frame("LZ_Star_Scores"=lzstern))
+  out <- data.frame("LZ_Star_Scores"=lzstern)
+  return(out)
 }
