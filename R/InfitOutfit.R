@@ -2,10 +2,10 @@ InfitOutfit <- function( data,
                          thetas, 
                          betas, 
                          lowerAs=NULL, 
-                         slope=NULL, 
+                         slopes=NULL, 
                          higherAs,... ){
 
-  if(is.null(slope)) slope <- rep(1,length(betas))
+  if(is.null(slopes)) slope <- rep(1,length(betas))
   if(is.null(lowerAs))lowerAs <- rep(0,length(betas))
   if(is.null(higherAs))higherAs <- rep(1,length(betas))
 
@@ -14,7 +14,7 @@ InfitOutfit <- function( data,
   L <- ncol(X)
   N <- apply(X,1,function(x) sum(!is.na(x)))
   
-  ai <- slope
+  ai <- slopes
   ci <- lowerAs
   di <- higherAs
   # calculate the propability of each pearson to NOT solve an item

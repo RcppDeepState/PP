@@ -31,7 +31,7 @@
 #'}
 #'@keywords Person fit, LZ-Index, Infit-Outfit
 #'
-Pfit <- function(respm,pp,fitindices) UseMethod("Pfit")
+Pfit <- function(respm,pp,fitindices) UseMethod("Pfit",object=pp)
 # ------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 #'@rdname pfit
@@ -42,13 +42,13 @@ Pfit <- function(respm,pp,fitindices) UseMethod("Pfit")
 #'@method Pfit fourpl
 #'@export
   Pfit.fourpl <- function(respm,pp,fitindices){
-    pfitfunctions <- list("lz" = lz,
-                          "lzstar" = lzstar,
-                          "infitoutfit" = InfitOutfit
+    pfitfunctions <- list("lz" = PP:::lz,
+                          "lzstar" = PP:::lzstar,
+                          "infitoutfit" = PP:::InfitOutfit
     )
-    pfitfunctions_red <- pfitfunctions[names(pfitfunction)%in%fitindices]
+    pfitfunctions_red <- pfitfunctions[names(pfitfunctions)%in%fitindices]
     
-    args <- list(list("data"=resmp, 
+    args <- list(list("data"=respm, 
          "thetas"=pp$resPP$resPP[,"estimate"], 
          "betas"=pp$ipar$thres[2,], 
          "lowerAs"=pp$ipar$lowerA, 
@@ -68,7 +68,7 @@ Pfit <- function(respm,pp,fitindices) UseMethod("Pfit")
   
   # ------------------------------------------------------------------------------------------------------------------------------------------------------------
   
-  #' @rdname pfit
+  #'@rdname pfit
   #'@param respm	      numeric response matrix
   #'@param pp 		      object of the class PP with estimated personparameter
   #'@param fitindices		character vector of desired person fit statistics. c("lz","lzstar","infitoutfit")

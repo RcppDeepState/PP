@@ -5,7 +5,7 @@ lz <- function( data,
                 lowerAs=NULL, 
                 slopes=NULL,
                 higherAs=NULL,...){ 
-  if(is.null(slope)) slope <- rep(1,length(betas))
+  if(is.null(slopes)) slope <- rep(1,length(betas))
   if(is.null(lowerAs))lowerAs <- rep(0,length(betas))
   if(is.null(higherAs))higherAs <- rep(1,length(betas))
      ai <- slopes
@@ -23,6 +23,7 @@ lz <- function( data,
   var_l0  <- rowSums( (Pi * (Pi_1)) * (log(Pi/(Pi_1))^2) ,na.rm=TRUE)
   lz      <- (l0 - mean_l0) / sqrt(var_l0) 
 
-  return(cbind("lz"=lz,"unstandardized"=l0))
+  out <- cbind("lz"=lz,"unstandardized"=l0)
+  return(out)
   
 }
