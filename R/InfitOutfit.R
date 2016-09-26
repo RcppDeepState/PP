@@ -3,7 +3,7 @@ InfitOutfit <- function( data,
                          betas, 
                          lowerAs=NULL, 
                          slopes=NULL, 
-                         higherAs,... ){
+                         higherAs=NULL,... ){
 
   if(is.null(slopes)) slope <- rep(1,length(betas))
   if(is.null(lowerAs))lowerAs <- rep(0,length(betas))
