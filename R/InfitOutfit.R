@@ -72,16 +72,15 @@ InfitOutfit <- function( data,
   pvalue  <- 1 - pchisq(rowSums( ((Zni)^2), na.rm=TRUE ), N-1 )
   df      <- N - 1 
   
-  return(
-    cbind(
-      "Chisq"       = chisq,
-      "df"          = df,
-      "pvalue"      = pvalue,
-      "outfitMSQ"   = Un,
-      "infitMSQ"    = Vn,
-      "outfitZSTD"  = tu,
-      "infitZSTD"   = ti
-    )
+  out <- cbind(
+    "Chisq"       = chisq,
+    "df"          = df,
+    "pvalue"      = pvalue,
+    "outfitMSQ"   = Un,
+    "infitMSQ"    = Vn,
+    "outfitZSTD"  = tu,
+    "infitZSTD"   = ti
   )
+  return(out)
 
 }

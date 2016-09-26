@@ -59,9 +59,9 @@ Pfit <- function(respm,pp,fitindices) UseMethod("Pfit",object=pp)
          "sigma"=sqrt(pp$ipar$sigma2)
     ))
     
-    out <- mapply(function(x,y) do.call("y",x), x=args, y=pfitfunctions_red)
-    
-    class(out) <- "pfit"
+    out <- mapply(function(x,y) do.call("y",x), x=args, y=pfitfunctions_red,SIMPLIFY = FALSE)
+    names(out) <- names(pfitfunctions_red)
+    # class(out) <- append(class(out),"pfit")
     return(out)
   }
   
