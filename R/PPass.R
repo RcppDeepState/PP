@@ -51,7 +51,7 @@ PPass <- function(...) UseMethod("PPass")
 #' @seealso \link{PP_4pl}, \link{PP_gpcm}, \link{PPall}, \link{Pfit}
 #' 
 
-PPass.default <- function(respdf, items="all", mod=c("1PL","2PL","3PL","4PL","PCM","GPCM","MIXED"), fitindices= c("lz","lzstar"), ...)
+PPass.default <- function(respdf, items="all", mod=c("1PL","2PL","3PL","4PL","PCM","GPCM","MIXED"), fitindices= c("lz","lzstar","infitoutfit"), ...)
 {
 
   
@@ -89,13 +89,14 @@ if(mod %in% c("1PL","2PL","3PL","4PL"))
             }
   
   
-########### ESTIMATE PERSON FIT ###############################
+########### CALCULATE PERSON FIT ###############################
 
-  
+fit_calc <- Pfit(respm=respm,pp=pp_est,fitindices=fitindices)
   
   
 ########### PUT IT ALL TOGETHER ############################### 
-  
+  out <- list("personparameter"=pp_est,"personfit"=fit_calc)
+return(out)
   
 }
 
@@ -115,7 +116,7 @@ if(mod %in% c("1PL","2PL","3PL","4PL"))
 #' @method PPass Rm
 #' 
 #' 
-PPass.Rm <- function(RMobj, fitindices= c("lz","lz_star"), ...)
+PPass.Rm <- function(RMobj, fitindices= c("lz","lz_star","infitoutfit"), ...)
 {
 
   # geht leider nicht anders weil sowohl PCM als auch RM die Klassen Rm als auch eRm haben.
@@ -161,8 +162,13 @@ PPass.Rm <- function(RMobj, fitindices= c("lz","lz_star"), ...)
         
       }
 
+  ########### CALCULATE PERSON FIT ###############################  
+
+  fit_calc <- Pfit(respm=respm,pp=pp_est,fitindices=fitindices)
   
-pp_est  
+  ########### PUT IT ALL TOGETHER ############################### 
+  out <- list("personparameter"=pp_est,"personfit"=fit_calc)
+  return(out)
 }
 
 

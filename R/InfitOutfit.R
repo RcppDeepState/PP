@@ -12,7 +12,7 @@ InfitOutfit <- function( data,
   if(!all(apply(data,2,function(x) { all(na.omit(x) %in% 0:1) }))) stop("Please check the input, only 0/1/NA are allowed \n")
   X <- data
   L <- ncol(X)
-  N <- apply(X,1,function(x) sum(!is.na(x)))
+  N <- as.numeric(apply(X,1,function(x) sum(!is.na(x))))
   
   ai <- slopes
   ci <- lowerAs
@@ -69,17 +69,18 @@ InfitOutfit <- function( data,
 
 # additional output
   chisq   <- rowSums( ((Zni)^2), na.rm=TRUE )
-  pvalue  <- 1 - pchisq(rowSums( ((Zni)^2), na.rm=TRUE ), N-1 )
+  Zni2 <- rowSums( ((Zni)^2), na.rm=TRUE )
+  pvalue  <- 1 - pchisq(Zni2, N-1 )
   df      <- N - 1 
   
   out <- cbind(
-    "Chisq"       = chisq,
+    "Chisq"       = round(chisq,3),
     "df"          = df,
-    "pvalue"      = pvalue,
-    "outfitMSQ"   = Un,
-    "infitMSQ"    = Vn,
-    "outfitZSTD"  = tu,
-    "infitZSTD"   = ti
+    "pvalue"      = round(pvalue,3),
+    "outfitMSQ"   = round(Un,3),
+    "infitMSQ"    = round(Vn,3),
+    "outfitZSTD"  = round(tu,3),
+    "infitZSTD"   = round(ti,3)
   )
   return(out)
 
