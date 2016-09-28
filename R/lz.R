@@ -22,7 +22,8 @@ lz <- function( data,
   mean_l0 <- rowSums( (Pi * log(Pi)) + ((Pi_1) * log(Pi_1)) ,na.rm=TRUE)
   var_l0  <- rowSums( (Pi * (Pi_1)) * (log(Pi/(Pi_1))^2) ,na.rm=TRUE)
   lz      <- (l0 - mean_l0) / sqrt(var_l0) 
-
+  lz <- round(lz,3)
+  l0 <- round(l0,3)
   out <- cbind("lz"=lz,"unstandardized"=l0)
   return(out)
   
