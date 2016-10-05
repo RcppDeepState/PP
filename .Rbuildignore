@@ -19,3 +19,5 @@ PP.Rproj
 .dll
 LICENSE
 man-roxygen
+ideas
+Makefile

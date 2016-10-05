@@ -61,6 +61,9 @@
 #' @useDynLib PP
 #' @importFrom Rcpp evalCpp
 #'
+#' @import utils
+#' @import stats
+#' @import graphics
 #'
 #'@export
 #'
