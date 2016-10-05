@@ -2,38 +2,17 @@
 % Please edit documentation in R/Pfit.R
 \name{Pfit}
 \alias{Pfit}
-\alias{Pfit.fourpl}
 \alias{Pfit.gpcm}
 \alias{Pfit.gpcm4pl}
 \title{Personfit statistics}
 \usage{
 Pfit(respm, pp, fitindices)
 
-\method{Pfit}{fourpl}(respm, pp, fitindices)
-
 \method{Pfit}{gpcm}(respm, pp, fitindices)
 
 \method{Pfit}{gpcm4pl}(respm, pp, fitindices)
 }
 \arguments{
-\item{respm}{numeric response matrix}
-
-\item{pp}{object of the class PP with estimated personparameter}
-
-\item{fitindices}{character vector of desired person fit statistics. c("lz","lzstar","infitoutfit")}
-
-\item{respm}{numeric response matrix}
-
-\item{pp}{object of the class PP with estimated personparameter}
-
-\item{fitindices}{character vector of desired person fit statistics. Currently the following fit statistics are provided c("lz","lzstar","infitoutfit")}
-
-\item{respm}{numeric response matrix}
-
-\item{pp}{object of the class PP with estimated personparameter}
-
-\item{fitindices}{character vector of desired person fit statistics. c("lz","lzstar","infitoutfit")}
-
 \item{respm}{numeric response matrix}
 
 \item{pp}{object of the class PP with estimated personparameter}
@@ -65,7 +44,7 @@ Jan Steinfeld
 }
 }
 \seealso{
-\link{PPall}, \link{PP_4pl}
+\link{PPall}, \link{PP_4pl}, \link{PPass}
 }
 \keyword{Infit-Outfit}
 \keyword{LZ-Index,}
