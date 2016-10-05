@@ -37,9 +37,9 @@ Pfit <- function(respm,pp,fitindices) UseMethod("Pfit",object=pp)
 #'@method Pfit fourpl
 #'@export
   Pfit.fourpl <- function(respm,pp,fitindices){
-    pfitfunctions <- list("lz" = PP:::lz,
-                          "lzstar" = PP:::lzstar,
-                          "infitoutfit" = PP:::InfitOutfit
+    pfitfunctions <- list("lz" = PP::lz,
+                          "lzstar" = PP::lzstar,
+                          "infitoutfit" = PP::InfitOutfit
     )
     pfitfunctions_red <- pfitfunctions[names(pfitfunctions)%in%fitindices]
     
