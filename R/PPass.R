@@ -92,8 +92,11 @@ if(mod %in% c("1PL","2PL","3PL","4PL"))
 ########### CALCULATE PERSON FIT ###############################
 
 fit_calc <- Pfit(respm=respm,pp=pp_est,fitindices=fitindices)
-  
-  
+# rename the colnames and combine to data.frame  
+for(l in names(fit_calc)){
+    colnames(fit_calc[[l]]) <- paste0(l,"_",colnames(fit_calc[[l]]))
+  }
+fit_calc <- do.call(cbind,fit_calc)
 ########### PUT IT ALL TOGETHER ############################### 
   out <- list("personparameter"=pp_est,"personfit"=fit_calc)
 return(out)
@@ -165,7 +168,11 @@ PPass.Rm <- function(RMobj, fitindices= c("lz","lz_star","infitoutfit"), ...)
   ########### CALCULATE PERSON FIT ###############################  
 
   fit_calc <- Pfit(respm=respm,pp=pp_est,fitindices=fitindices)
-  
+  # rename the colnames and combine to data.frame  
+  for(l in names(fit_calc)){
+    colnames(fit_calc[[l]]) <- paste0(l,"_",colnames(fit_calc[[l]]))
+  }
+  fit_calc <- do.call(cbind,fit_calc)
   ########### PUT IT ALL TOGETHER ############################### 
   out <- list("personparameter"=pp_est,"personfit"=fit_calc)
   return(out)
