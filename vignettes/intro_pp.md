@@ -42,19 +42,43 @@ In this example, we want to gain ability estimates for each person in our sample
 
 Getting the data inside the R workspace is quite easy in this case, because we merely load the data set which already comes with the PP package. It contains 60 response sets (60 persons answered to a test of 12 items) - and we have additional information, which we do not take into account for now. We first inspect the data, and in a second step informations about item difficulty and the slope parameters are extracted from the dataset attributes.
 
-```{r get}
 
+```r
 library(PP)
 
 data(fourpl_df)
 
 dim(fourpl_df)
+```
 
+```
+## [1] 60 14
+```
+
+```r
 head(fourpl_df)
+```
 
+```
+##        id sex Item1 Item2 Item3 Item4 Item5 Item6 Item7 Item8 Item9 Item10
+## 1 LVL0694   w     1     1     1     1     0     0     1     0     0      0
+## 2 BBU1225   w     1     1     1     1     1     1     1     1     1      0
+## 3 MJN2028   w     1     1     1     1     1     1     1     1     0      0
+## 4 TSU0771   m     1     1     1     0     1     1     1     1     1      0
+## 5 XDS0698   w     1     1    NA     1     1     1     1     0     0      0
+## 6 BOS1292   w     0     0     0     0     0     0     0     0     0      0
+##   Item11 Item12
+## 1      0      0
+## 2      0      0
+## 3      0      0
+## 4      0      1
+## 5      0      0
+## 6      0      0
+```
+
+```r
 diff_par <- attr(fourpl_df,"diffpar")
 slope_par <- attr(fourpl_df,"slopes")
-
 ```
 
 
@@ -65,8 +89,8 @@ slope_par <- attr(fourpl_df,"slopes")
 Now we explore the item response data regarding full or zero score, missing values etc. . Considering this information, we are able to decide which estimation method we will apply.
 
 
-```{r check}
 
+```r
 # extract items and transform the data.frame to matrix
 itmat <- as.matrix(fourpl_df[,-(1:2)])
 
@@ -74,24 +98,56 @@ itmat <- as.matrix(fourpl_df[,-(1:2)])
 # are there any full scores?
 fullsc <- apply(itmat,1,function(x) (sum(x,na.rm=TRUE)+sum(is.na(x))) == length(x))
 any(fullsc)
+```
 
+```
+## [1] FALSE
+```
+
+```r
 # are there 0 scores?
 nullsc <- apply(itmat,1,function(x) sum(x,na.rm=TRUE) == 0)
 any(nullsc)
+```
 
+```
+## [1] TRUE
+```
+
+```r
 # are there missing values? how many and where?
 nasc <- apply(itmat,1,function(x) sum(is.na(x)))
 any(nasc > 0)
+```
+
+```
+## [1] TRUE
+```
+
+```r
 #which(nasc)
 
 # is our data dichotomous as expected?
 apply(itmat,2,function(x) table(x))
+```
 
+```
+##   Item1 Item2 Item3 Item4 Item5 Item6 Item7 Item8 Item9 Item10 Item11
+## 0     9    17    13    16    21    23    24    28    44     53     53
+## 1    51    43    46    44    38    37    35    32    16      7      7
+##   Item12
+## 0     53
+## 1      7
+```
+
+```r
 # are there any duplicates?
 rdup <- duplicated(itmat)
 sum(rdup)
+```
 
-
+```
+## [1] 8
 ```
 
 
@@ -108,16 +164,53 @@ We use the `PP_4pl()` function for our estimation. So perhaps you are thinking:"
 
 In this case, difficulty parameters and slopes are available, so we will submit them, and a 2-PL model is fitted **automatically**.
 
-We decide to apply a common maximum likelihood estimation (`type = "mle"`), and do not remove duplicated response patterns (see argument: `ctrl=list()`) from estimation because there are only `r sum(rdup)` duplicated patterns. If the data set would have been much larger, duplicated patterns are more likely and therefore choosing to remove these patterns would speed up the estimation process significantly. (Choosing this option or not, does not change the numerical results!)
+We decide to apply a common maximum likelihood estimation (`type = "mle"`), and do not remove duplicated response patterns (see argument: `ctrl=list()`) from estimation because there are only 8 duplicated patterns. If the data set would have been much larger, duplicated patterns are more likely and therefore choosing to remove these patterns would speed up the estimation process significantly. (Choosing this option or not, does not change the numerical results!)
 
 
-```{r decide}
+
+```r
 library(PP)
 
 res1plmle <- PP_4pl(respm = itmat,thres = diff_par, slopes = slope_par, type = "mle")
+```
 
+```
+## Estimating:  2pl model ... 
+## type = mle 
+## Estimation finished!
+```
+
+```r
 summary(res1plmle)
+```
 
+```
+## PP Version:  0.5.4 
+## 
+##  Call: PP_4pl(respm = itmat, thres = diff_par, slopes = slope_par, type = "mle") 
+## - job started @ Wed Oct  5 16:32:18 2016 
+## 
+## Estimation type: mle 
+## 
+## Number of iterations: 32765 
+## -------------------------------------
+##       estimate SE
+##  [1,]        0  0
+##  [2,]        0  0
+##  [3,]        0  0
+##  [4,]        0  0
+##  [5,]        0  0
+##  [6,]     -Inf NA
+##  [7,]        0  0
+##  [8,]        0  0
+##  [9,]        0  0
+## [10,]        0  0
+## [11,]        0  0
+## [12,]        0  0
+## [13,]        0  0
+## [14,]        0  0
+## [15,]        0  0
+## --------> output truncated <--------
 ```
 
 Some facts:
@@ -133,11 +226,36 @@ Some facts:
 In the last step, we add the estimates to the data.frame we extracted the item responses from in the first place.
 
 
-```{r edit}
 
+```r
 dafest <- data.frame(fourpl_df,res1plmle$resPP$resPP)
 
 head(dafest,10)
+```
+
+```
+##         id sex Item1 Item2 Item3 Item4 Item5 Item6 Item7 Item8 Item9
+## 1  LVL0694   w     1     1     1     1     0     0     1     0     0
+## 2  BBU1225   w     1     1     1     1     1     1     1     1     1
+## 3  MJN2028   w     1     1     1     1     1     1     1     1     0
+## 4  TSU0771   m     1     1     1     0     1     1     1     1     1
+## 5  XDS0698   w     1     1    NA     1     1     1     1     0     0
+## 6  BOS1292   w     0     0     0     0     0     0     0     0     0
+## 7  KFF1422   w     1     1     1     1     1     1     1     1     1
+## 8  DCQ0198   w     1     1     1     1     0     1     1     1     1
+## 9  FTT1492   w     0     0     1     1     0     0     0     0     0
+## 10 GCP0645   m     1     1     1     1     1     0     0     1     0
+##    Item10 Item11 Item12 estimate SE
+## 1       0      0      0        0  0
+## 2       0      0      0        0  0
+## 3       0      0      0        0  0
+## 4       0      0      1        0  0
+## 5       0      0      0        0  0
+## 6       0      0      0     -Inf NA
+## 7       0      0      1        0  0
+## 8       0      1      0        0  0
+## 9       0      0      0        0  0
+## 10      0      0      0        0  0
 ```
 
 
@@ -147,12 +265,50 @@ One shortcoming of the plain maximum likelihood estimate is the fact, that the *
 ### Rerun
 
 
-```{r rerun}
+
+```r
 library(PP)
 
 res1plmle <- PP_4pl(respm = itmat,thres = diff_par, slopes = slope_par, type = "wle")
+```
 
+```
+## Estimating:  2pl model ... 
+## type = wle 
+## Estimation finished!
+```
+
+```r
 summary(res1plmle)
+```
+
+```
+## PP Version:  0.5.4 
+## 
+##  Call: PP_4pl(respm = itmat, thres = diff_par, slopes = slope_par, type = "wle") 
+## - job started @ Wed Oct  5 16:32:18 2016 
+## 
+## Estimation type: wle 
+## 
+## Number of iterations: 32765 
+## -------------------------------------
+##       estimate SE
+##  [1,]        0  0
+##  [2,]        0  0
+##  [3,]        0  0
+##  [4,]        0  0
+##  [5,]        0  0
+##  [6,]        0  0
+##  [7,]        0  0
+##  [8,]        0  0
+##  [9,]        0  0
+## [10,]        0  0
+## [11,]        0  0
+## [12,]        0  0
+## [13,]        0  0
+## [14,]        0  0
+## [15,]        0  0
+## --------> output truncated <--------
 ```
 
 
