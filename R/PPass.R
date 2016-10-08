@@ -2,7 +2,7 @@
 
 #' Person Assessment function
 #' 
-#' Estimate Person Paramters and estimate Person Fit in one step to gain resonse pattern assessment. Submit a data.frame which contains item responses, or an fitted model (Rasch Model and Partial Credit Model are supported) of the \code{eRm} package.
+#' Estimate Person Paramters and calculate Person Fit in one step to gain resonse pattern assessment. Submit a data.frame which contains item responses, or an fitted model (Rasch Model and Partial Credit Model are supported) of the \code{eRm} package.
 #' 
 #' @param \ldots Submit arguments to the underlying functions: \code{PP_4pl}, \code{PP_gpcm} and \code{PPall} (see documentation files) for person parameter estimation.
 #' 

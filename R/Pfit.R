@@ -6,13 +6,14 @@
 #'
 #' 
 #'@param respm	      numeric response matrix
-#'@param pp 		      object of the class PP with estimated personparameter
+#'@param pp 		      object of the class fourpl with estimated personparameter
 #'@param fitindices		character vector of desired person fit statistics. c("lz","lzstar","infitoutfit")
+#'
+#' @return list of person parameter
 #'
 #' @rdname pfit
 #' @seealso \link{PPall}, \link{PP_4pl}, \link{PPass}
 #'
-#'@export
 #'
 #'@author Jan Steinfeld
 #'@references 
@@ -29,14 +30,20 @@
 #' \item Snijders, T. B. (2001) Asymptotic null distribution of person fit statistics with estimated person parameter. \emph{Psychometrika}, \bold{66(3)}, 331--342. 
 #' \item Wright, B. D. & Masters, G. N. (1990). Computation of OUTFIT and INFIT Statistics.  \emph{Rasch Measurement Transactions}, 3, 84-85.
 #'}
-#'@keywords Person fit, LZ-Index, Infit-Outfit
 #'
+#' @example ./R/.examples_pfit.R
+#' @keywords Person fit, LZ-Index, Infit-Outfit
+#' @export
 Pfit <- function(respm,pp,fitindices) UseMethod("Pfit",object=pp)
 # ------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 
 #'@method Pfit fourpl
 #'@export
   Pfit.fourpl <- function(respm,pp,fitindices){
+
+    if(any(pp$type%in%c("map","eap","robust"))) stop("Only 'mle','wle' and 'map' ability estimates are supported \n")
+
     pfitfunctions <- list("lz" = lz,
                           "lzstar" = lzstar,
                           "infitoutfit" = InfitOutfit
