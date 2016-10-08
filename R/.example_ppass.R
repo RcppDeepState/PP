@@ -27,3 +27,27 @@ my_pcm <- eRm::PCM(simdat_gpcm)
 
 res_pp2 <- PPass(my_pcm)
 
+## ==========  1PL model
+
+set.seed(1337)
+
+# intercepts
+diffpar <- seq(-3,3,length=15)
+# slope parameters
+sl     <- round(runif(15,0.5,1.5),2)
+la     <- round(runif(15,0,0.25),2)
+ua     <- round(runif(15,0.8,1),2)
+
+# response matrix
+awm <- matrix(sample(0:1,100*15,replace=TRUE),ncol=15)
+awm <- as.data.frame(awm)
+# estimate ability parameter
+res1plmle <- PP_4pl(respm = awm,thres = diffpar,type = "mle")
+
+# estimate ability parameter and personfit
+out <- PPass(respdf = awm,thres = diffpar, items="all", mod=c("1PL"), fitindices= c("lz","lzstar","infitoutfit"))
+
+# show first rows of person parameter
+head(out$personparameter)
+# show first rows of person fit
+head(out$personfit)
