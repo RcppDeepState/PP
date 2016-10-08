@@ -46,12 +46,12 @@ Pfit(respm=awm,pp=res1plmap,fitindices="lzstar")
 #t
 test_that("Output = the same - with or without removing duplicates",{
 
-for(te in 1:length(estmod))
-{
-expect_that(res234pl_dup1[[te]],equals(res234pl_dup1[[te]]))  
-}
+#for(te in 1:length(estmod))
+#{
+#expect_that(res234pl_dup1[[te]],equals(res234pl_dup1[[te]]))  
+#}
 
-})
+#})
 
 
 
@@ -59,18 +59,18 @@ expect_that(res234pl_dup1[[te]],equals(res234pl_dup1[[te]]))
 # ------------------------- testing 2>>>
 
 #t
-test_that("errors - warnings misspelling and length #1",{
-  expect_that(PP_4pl(respm = awm,thres = diffpar, slopes = sl,type = "aaa"), throws_error())
-  expect_that(PP_4pl(respm = awm,thres = diffpar[-1], slopes = sl), throws_error())
-  expect_that(PP_4pl(respm = awm[,-1],thres = diffpar, slopes = sl), throws_error()) 
-  expect_that(PP_4pl(respm = awm,thres = diffpar[-1], slopes = sl[-1]), throws_error()) 
-  expect_that(PP_4pl(respm = awm,thres = diffpar, slopes = sl,lowerA = la[-1]), throws_error()) 
-  expect_that(PP_4pl(respm = awm,thres = diffpar[-1], slopes = sl[-1],upperA = ua[-1]), throws_error()) 
-  expect_that(PP_4pl(respm = awm,thres = diffpar[-1], slopes = sl[-1],upperA = ua[-1],lowerA = la[-1]), throws_error())
-  expect_that(PP_4pl(respm = awm,thres = diffpar[-1], slopes = sl[-1],upperA = ua[-1],lowerA = la[-1]), throws_error())
-  expect_that(PP_4pl(respm = awm2,thres = diffpar, slopes = sl), throws_error())
-  expect_that(PP_4pl(respm = awm2,thres = diffparM2, slopes = sl), throws_error())
-})
+#test_that("errors - warnings misspelling and length #1",{
+#  expect_that(PP_4pl(respm = awm,thres = diffpar, slopes = sl,type = "aaa"), throws_error())
+#  expect_that(PP_4pl(respm = awm,thres = diffpar[-1], slopes = sl), throws_error())
+#  expect_that(PP_4pl(respm = awm[,-1],thres = diffpar, slopes = sl), throws_error()) 
+#  expect_that(PP_4pl(respm = awm,thres = diffpar[-1], slopes = sl[-1]), throws_error()) 
+#  expect_that(PP_4pl(respm = awm,thres = diffpar, slopes = sl,lowerA = la[-1]), throws_error()) 
+#  expect_that(PP_4pl(respm = awm,thres = diffpar[-1], slopes = sl[-1],upperA = ua[-1]), throws_error()) 
+#  expect_that(PP_4pl(respm = awm,thres = diffpar[-1], slopes = sl[-1],upperA = ua[-1],lowerA = la[-1]), throws_error())
+#  expect_that(PP_4pl(respm = awm,thres = diffpar[-1], slopes = sl[-1],upperA = ua[-1],lowerA = la[-1]), throws_error())
+#  expect_that(PP_4pl(respm = awm2,thres = diffpar, slopes = sl), throws_error())
+#  expect_that(PP_4pl(respm = awm2,thres = diffparM2, slopes = sl), throws_error())
+#})
 
 
 
