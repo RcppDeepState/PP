@@ -19,7 +19,7 @@
 #'@references 
 #'\itemize{
 #' \item Armstrong, R. D., Stoumbos, Z. G., Kung, M. T. & Shi, M. (2007). On the performance of the lz person-fit statistic.  \emph{Practical Assessment, Research & Evaluation}, \bold{12(16)}. Chicago	
-#' \item De La Torre, J., & Deng, W. (2008). Improving Person‐Fit Assessment by Correcting the Ability Estimate and Its Reference Distribution. Journal of Educational Measurement, \bold{45(2)}, 159-177.
+#' \item De La Torre, J., & Deng, W. (2008). Improving Person-Fit Assessment by Correcting the Ability Estimate and Its Reference Distribution. Journal of Educational Measurement, \bold{45(2)}, 159-177.
 #' \item Drasgow, F., Levine, M. V. & Williams, E. A. (1985) Appropriateness measurement with polychotomous item response models and standardized indices. \emph{British Journal of Mathematical and Statistical Psychology}, \bold{38(1)}, 67--86.
 #' \item Karabatsos, G. (2003) Comparing the Aberrant Response Detection Performance of Thirty-Six Person-Fit Statistics. \emph{Applied Measurement In Education}, \bold{16(4)}, 277--298.
 #' \item Magis, D., Raiche, G. & Beland, S. (2012) A didactic presentation of Snijders's l[sub]z[/sub] index of person fit with emphasis on response model selection and ability estimation. \emph{Journal of Educational and Behavioral Statistics}, \bold{37(1)}, 57--81.
@@ -30,7 +30,7 @@
 #' \item Snijders, T. B. (2001) Asymptotic null distribution of person fit statistics with estimated person parameter. \emph{Psychometrika}, \bold{66(3)}, 331--342. 
 #' \item Wright, B. D. & Masters, G. N. (1990). Computation of OUTFIT and INFIT Statistics.  \emph{Rasch Measurement Transactions}, 3, 84-85.
 #'}
-#'
+#' 
 #' @example ./R/.examples_pfit.R
 #' @keywords Person fit, LZ-Index, Infit-Outfit
 #' @export
@@ -42,7 +42,7 @@ Pfit <- function(respm,pp,fitindices) UseMethod("Pfit",object=pp)
 #'@export
   Pfit.fourpl <- function(respm,pp,fitindices){
 
-    if(any(pp$type%in%c("map","eap","robust"))) stop("Only 'mle','wle' and 'map' ability estimates are supported \n")
+    if(any(pp$type%in%c("eap","robust"))) stop("Only 'mle','wle' and 'map' ability estimates are supported \n")
 
     pfitfunctions <- list("lz" = lz,
                           "lzstar" = lzstar,
@@ -72,10 +72,25 @@ Pfit <- function(respm,pp,fitindices) UseMethod("Pfit",object=pp)
   
   #'@rdname pfit
   #' 
-  #' @method Pfit gpcm
+  #' @method Pfit pcm
   #' @export
-  Pfit.gpcm <- function(respm,pp,fitindices){
-    cat("the mixed method for person fits is not yet implemented \n")
+  Pfit.pcm <- function(respm,pp,fitindices){
+    if(any(pp$type%in%c("map","eap","robust"))) stop("Only 'mle' and 'wle' ability estimates are supported \n")
+    
+    pfitfunctions <- list("infitoutfitpoly" = InfitOutfit
+    )
+    pfitfunctions_red <- pfitfunctions[names(pfitfunctions)%in%fitindices]
+    
+    args <- list(list("data"=respm, 
+                      "thetas"=pp$resPP$resPP[,"estimate"], 
+                      "betas"=pp$ipar$thres[2,], 
+                      "slopes"=pp$ipar$slopes
+    ))
+    
+    out <- mapply(function(x,y) do.call("y",x), x=args, y=pfitfunctions_red,SIMPLIFY = FALSE)
+    names(out) <- names(pfitfunctions_red)
+    class(out) <- append(class(out),"PPfit")
+    return(out)
   }
   # ------------------------------------------------------------------------------------------------------------------------------------------------------------
   

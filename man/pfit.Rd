@@ -15,9 +15,12 @@ Pfit(respm, pp, fitindices)
 \arguments{
 \item{respm}{numeric response matrix}
 
-\item{pp}{object of the class PP with estimated personparameter}
+\item{pp}{object of the class fourpl with estimated personparameter}
 
 \item{fitindices}{character vector of desired person fit statistics. c("lz","lzstar","infitoutfit")}
+}
+\value{
+list of person parameter
 }
 \description{
 Compute several person fit statistic for the 1-PL, 2-PL, 3PL and 4-PL.
@@ -25,13 +28,112 @@ Compute several person fit statistic for the 1-PL, 2-PL, 3PL and 4-PL.
 \details{
 Please note that currently only the LZ-Index, LZ*-Index and INFIT-OUTIFT as well as the polytomouse version of INFIT-OUTFIT are implemented. Other person fit staistics will be added soon.
 }
+\examples{
+################# Pfit #############################################################
+
+
+### data creation ##########
+
+set.seed(1337)
+
+
+# intercepts
+diffpar <- seq(-3,3,length=15)
+# slope parameters
+sl     <- round(runif(15,0.5,1.5),2)
+la     <- round(runif(15,0,0.25),2)
+ua     <- round(runif(15,0.8,1),2)
+
+# response matrix
+awm <- matrix(sample(0:1,100*15,replace=TRUE),ncol=15)
+
+# ------------------------------------------------------------------------
+## 1PL model ##### 
+# ------------------------------------------------------------------------
+# MLE
+res1plmle <- PP_4pl(respm = awm,thres = diffpar,type = "mle")
+# WLE
+res1plwle <- PP_4pl(respm = awm,thres = diffpar,type = "wle")
+# MAP estimation
+res1plmap <- PP_4pl(respm = awm,thres = diffpar,type = "map")
+# ------------------------------------------------------------------------
+## 2PL model ##### 
+# ------------------------------------------------------------------------
+# MLE
+res2plmle <- PP_4pl(respm = awm,thres = diffpar, slopes = sl,type = "mle")
+# WLE
+res2plwle <- PP_4pl(respm = awm,thres = diffpar, slopes = sl,type = "wle")
+
+# ------------------------------------------------------------------------
+## 3PL model ##### 
+# ------------------------------------------------------------------------
+# MLE
+res3plmle <- PP_4pl(respm = awm,thres = diffpar,
+                    slopes = sl,lowerA = la,type = "mle")
+# WLE
+res3plwle <- PP_4pl(respm = awm,thres = diffpar,
+                    slopes = sl,lowerA = la,type = "wle")
+# ------------------------------------------------------------------------
+## 4PL model ##### 
+# ------------------------------------------------------------------------
+# MLE
+res4plmle <- PP_4pl(respm = awm,thres = diffpar,
+                    slopes = sl,lowerA = la,upperA=ua,type = "mle")
+# WLE
+res4plwle <- PP_4pl(respm = awm,thres = diffpar,
+                    slopes = sl,lowerA = la,upperA=ua,type = "wle")
+
+##########################################################################################
+
+# ------------------------------------------------------------------------
+## 1PL model ##### 
+# ------------------------------------------------------------------------
+## LZ*-Index ##### 
+Pfit(respm=awm,pp=res1plwle,fitindices="lzstar")
+## LZ*-Index combined with Infit-Outfit ##### 
+Pfit(respm=awm,pp=res1plwle,fitindices=c("lzstar","infitoutfit"))
+# ------------------------------------------------------------------------
+## 2PL model ##### 
+# ------------------------------------------------------------------------
+## LZ*-Index ##### 
+Pfit(respm=awm,pp=res2plwle,fitindices="lzstar")
+## LZ*-Index combined with Infit-Outfit ##### 
+Pfit(respm=awm,pp=res2plwle,fitindices=c("lzstar","infitoutfit"))
+# ------------------------------------------------------------------------
+## 3PL model ##### 
+# ------------------------------------------------------------------------
+## LZ*-Index ##### 
+Pfit(respm=awm,pp=res3plwle,fitindices="lzstar")
+## LZ*-Index combined with Infit-Outfit ##### 
+Pfit(respm=awm,pp=res3plwle,fitindices=c("lzstar","infitoutfit"))
+# ------------------------------------------------------------------------
+## 4PL model ##### 
+# ------------------------------------------------------------------------
+## LZ*-Index ##### 
+Pfit(respm=awm,pp=res4plwle,fitindices="lzstar")
+## LZ*-Index combined with Infit-Outfit ##### 
+Pfit(respm=awm,pp=res4plwle,fitindices=c("lzstar","infitoutfit"))
+
+##########################################################################################
+
+# ------------------------------------------------------------------------
+## 1PL model ##### 
+# ------------------------------------------------------------------------
+## LZ*-Index ##### 
+## mle ####
+Pfit(respm=awm,pp=res1plmle,fitindices="lzstar")
+## wle ####
+Pfit(respm=awm,pp=res1plwle,fitindices="lzstar")
+## map ####
+Pfit(respm=awm,pp=res1plmap,fitindices="lzstar")
+}
 \author{
 Jan Steinfeld
 }
 \references{
 \itemize{
 \item Armstrong, R. D., Stoumbos, Z. G., Kung, M. T. & Shi, M. (2007). On the performance of the lz person-fit statistic.  \emph{Practical Assessment, Research & Evaluation}, \bold{12(16)}. Chicago	
-\item De La Torre, J., & Deng, W. (2008). Improving Person‐Fit Assessment by Correcting the Ability Estimate and Its Reference Distribution. Journal of Educational Measurement, \bold{45(2)}, 159-177.
+\item De La Torre, J., & Deng, W. (2008). Improving Person-Fit Assessment by Correcting the Ability Estimate and Its Reference Distribution. Journal of Educational Measurement, \bold{45(2)}, 159-177.
 \item Drasgow, F., Levine, M. V. & Williams, E. A. (1985) Appropriateness measurement with polychotomous item response models and standardized indices. \emph{British Journal of Mathematical and Statistical Psychology}, \bold{38(1)}, 67--86.
 \item Karabatsos, G. (2003) Comparing the Aberrant Response Detection Performance of Thirty-Six Person-Fit Statistics. \emph{Applied Measurement In Education}, \bold{16(4)}, 277--298.
 \item Magis, D., Raiche, G. & Beland, S. (2012) A didactic presentation of Snijders's l[sub]z[/sub] index of person fit with emphasis on response model selection and ability estimation. \emph{Journal of Educational and Behavioral Statistics}, \bold{37(1)}, 57--81.
