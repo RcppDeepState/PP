@@ -48,6 +48,12 @@ Pfit <- function(respm,pp,fitindices) UseMethod("Pfit",object=pp)
                           "lzstar" = lzstar,
                           "infitoutfit" = InfitOutfit
     )
+    
+    findefit <- function(fitindices=c("lz","lzstar","infitoutfit")){
+              fitindices <- match.arg(fitindices, several.ok = TRUE)  
+              return(fitindices)
+             }
+    fitindices <- findefit(fitindices = fitindices)
     pfitfunctions_red <- pfitfunctions[names(pfitfunctions)%in%fitindices]
     
     args <- list(list("data"=respm, 
@@ -77,13 +83,18 @@ Pfit <- function(respm,pp,fitindices) UseMethod("Pfit",object=pp)
   Pfit.gpcm <- function(respm,pp,fitindices){
     if(any(pp$type%in%c("map","eap","robust"))) stop("Only 'mle' and 'wle' ability estimates are supported \n")
     
-    pfitfunctions <- list("infitoutfitpoly" = InfitOutfit)
-
+    if(!all(fitindices%in%c("infitoutfit"))){ warning("Only 'infitoutfit' are currently supported. The calculation is executed with infitoutfit \n"); fitindices <- "infitoutfit"}
+    pfitfunctions <- list("infitoutfit" = InfitOutfitpoly)
+    findefit <- function(fitindices=c("infitoutfit")){
+      fitindices <- match.arg(fitindices, several.ok = TRUE)  
+      return(fitindices)
+    }
+    fitindices <- findefit(fitindices = fitindices)
     pfitfunctions_red <- pfitfunctions[names(pfitfunctions)%in%fitindices]
     
     args <- list(list("data"=respm, 
                       "thetas"=pp$resPP$resPP[,"estimate"], 
-                      "betas"=pp$ipar$thres[2,], 
+                      "thres"=pp$ipar$thres[2,], 
                       "slopes"=pp$ipar$slopes
     ))
     
