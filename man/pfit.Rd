@@ -2,13 +2,13 @@
 % Please edit documentation in R/Pfit.R
 \name{Pfit}
 \alias{Pfit}
+\alias{Pfit.gpcm}
 \alias{Pfit.gpcm4pl}
-\alias{Pfit.pcm}
 \title{Personfit statistics}
 \usage{
 Pfit(respm, pp, fitindices)
 
-\method{Pfit}{pcm}(respm, pp, fitindices)
+\method{Pfit}{gpcm}(respm, pp, fitindices)
 
 \method{Pfit}{gpcm4pl}(respm, pp, fitindices)
 }
