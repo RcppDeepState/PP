@@ -94,7 +94,7 @@ Pfit <- function(respm,pp,fitindices) UseMethod("Pfit",object=pp)
     
     args <- list(list("data"=respm, 
                       "thetas"=pp$resPP$resPP[,"estimate"], 
-                      "thres"=pp$ipar$thres[2,], 
+                      "thresholds"=pp$ipar$thres, 
                       "slopes"=pp$ipar$slopes
     ))
     
