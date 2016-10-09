@@ -33,6 +33,10 @@ install: $(PKG_NAME)_$(PKG_VERSION).tar.gz
 NAMESPACE: $(R_FILES)
 	Rscript -e "library(roxygen2);roxygenize('../PP')"
 
+rhub: $(R_FILES)
+	Rscript -e "library(roxygen2);roxygenize('../PP')"
+	Rscript -e "library(rhub); check(platform = 'debian-gcc-devel')" > ../ruhub.log
+
 clean:
 	-rm -f ../$(PKG_NAME)_*.tar.gz
 	-rm -r -f ../$(PKG_NAME).Rcheck
