@@ -8,7 +8,7 @@
 \usage{
 Pfit(respm, pp, fitindices)
 
-\method{Pfit}{gpcm}(respm, pp, fitindices)
+\method{Pfit}{gpcm}(respm, pp, fitindices = c("infitoutfit"))
 
 \method{Pfit}{gpcm4pl}(respm, pp, fitindices)
 }
