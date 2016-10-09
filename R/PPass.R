@@ -156,7 +156,7 @@ PPass.Rm <- function(RMobj, fitindices= c("lz","lz_star","infitoutfit"), ...)
       
       ########### ESTIMATE PERSON PARAMETERS ###############################  
       
-      pp_est <- PP_GPCM(respm=RMobj$X, thres=thres, ...)
+      pp_est <- PP_gpcm(respm=RMobj$X, thres=thres, ...)
        
       
       } else {
