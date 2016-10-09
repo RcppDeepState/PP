@@ -30,7 +30,7 @@ install: $(PKG_NAME)_$(PKG_VERSION).tar.gz
 	R CMD INSTALL ../$(PKG_NAME)_$(PKG_VERSION).tar.gz
 
 NAMESPACE: $(R_FILES)
-	Rscript -e "library(roxygen2);roxygenize('PP')"
+	Rscript -e "library(roxygen2);roxygenize('../PP')"
 
 clean:
 	-rm -f ../$(PKG_NAME)_*.tar.gz
