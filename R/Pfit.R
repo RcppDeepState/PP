@@ -77,8 +77,7 @@ Pfit <- function(respm,pp,fitindices) UseMethod("Pfit",object=pp)
   Pfit.pcm <- function(respm,pp,fitindices){
     if(any(pp$type%in%c("map","eap","robust"))) stop("Only 'mle' and 'wle' ability estimates are supported \n")
     
-    pfitfunctions <- list("infitoutfitpoly" = InfitOutfit
-    )
+    pfitfunctions <- list("infitoutfit" = InfitOutfitpoly)
     pfitfunctions_red <- pfitfunctions[names(pfitfunctions)%in%fitindices]
     
     args <- list(list("data"=respm, 
