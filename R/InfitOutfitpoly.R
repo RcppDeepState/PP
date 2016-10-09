@@ -1,7 +1,7 @@
 InfitOutfitpoly <- function( data,
                              thetas,
                              thresholds, 
-                             slope=NULL
+                             slopes=NULL
                              ){
   # ------------------------------------------------------------------------------------------------
   betas <- as.vector(apply(thresholds[-1,],2,cumsum))
@@ -32,7 +32,7 @@ InfitOutfitpoly <- function( data,
   theta_mat_kat <- tcrossprod(theta_mat , diag(k_seq))
 
 # ---------------------------------------------
-submatrix_pijx <- (t(theta_mat_kat) - betas) * ai 
+submatrix_pijx <- (t(theta_mat_kat) - betas) #* ai 
 
   cat_pijx_0 <- tapply(1:length(betas),k_item,function(x) {
   submat <- rbind(rep(0,times = ncol(submatrix_pijx)),submatrix_pijx[x,])

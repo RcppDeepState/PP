@@ -84,6 +84,8 @@ Pfit <- function(respm,pp,fitindices) UseMethod("Pfit",object=pp)
     if(any(pp$type%in%c("map","eap","robust"))) stop("Only 'mle' and 'wle' ability estimates are supported \n")
     
     if(!all(fitindices%in%c("infitoutfit"))){ warning("Only 'infitoutfit' are currently supported. The calculation is executed with infitoutfit \n"); fitindices <- "infitoutfit"}
+    if(any(pp$ipar$slopes>1)) warning("Currently only the PCM-Modell is supported \n")
+    
     pfitfunctions <- list("infitoutfit" = InfitOutfitpoly)
     findefit <- function(fitindices=c("infitoutfit")){
       fitindices <- match.arg(fitindices, several.ok = TRUE)  
@@ -95,7 +97,7 @@ Pfit <- function(respm,pp,fitindices) UseMethod("Pfit",object=pp)
     args <- list(list("data"=respm, 
                       "thetas"=pp$resPP$resPP[,"estimate"], 
                       "thresholds"=pp$ipar$thres, 
-                      "slopes"=pp$ipar$slopes
+                      "slopes"=NULL
     ))
     
     out <- mapply(function(x,y) do.call("y",x), x=args, y=pfitfunctions_red,SIMPLIFY = FALSE)
