@@ -50,21 +50,21 @@ InfitOutfit <- function( data,
   
   # Fit Mean Square
   
-  # OUTFIT MEANSQ (unweighted)
+  # OUTFIT  (unweighted)
   Un <- rowSums( ((Zni)^2), na.rm=TRUE ) / N
   
-  # INFIT MEANSQ (weighted)
+  # INFIT  (weighted)
   Vn <- rowSums( (Yni)^2, na.rm=TRUE ) / rowSums( Qni, na.rm=TRUE )
   
   # standardized INFIT
   # Variance term
   qni2 <- rowSums(Cni - Wni^2,na.rm=TRUE ) / (rowSums(Wni,na.rm=TRUE))^2
-  # infitZSTD
+  # infit.z
   ti <- ( (Vn^(1/3)) - 1)*(3/sqrt(qni2))+(sqrt(qni2)/3)
   
   # Variance term
   varInfit <- rowSums(Cni / Wni^2,na.rm=TRUE ) / (N^2) - (1/N)
-  # outfitZSTD
+  # outfit.z
   tu <- ( (Un^(1/3)) - 1)*(3/sqrt(varInfit))+(sqrt(varInfit)/3)
 
 # additional output
@@ -77,10 +77,10 @@ InfitOutfit <- function( data,
     "Chisq"       = round(chisq,3),
     "df"          = df,
     "pvalue"      = round(pvalue,3),
-    "outfitMSQ"   = round(Un,3),
-    "infitMSQ"    = round(Vn,3),
-    "outfitZSTD"  = round(tu,3),
-    "infitZSTD"   = round(ti,3)
+    "outfit"      = round(Un,3),
+    "outfit.z"    = round(tu,3),
+    "infit"       = round(Vn,3),
+    "infit.z"     = round(ti,3)
   )
   return(out)
 

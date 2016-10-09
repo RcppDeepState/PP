@@ -1,9 +1,11 @@
 InfitOutfitpoly <- function( data,
                              thetas,
-                             thres, 
+                             thresholds, 
                              slope=NULL
                              ){
   # ------------------------------------------------------------------------------------------------
+  betas <- as.vector(apply(thresholds[-1,],2,cumsum))
+  betas <- betas[!is.na(betas)]
   if(is.null(slope)) slope <- rep(1,length(betas))
   # ------------------------------------------------------------------------------------------------
   #  information
@@ -43,7 +45,7 @@ submatrix_pijx <- (t(theta_mat_kat) - betas) * ai
   })
   
   return(tmp)   
-})
+ })
 
 
   cat_pijx <- lapply(cat_pijx_0,function(x){
@@ -85,12 +87,12 @@ submatrix_pijx <- (t(theta_mat_kat) - betas) * ai
   # standardized INFIT
   # Variance term
   qni2 <- rowSums(Cni.mat - Wni.mat^2,na.rm=TRUE ) / (rowSums(Wni.mat,na.rm=TRUE))^2
-  # infitZSTD
+  # infit
   ti <- ( (Vn^(1/3)) - 1)*(3/sqrt(qni2))+(sqrt(qni2)/3)
   
   # Variance term
   varInfit <- rowSums(Cni.mat / Wni.mat^2,na.rm=TRUE ) / (N.mat^2) - (1/N.mat)
-  # outfitZSTD
+  # outfit
   tu <- ( (Un^(1/3)) - 1)*(3/sqrt(varInfit))+(sqrt(varInfit)/3)
   
   # additional output
@@ -102,10 +104,10 @@ submatrix_pijx <- (t(theta_mat_kat) - betas) * ai
     "Chisq"       = round(chisq,3),
     "df"          = df,
     "pvalue"      = round(pvalue,3),
-    "outfitMSQ"   = round(Un,3),
-    "infitMSQ"    = round(Vn,3),
-    "outfitZSTD"  = round(tu,3),
-    "infitZSTD"   = round(ti,3)
+    "outfit"      = round(Un,3),
+    "outfit.z"    = round(tu,3),
+    "infit"       = round(Vn,3),
+    "infit.z"     = round(ti,3)
   )
   return(out)
 }
