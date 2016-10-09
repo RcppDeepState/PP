@@ -40,7 +40,7 @@ Pfit <- function(respm,pp,fitindices) UseMethod("Pfit",object=pp)
 
 #'@method Pfit fourpl
 #'@export
-  Pfit.fourpl <- function(respm,pp,fitindices){
+  Pfit.fourpl <- function(respm, pp, fitindices=c("lz","lzstar","infitoutfit")){
 
     if(any(pp$type%in%c("eap","robust"))) stop("Only 'mle','wle' and 'map' ability estimates are supported \n")
 
@@ -49,11 +49,8 @@ Pfit <- function(respm,pp,fitindices) UseMethod("Pfit",object=pp)
                           "infitoutfit" = InfitOutfit
     )
     
-    findefit <- function(fitindices=c("lz","lzstar","infitoutfit")){
-              fitindices <- match.arg(fitindices, several.ok = TRUE)  
-              return(fitindices)
-             }
-    fitindices <- findefit(fitindices = fitindices)
+    fitindices <- match.arg(fitindices, several.ok = TRUE)  
+
     pfitfunctions_red <- pfitfunctions[names(pfitfunctions)%in%fitindices]
     
     args <- list(list("data"=respm, 
@@ -80,18 +77,16 @@ Pfit <- function(respm,pp,fitindices) UseMethod("Pfit",object=pp)
   #' 
   #' @method Pfit gpcm
   #' @export
-  Pfit.gpcm <- function(respm,pp,fitindices){
+  Pfit.gpcm <- function(respm, pp, fitindices=c("infitoutfit")){
     if(any(pp$type%in%c("map","eap","robust"))) stop("Only 'mle' and 'wle' ability estimates are supported \n")
     
     if(!all(fitindices%in%c("infitoutfit"))){ warning("Only 'infitoutfit' are currently supported. The calculation is executed with infitoutfit \n"); fitindices <- "infitoutfit"}
     if(any(pp$ipar$slopes>1)) warning("Currently only the PCM-Modell is supported \n")
     
     pfitfunctions <- list("infitoutfit" = InfitOutfitpoly)
-    findefit <- function(fitindices=c("infitoutfit")){
-      fitindices <- match.arg(fitindices, several.ok = TRUE)  
-      return(fitindices)
-    }
-    fitindices <- findefit(fitindices = fitindices)
+
+    fitindices <- match.arg(fitindices, several.ok = TRUE)  
+
     pfitfunctions_red <- pfitfunctions[names(pfitfunctions)%in%fitindices]
     
     args <- list(list("data"=respm, 
@@ -111,7 +106,7 @@ Pfit <- function(respm,pp,fitindices) UseMethod("Pfit",object=pp)
   #' 
   #' @method Pfit gpcm4pl
   #' @export
-  Pfit.gpcm4pl <- function(respm,pp,fitindices){
+  Pfit.gpcm4pl <- function(respm, pp, fitindices){
       cat("the mixed method for person fits is not yet implemented \n")
   }
   # ------------------------------------------------------------------------------------------------------------------------------------------------------------
