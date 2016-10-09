@@ -25,7 +25,7 @@ simdat_gpcm <- sim_gpcm(thres = THRESx,alpha = sl,theta = THETA)
 
 my_pcm <- eRm::PCM(simdat_gpcm)
 
-res_pp2 <- PPass(my_pcm)
+#res_pp2 <- PPass(my_pcm)
 
 ## ==========  1PL model
 
@@ -42,7 +42,6 @@ ua     <- round(runif(15,0.8,1),2)
 awm <- matrix(sample(0:1,100*15,replace=TRUE),ncol=15)
 awm <- as.data.frame(awm)
 # estimate ability parameter
-res1plmle <- PP_4pl(respm = awm,thres = diffpar,type = "mle")
 
 # estimate ability parameter and personfit
 out <- PPass(respdf = awm,thres = diffpar, items="all",

@@ -60,7 +60,7 @@ PPass.default <- function(respdf, items="all", mod=c("1PL","2PL","3PL","4PL","PC
 ## checks concering the input  
   
 stopifnot(is.data.frame(respdf)) # muss ein df sein als input
-stopifnot((is.numeric(items) & all(items) >= 1) | all(items == "all")) # indices oder alles
+stopifnot((is.numeric(items) & all(items >= 1)) | all(items == "all")) # indices oder alles
   
 ## create matrix, keep the rest
 if(items == "all") # all variables are items
@@ -153,10 +153,11 @@ PPass.Rm <- function(RMobj, fitindices= c("lz","lz_star","infitoutfit"), ...)
       }
       
       thres <- rbind(0,thres)
+      slopes <- rep(1,ncol(thres))
       
       ########### ESTIMATE PERSON PARAMETERS ###############################  
       
-      pp_est <- PP_gpcm(respm=RMobj$X, thres=thres, ...)
+      pp_est <- PP_gpcm(respm=RMobj$X, thres=thres, slopes=slopes, ...)
        
       
       } else {
