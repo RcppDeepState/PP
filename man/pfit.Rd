@@ -142,7 +142,8 @@ Jan Steinfeld
 \item Mousavi, A. & Cui, Y. Evaluate the performance of and of person fit: A simulation study.
 \item Reise, S. P. (1990). A comparison of item-and person-fit methods of assessing model-data fit in IRT.  \emph{Applied Psychological Measurement}, \bold{14(2)}, 127-137.
 \item Snijders, T. B. (2001) Asymptotic null distribution of person fit statistics with estimated person parameter. \emph{Psychometrika}, \bold{66(3)}, 331--342. 
-\item Wright, B. D. & Masters, G. N. (1990). Computation of OUTFIT and INFIT Statistics.  \emph{Rasch Measurement Transactions}, 3, 84-85.
+\item Wright, B. D. & Masters, G. N. (1990). Computation of OUTFIT and INFIT Statistics.  \emph{Rasch Measurement Transactions}, 3:4, 84-85.
+\item Wright, B. D., & Masters, G. N. (1982). \emph{Rating Scale Analysis. Rasch Measurement.} MESA Press, 5835 S. Kimbark Avenue, Chicago, IL 60637.
 }
 }
 \seealso{
