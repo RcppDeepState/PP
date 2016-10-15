@@ -4,7 +4,7 @@
 \alias{Pfit}
 \alias{Pfit.gpcm}
 \alias{Pfit.gpcm4pl}
-\title{Personfit statistics}
+\title{Person-Fit statistics}
 \usage{
 Pfit(respm, pp, fitindices)
 
@@ -15,7 +15,7 @@ Pfit(respm, pp, fitindices)
 \arguments{
 \item{respm}{numeric response matrix}
 
-\item{pp}{object of the class fourpl with estimated personparameter}
+\item{pp}{object of the class fourpl with estimated person parameter}
 
 \item{fitindices}{character vector of desired person fit statistics. c("lz","lzstar","infitoutfit")}
 }
@@ -23,13 +23,15 @@ Pfit(respm, pp, fitindices)
 list of person parameter
 }
 \description{
-Compute several person fit statistic for the 1-PL, 2-PL, 3PL and 4-PL.
+Compute several person fit statistic for the 1-PL, 2-PL, 3-PL and 4-PL.
 }
 \details{
 Please note that currently only the likelihood based LZ-Index (Drasgow, Levine, and Williams, 1985) and LZ*-Index (Snijders, 2001). Also we support the INFIT-OUTIFT (Wright and Masters, 1982, 1990) statistic as well as the polytomouse version of INFIT-OUTFIT. Other person fit staistics will be added soon.
 
-The calculation of the person fit statistics requires the numeric response-matrix as well as an object of the fourpl-class. So first you should estimate the personparameter and afterwards calculate the person fit statistics.
+The calculation of the person fit statistics requires the numeric response-matrix as well as an object of the fourpl-class. So first you should estimate the person parameter and afterwards calculate the person fit statistics.
 It is possible to calculate several person fit statistics at once, you only have to specify them in a vector.
+
+For the Partial Credit model we currently support the infit-outfit statistic. Pleas submit also the numeric response-matrix as well as the estimated person parameter with an gpcm-class.
 }
 \examples{
 ################# Pfit #############################################################
