@@ -2,9 +2,9 @@
 %\VignetteEngine{knitr::knitr}
 %\VignetteIndexEntry{Getting started with Personfit in PP}
 -->
-# Getting started with Personfit functions in PP
+# Getting started with Person-Fit functions
 
-A brief introduction in the currently implemented personfit functions will be added soon. Currently the **LZ, LZ*** and also the **Infit-Outfit-Statistics** are implemented. We also added the Infit-Outfit-Functions for the Partial-Credit Model. Meanwhile we are working on plots for a better understanding of the person misfit as well as on inference statistic methods.
+A brief introduction in the currently implemented person fit functions will be added soon. Currently the **LZ, LZ*** and also the **Infit-Outfit-Statistics** are implemented. We also added the Infit-Outfit-Functions for the Partial-Credit Model. Meanwhile we are working on plots for a better understanding of the person misfit as well as on inference statistic methods.
 
 Now a simple example.
 First we will simulate some data for our hands on example:
