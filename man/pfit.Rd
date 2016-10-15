@@ -26,7 +26,10 @@ list of person parameter
 Compute several person fit statistic for the 1-PL, 2-PL, 3PL and 4-PL.
 }
 \details{
-Please note that currently only the LZ-Index, LZ*-Index and INFIT-OUTIFT as well as the polytomouse version of INFIT-OUTFIT are implemented. Other person fit staistics will be added soon.
+Please note that currently only the likelihood based LZ-Index (Drasgow, Levine, and Williams, 1985) and LZ*-Index (Snijders, 2001). Also we support the INFIT-OUTIFT (Wright and Masters, 1982, 1990) statistic as well as the polytomouse version of INFIT-OUTFIT. Other person fit staistics will be added soon.
+
+The calculation of the person fit statistics requires the numeric response-matrix as well as an object of the fourpl-class. So first you should estimate the personparameter and afterwards calculate the person fit statistics.
+It is possible to calculate several person fit statistics at once, you only have to specify them in a vector.
 }
 \examples{
 ################# Pfit #############################################################
