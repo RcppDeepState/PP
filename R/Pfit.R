@@ -1,6 +1,6 @@
-#' Personfit statistics
+#' Person-Fit statistics
 #' 
-#' Compute several person fit statistic for the 1-PL, 2-PL, 3PL and 4-PL. 
+#' Compute several person fit statistic for the 1-PL, 2-PL, 3-PL and 4-PL. 
 #'
 #' Please note that currently only the likelihood based LZ-Index (Drasgow, Levine, and Williams, 1985) and LZ*-Index (Snijders, 2001). Also we support the INFIT-OUTIFT (Wright and Masters, 1982, 1990) statistic as well as the polytomouse version of INFIT-OUTFIT. Other person fit staistics will be added soon.
 #' 
