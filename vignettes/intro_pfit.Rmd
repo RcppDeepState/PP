@@ -24,7 +24,7 @@ ua     <- round(runif(15,0.8,1),2)
 awm <- matrix(sample(0:1,100*15,replace=TRUE),ncol=15)
 ```
 
-1. We will start with a simple 1PL-Model. First we have to estimate the person parameters. Here we have to choose an estimation method. It is importend, that you can only choose **mle, wle or map** for the LZ and LZ* Index. For the Infit-Outfit statistic we support the **mle and wle** estimates.
+1. We will start with a simple 1PL-Model. First we have to estimate the person parameters. Here we have to choose an estimation method. It is important, that you can only choose **mle, wle or map** for the LZ and LZ* Index. For the Infit-Outfit statistic we support the **mle and wle** estimates.
 
 ```{r 1pl}
 # MLE
