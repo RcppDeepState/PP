@@ -26,12 +26,32 @@ res1plwle <- PP_4pl(respm = awm,thres = diffpar,type = "wle")
 # MAP estimation
 res1plmap <- PP_4pl(respm = awm,thres = diffpar,type = "map")
 # ------------------------------------------------------------------------
+## LZ*-Index ##### 
+Pfit(respm=awm,pp=res1plwle,fitindices="lzstar")
+Pfit(respm=awm,pp=res1plmle,fitindices="lzstar")
+Pfit(respm=awm,pp=res1plmap,fitindices="lzstar")
+## LZ*-Index combined with Infit-Outfit ##### 
+Pfit(respm=awm,pp=res1plwle,fitindices=c("lzstar","infitoutfit"))
+# ------------------------------------------------------------------------
+
+##########################################################################
+
+# ------------------------------------------------------------------------
 ## 2PL model ##### 
 # ------------------------------------------------------------------------
 # MLE
 res2plmle <- PP_4pl(respm = awm,thres = diffpar, slopes = sl,type = "mle")
 # WLE
 res2plwle <- PP_4pl(respm = awm,thres = diffpar, slopes = sl,type = "wle")
+# ------------------------------------------------------------------------
+## LZ*-Index ##### 
+Pfit(respm=awm,pp=res2plwle,fitindices="lzstar")
+Pfit(respm=awm,pp=res2plmle,fitindices="lzstar")
+## LZ*-Index combined with Infit-Outfit ##### 
+Pfit(respm=awm,pp=res2plwle,fitindices=c("lzstar","infitoutfit"))
+# ------------------------------------------------------------------------
+
+##########################################################################
 
 # ------------------------------------------------------------------------
 ## 3PL model ##### 
@@ -43,6 +63,16 @@ res3plmle <- PP_4pl(respm = awm,thres = diffpar,
 res3plwle <- PP_4pl(respm = awm,thres = diffpar,
                     slopes = sl,lowerA = la,type = "wle")
 # ------------------------------------------------------------------------
+## LZ*-Index ##### 
+Pfit(respm=awm,pp=res3plwle,fitindices="lzstar")
+Pfit(respm=awm,pp=res3plmle,fitindices="lzstar")
+## LZ*-Index combined with Infit-Outfit ##### 
+Pfit(respm=awm,pp=res3plwle,fitindices=c("lzstar","infitoutfit"))
+# ------------------------------------------------------------------------
+
+##########################################################################
+
+# ------------------------------------------------------------------------
 ## 4PL model ##### 
 # ------------------------------------------------------------------------
 # MLE
@@ -51,47 +81,12 @@ res4plmle <- PP_4pl(respm = awm,thres = diffpar,
 # WLE
 res4plwle <- PP_4pl(respm = awm,thres = diffpar,
                     slopes = sl,lowerA = la,upperA=ua,type = "wle")
-
-##########################################################################################
-
-# ------------------------------------------------------------------------
-## 1PL model ##### 
-# ------------------------------------------------------------------------
-## LZ*-Index ##### 
-Pfit(respm=awm,pp=res1plwle,fitindices="lzstar")
-## LZ*-Index combined with Infit-Outfit ##### 
-Pfit(respm=awm,pp=res1plwle,fitindices=c("lzstar","infitoutfit"))
-# ------------------------------------------------------------------------
-## 2PL model ##### 
-# ------------------------------------------------------------------------
-## LZ*-Index ##### 
-Pfit(respm=awm,pp=res2plwle,fitindices="lzstar")
-## LZ*-Index combined with Infit-Outfit ##### 
-Pfit(respm=awm,pp=res2plwle,fitindices=c("lzstar","infitoutfit"))
-# ------------------------------------------------------------------------
-## 3PL model ##### 
-# ------------------------------------------------------------------------
-## LZ*-Index ##### 
-Pfit(respm=awm,pp=res3plwle,fitindices="lzstar")
-## LZ*-Index combined with Infit-Outfit ##### 
-Pfit(respm=awm,pp=res3plwle,fitindices=c("lzstar","infitoutfit"))
-# ------------------------------------------------------------------------
-## 4PL model ##### 
 # ------------------------------------------------------------------------
 ## LZ*-Index ##### 
 Pfit(respm=awm,pp=res4plwle,fitindices="lzstar")
+Pfit(respm=awm,pp=res4plmle,fitindices="lzstar")
 ## LZ*-Index combined with Infit-Outfit ##### 
 Pfit(respm=awm,pp=res4plwle,fitindices=c("lzstar","infitoutfit"))
+# ------------------------------------------------------------------------
 
 ##########################################################################################
-
-# ------------------------------------------------------------------------
-## 1PL model ##### 
-# ------------------------------------------------------------------------
-## LZ*-Index ##### 
-## mle ####
-Pfit(respm=awm,pp=res1plmle,fitindices="lzstar")
-## wle ####
-Pfit(respm=awm,pp=res1plwle,fitindices="lzstar")
-## map ####
-Pfit(respm=awm,pp=res1plmap,fitindices="lzstar")

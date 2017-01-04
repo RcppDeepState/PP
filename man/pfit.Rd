@@ -17,7 +17,7 @@ Pfit(respm, pp, fitindices)
 
 \item{pp}{object of the class fourpl with estimated person parameter}
 
-\item{fitindices}{character vector of desired person fit statistics. c("lz","lzstar","infitoutfit")}
+\item{fitindices}{character vector of desired person fit statistics c("lz","lzstar","infitoutfit")}
 }
 \value{
 list of person parameter
@@ -26,12 +26,12 @@ list of person parameter
 Compute several person fit statistic for the 1-PL, 2-PL, 3-PL and 4-PL.
 }
 \details{
-Please note that currently only the likelihood based LZ-Index (Drasgow, Levine, and Williams, 1985) and LZ*-Index (Snijders, 2001). Also we support the INFIT-OUTIFT (Wright and Masters, 1982, 1990) statistic as well as the polytomouse version of INFIT-OUTFIT. Other person fit statistics will be added soon.
+Please note that currently only the likelihood based LZ-Index (Drasgow, Levine, and Williams, 1985) and LZ*-Index (Snijders, 2001) are implemented. Also, we support the INFIT-OUTIFT (Wright and Masters, 1982, 1990) statistic as well as the polytomouse version of INFIT-OUTFIT. Other person fit statistics will be added soon.
 
 The calculation of the person fit statistics requires the numeric response-matrix as well as an object of the fourpl-class. So first you should estimate the person parameter and afterwards calculate the person fit statistics.
 It is possible to calculate several person fit statistics at once, you only have to specify them in a vector.
 
-For the Partial Credit model we currently support the infit-outfit statistic. Pleas submit also the numeric response-matrix as well as the estimated person parameter with an gpcm-class.
+For the Partial Credit model we currently support the infit-outfit statistic. Please submit also the numeric response-matrix as well as the estimated person parameter with an gpcm-class.
 }
 \examples{
 ################# Pfit #############################################################
@@ -62,12 +62,32 @@ res1plwle <- PP_4pl(respm = awm,thres = diffpar,type = "wle")
 # MAP estimation
 res1plmap <- PP_4pl(respm = awm,thres = diffpar,type = "map")
 # ------------------------------------------------------------------------
+## LZ*-Index ##### 
+Pfit(respm=awm,pp=res1plwle,fitindices="lzstar")
+Pfit(respm=awm,pp=res1plmle,fitindices="lzstar")
+Pfit(respm=awm,pp=res1plmap,fitindices="lzstar")
+## LZ*-Index combined with Infit-Outfit ##### 
+Pfit(respm=awm,pp=res1plwle,fitindices=c("lzstar","infitoutfit"))
+# ------------------------------------------------------------------------
+
+##########################################################################
+
+# ------------------------------------------------------------------------
 ## 2PL model ##### 
 # ------------------------------------------------------------------------
 # MLE
 res2plmle <- PP_4pl(respm = awm,thres = diffpar, slopes = sl,type = "mle")
 # WLE
 res2plwle <- PP_4pl(respm = awm,thres = diffpar, slopes = sl,type = "wle")
+# ------------------------------------------------------------------------
+## LZ*-Index ##### 
+Pfit(respm=awm,pp=res2plwle,fitindices="lzstar")
+Pfit(respm=awm,pp=res2plmle,fitindices="lzstar")
+## LZ*-Index combined with Infit-Outfit ##### 
+Pfit(respm=awm,pp=res2plwle,fitindices=c("lzstar","infitoutfit"))
+# ------------------------------------------------------------------------
+
+##########################################################################
 
 # ------------------------------------------------------------------------
 ## 3PL model ##### 
@@ -79,6 +99,16 @@ res3plmle <- PP_4pl(respm = awm,thres = diffpar,
 res3plwle <- PP_4pl(respm = awm,thres = diffpar,
                     slopes = sl,lowerA = la,type = "wle")
 # ------------------------------------------------------------------------
+## LZ*-Index ##### 
+Pfit(respm=awm,pp=res3plwle,fitindices="lzstar")
+Pfit(respm=awm,pp=res3plmle,fitindices="lzstar")
+## LZ*-Index combined with Infit-Outfit ##### 
+Pfit(respm=awm,pp=res3plwle,fitindices=c("lzstar","infitoutfit"))
+# ------------------------------------------------------------------------
+
+##########################################################################
+
+# ------------------------------------------------------------------------
 ## 4PL model ##### 
 # ------------------------------------------------------------------------
 # MLE
@@ -87,50 +117,15 @@ res4plmle <- PP_4pl(respm = awm,thres = diffpar,
 # WLE
 res4plwle <- PP_4pl(respm = awm,thres = diffpar,
                     slopes = sl,lowerA = la,upperA=ua,type = "wle")
-
-##########################################################################################
-
-# ------------------------------------------------------------------------
-## 1PL model ##### 
-# ------------------------------------------------------------------------
-## LZ*-Index ##### 
-Pfit(respm=awm,pp=res1plwle,fitindices="lzstar")
-## LZ*-Index combined with Infit-Outfit ##### 
-Pfit(respm=awm,pp=res1plwle,fitindices=c("lzstar","infitoutfit"))
-# ------------------------------------------------------------------------
-## 2PL model ##### 
-# ------------------------------------------------------------------------
-## LZ*-Index ##### 
-Pfit(respm=awm,pp=res2plwle,fitindices="lzstar")
-## LZ*-Index combined with Infit-Outfit ##### 
-Pfit(respm=awm,pp=res2plwle,fitindices=c("lzstar","infitoutfit"))
-# ------------------------------------------------------------------------
-## 3PL model ##### 
-# ------------------------------------------------------------------------
-## LZ*-Index ##### 
-Pfit(respm=awm,pp=res3plwle,fitindices="lzstar")
-## LZ*-Index combined with Infit-Outfit ##### 
-Pfit(respm=awm,pp=res3plwle,fitindices=c("lzstar","infitoutfit"))
-# ------------------------------------------------------------------------
-## 4PL model ##### 
 # ------------------------------------------------------------------------
 ## LZ*-Index ##### 
 Pfit(respm=awm,pp=res4plwle,fitindices="lzstar")
+Pfit(respm=awm,pp=res4plmle,fitindices="lzstar")
 ## LZ*-Index combined with Infit-Outfit ##### 
 Pfit(respm=awm,pp=res4plwle,fitindices=c("lzstar","infitoutfit"))
+# ------------------------------------------------------------------------
 
 ##########################################################################################
-
-# ------------------------------------------------------------------------
-## 1PL model ##### 
-# ------------------------------------------------------------------------
-## LZ*-Index ##### 
-## mle ####
-Pfit(respm=awm,pp=res1plmle,fitindices="lzstar")
-## wle ####
-Pfit(respm=awm,pp=res1plwle,fitindices="lzstar")
-## map ####
-Pfit(respm=awm,pp=res1plmap,fitindices="lzstar")
 }
 \author{
 Jan Steinfeld
