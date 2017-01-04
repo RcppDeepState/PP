@@ -34,7 +34,7 @@ It is possible to calculate several person fit statistics at once, you only have
 For the Partial Credit model we currently support the infit-outfit statistic. Please submit also the numeric response-matrix as well as the estimated person parameter with an gpcm-class.
 }
 \examples{
-################# Pfit #############################################################
+################# Pfit ###################################################
 
 
 ### data creation ##########
@@ -125,7 +125,7 @@ Pfit(respm=awm,pp=res4plmle,fitindices="lzstar")
 Pfit(respm=awm,pp=res4plwle,fitindices=c("lzstar","infitoutfit"))
 # ------------------------------------------------------------------------
 
-##########################################################################################
+##########################################################################
 }
 \author{
 Jan Steinfeld

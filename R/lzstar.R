@@ -49,7 +49,6 @@ lzstar <- function(
         # dependend on the choosen distribution
         r0 <-  (mu - thetas) / sigma^2
       }
-  # S. 67: für das 3PL definiert d1Pi(theta) = (1-ci) * ai * exp(ai*(theta-beta)) / (1 + exp(ai*(theta-beta)))^2
   wi            <- log( Pi / Qi )
   Wn            <- rowSums( (data - Pi) * wi ,na.rm=TRUE)
   sigmaNtheta2  <- rowSums(wi^2 * Pi  * Qi) / ncol(data)
