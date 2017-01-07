@@ -6,7 +6,7 @@ InfitOutfitpoly <- function( data,
   # ------------------------------------------------------------------------------------------------
   betas <- as.vector(apply(thresholds[-1,],2,cumsum))
   betas <- betas[!is.na(betas)]
-  if(is.null(slope)) slope <- rep(1,length(betas))
+  if(is.null(slopes)) slope <- rep(1,length(betas))
   # ------------------------------------------------------------------------------------------------
   #  information
   X <- data

@@ -25,7 +25,7 @@ simdat_gpcm <- sim_gpcm(thres = THRESx,alpha = sl,theta = THETA)
 
 my_pcm <- eRm::PCM(simdat_gpcm)
 
-#res_pp2 <- PPass(my_pcm)
+res_pp2 <- PPass(my_pcm)
 
 ## ==========  1PL model
 
