@@ -75,10 +75,10 @@ InfitOutfit <- function( data,
     "Chisq"       = round(chisq,3),
     "df"          = df,
     "pvalue"      = round(pvalue,3),
-    "outfit"      = round(Un,3),
-    "outfit.z"    = round(tu,3),
-    "infit"       = round(Vn,3),
-    "infit.z"     = round(ti,3)
+    "outfit"      = round(Un,6),
+    "outfit.z"    = round(tu,6),
+    "infit"       = round(Vn,6),
+    "infit.z"     = round(ti,6)
   )
   return(out)
 

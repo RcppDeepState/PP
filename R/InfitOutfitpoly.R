@@ -104,10 +104,10 @@ submatrix_pijx <- (t(theta_mat_kat) - betas) #* ai
     "Chisq"       = round(chisq,3),
     "df"          = df,
     "pvalue"      = round(pvalue,3),
-    "outfit"      = round(Un,3),
-    "outfit.t"    = round(tu,3),
-    "infit"       = round(Vn,3),
-    "infit.t"     = round(ti,3)
+    "outfit"      = round(Un,6),
+    "outfit.t"    = round(tu,6),
+    "infit"       = round(Vn,6),
+    "infit.t"     = round(ti,6)
   )
   return(out)
 }
