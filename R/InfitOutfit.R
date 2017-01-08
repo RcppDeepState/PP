@@ -76,9 +76,9 @@ InfitOutfit <- function( data,
     "df"          = df,
     "pvalue"      = round(pvalue,3),
     "outfit"      = round(Un,6),
-    "outfit.z"    = round(tu,6),
+    "outfit.t"    = round(tu,6),
     "infit"       = round(Vn,6),
-    "infit.z"     = round(ti,6)
+    "infit.t"     = round(ti,6)
   )
   return(out)
 
