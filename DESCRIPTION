@@ -1,10 +1,11 @@
 Package: PP
 Type: Package
 Title: Person Parameter estimation
-Version: 0.5.4
-Date: 2016-09-24
-Author: Manuel Reif <manuel.reif@gmail.com>
-Maintainer: Manuel Reif <manuel.reif@gmail.com>
+Version: 0.6.0
+Date: 2017-01-13
+Authors@R: c(
+    person("Reif", "Manuel", email = "manuel.reif@gmail.com", role = c("cre","aut")),
+    person("Steinfeld", "Jan", email = "jand.steinfeld@gmail.com", role = "aut"))
 Description: The PP package includes estimation of (MLE, WLE, MAP, EAP, ROBUST)
     person parameters for the 1,2,3,4-PL model and the GPCM (generalized
     partial credit model). The parameters are estimated under the assumption
