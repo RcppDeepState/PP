@@ -49,7 +49,6 @@ lzstar <- function(
         # dependend on the choosen distribution
         r0 <-  (mu - thetas) / sigma^2
       }
-  # S. 67: für das 3PL definiert d1Pi(theta) = (1-ci) * ai * exp(ai*(theta-beta)) / (1 + exp(ai*(theta-beta)))^2
   wi            <- log( Pi / Qi )
   Wn            <- rowSums( (data - Pi) * wi ,na.rm=TRUE)
   sigmaNtheta2  <- rowSums(wi^2 * Pi  * Qi) / ncol(data)
@@ -58,8 +57,8 @@ lzstar <- function(
   tau2          <- rowSums(widach^2 * Pi * Qi) / ncol(data)
   
   lzstern       <- (Wn + cn*r0) / sqrt(ncol(data) * tau2)
-  lzstern <- round(lzstern,3)
+  lzstern <- round(lzstern,6)
   out <- matrix(lzstern,ncol=1)
-  colnames(out) <- "LZ_Star_Scores"
+  colnames(out) <- "lzstar"
   return(out)
 }

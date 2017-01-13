@@ -6,8 +6,8 @@
 
 A brief introduction in the currently implemented person fit functions will be added soon. Currently the **LZ, LZ*** and also the **Infit-Outfit-Statistics** are implemented. We also added the Infit-Outfit-Functions for the Partial-Credit Model. Meanwhile we are working on plots for a better understanding of the person misfit as well as on inference statistic methods.
 
-Now a simple example.
-First we will simulate some data for our hands on example:
+Now a simple example will be given.
+First, we will simulate some data for our hands on example:
 
 ```r
 library(PP)
@@ -25,7 +25,7 @@ ua     <- round(runif(15,0.8,1),2)
 awm <- matrix(sample(0:1,100*15,replace=TRUE),ncol=15)
 ```
 
-1. We will start with a simple 1PL-Model. First we have to estimate the person parameters. Here we have to choose an estimation method. It is importend, that you can only choose **mle, wle or map** for the LZ and LZ* Index. For the Infit-Outfit statistic we support the **mle and wle** estimates.
+1. We will start with a simple 1PL-Model. First, we have to estimate the person parameters. Here we have to choose an estimation method. It is important, that you can choose **mle, wle or map** only for the LZ and LZ* Index. For the Infit-Outfit statistic we support **mle and wle** estimates.
 
 
 ```r
@@ -150,7 +150,7 @@ res4plwle <- PP_4pl(respm = awm,thres = diffpar,
 ## Estimation finished!
 ```
 
-2. After the estimation of the person parameter we are able to calculate the personfits. At this point you are able to calculate only one kind of personfit as well as all simultaneously (as shown next).
+2. After the estimation of the person parameter we are able to calculate the person fits. At this point you are able to calculate only one kind of personfit as well as all simultaneously (as shown next).
 
 
 ```r

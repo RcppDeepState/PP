@@ -17,7 +17,7 @@ InfitOutfit <- function( data,
   ai <- slopes
   ci <- lowerAs
   di <- higherAs
-  # calculate the propability of each pearson to NOT solve an item
+  # calculate the propability of each pearson to not solve an item
   submatrix <- (matrix( thetas, ncol = nrow( data ), nrow = ncol( data ) ,byrow = TRUE) - betas) * ai
   
   
@@ -26,8 +26,6 @@ InfitOutfit <- function( data,
    Pni     <- t( ci + (di-ci)/(1+exp(-submatrix)) )
   # --------------------------------------------------------------------------------
 
-  # For the PCM, the categorys must be calculated
-  # for Wni it is important to sum both (1 and 0)
   # first: finde the k categories of each item
        k_temp <- apply(X,2,max,na.rm=TRUE)
        k  <- as.vector( sapply( k_temp, function(x) seq(0,x) ) )
@@ -77,10 +75,10 @@ InfitOutfit <- function( data,
     "Chisq"       = round(chisq,3),
     "df"          = df,
     "pvalue"      = round(pvalue,3),
-    "outfit"      = round(Un,3),
-    "outfit.z"    = round(tu,3),
-    "infit"       = round(Vn,3),
-    "infit.z"     = round(ti,3)
+    "outfit"      = round(Un,6),
+    "outfit.t"    = round(tu,6),
+    "infit"       = round(Vn,6),
+    "infit.t"     = round(ti,6)
   )
   return(out)
 
