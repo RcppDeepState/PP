@@ -56,7 +56,7 @@
 #'
 #'@template resulttemplate
 #'
-#' @seealso \link{PPall}, \link{PP_gpcm}, \link{JKpp}, \link{PV}
+#' @seealso \link{PPass}, \link{PPall}, \link{PP_gpcm}, \link{JKpp}, \link{PV}
 #'
 #' @useDynLib PP
 #' @importFrom Rcpp evalCpp

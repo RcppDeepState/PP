@@ -134,7 +134,7 @@ Wang, S. and Wang, T. (2001). Precision of Warm's Weighted Likelihood Estimates 
 Warm, Thomas A. (1989). Weighted Likelihood Estimation Of Ability In Item Response Theory. Psychometrika, 54, 427-450.
 }
 \seealso{
-\link{PPall}, \link{PP_4pl}, \link{JKpp}, \link{PV}
+\link{PPass}, \link{PPall}, \link{PP_4pl}, \link{JKpp}, \link{PV}
 }
 \keyword{GPCM}
 \keyword{Parameters,}

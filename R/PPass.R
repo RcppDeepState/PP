@@ -63,7 +63,7 @@ stopifnot(is.data.frame(respdf)) # muss ein df sein als input
 stopifnot((is.numeric(items) & all(items >= 1)) | all(items == "all")) # indices oder alles
   
 ## create matrix, keep the rest
-if(items == "all") # all variables are items
+if(all(items == "all")) # all variables are items
   {
     respm <- as.matrix(respdf)
   } else {

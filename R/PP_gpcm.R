@@ -35,7 +35,7 @@
 #'
 #'@template resulttemplate
 #'
-#' @seealso \link{PPall}, \link{PP_4pl}, \link{JKpp}, \link{PV}
+#' @seealso \link{PPass}, \link{PPall}, \link{PP_4pl}, \link{JKpp}, \link{PV}
 #'
 #'@export
 #'

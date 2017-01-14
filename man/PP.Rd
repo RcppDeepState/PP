@@ -43,6 +43,6 @@ Warm, Thomas A. (1989). Weighted Likelihood Estimation Of Ability In Item Respon
 Yen, Y.-C., Ho, R.-G., Liao, W.-W., Chen, L.-J., & Kuo, C.-C. (2012). An empirical evaluation of the slip correction in the four parameter logistic models with computerized adaptive testing. Applied Psychological Measurement, 36, 75-87.
 }
 \seealso{
-\link{PP_gpcm}, \link{PP_4pl}, \link{PPall}
+\link{PPass}, \link{PP_gpcm}, \link{PP_4pl}, \link{PPall}
 }
 
