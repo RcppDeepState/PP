@@ -43,7 +43,7 @@ sum(rdup)
 ## ----decide--------------------------------------------------------------
 library(PP)
 
-res1plmle <- PP_4pl(respm = itmat,thres = diff_par, slopes = slope_par, type = "mle")
+res1plmle <- PP_4pl(respm = itmat, thres = diff_par, slopes = slope_par, type = "mle")
 
 summary(res1plmle)
 
@@ -57,7 +57,13 @@ head(dafest,10)
 ## ----rerun---------------------------------------------------------------
 library(PP)
 
-res1plmle <- PP_4pl(respm = itmat,thres = diff_par, slopes = slope_par, type = "wle")
+res1plwle <- PP_4pl(respm = itmat,thres = diff_par, slopes = slope_par, type = "wle")
 
-summary(res1plmle)
+summary(res1plwle)
+
+## ----ppass---------------------------------------------------------------
+
+PPass(fourpl_df, items = 3:14, mod="2PL", thres = diff_par, slopes = slope_par, type = "wle")
+
+
 
