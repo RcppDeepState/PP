@@ -70,7 +70,7 @@ res4plwle <- PP_4pl(respm = awm,thres = diffpar,
                     slopes = sl,lowerA = la,upperA=ua,type = "wle")
 ```
 
-After the estimation of the person parameter we are able to calculate the person fits. At this point you are able to calculate only one kind of personfit as well as all simultaneously (as shown next).
+After the estimation of the person parameter we are able to calculate the person fits. At this point you are able to calculate only one kind of personfit as well as all various simultaneously (as shown next).
 
 ```{r pfit}
 
