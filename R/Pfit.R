@@ -11,7 +11,8 @@
 #' 
 #'@param respm	      numeric response matrix
 #'@param pp 		      object of the class fourpl with estimated person parameter
-#'@param fitindices		character vector of desired person fit statistics c("lz","lzstar","infitoutfit")
+#'@param fitindices		character vector of desired person fit statistics c("lz","lzstar","infit","outfit")
+#'@param se		        logical: if true standard errors are computed using jackknife method
 #'
 #' @return list of person parameter
 #'
@@ -25,6 +26,7 @@
 #' \item Armstrong, R. D., Stoumbos, Z. G., Kung, M. T. & Shi, M. (2007). On the performance of the lz person-fit statistic.  \emph{Practical Assessment, Research & Evaluation}, \bold{12(16)}. Chicago	
 #' \item De La Torre, J., & Deng, W. (2008). Improving Person-Fit Assessment by Correcting the Ability Estimate and Its Reference Distribution. Journal of Educational Measurement, \bold{45(2)}, 159-177.
 #' \item Drasgow, F., Levine, M. V. & Williams, E. A. (1985) Appropriateness measurement with polychotomous item response models and standardized indices. \emph{British Journal of Mathematical and Statistical Psychology}, \bold{38(1)}, 67--86.
+#' \item Efron, B., & Stein, C. (1981). The jackknife estimate of variance. \emph{The Annals of Statistics}, \bold{9(3)}, 586-596.	
 #' \item Karabatsos, G. (2003) Comparing the Aberrant Response Detection Performance of Thirty-Six Person-Fit Statistics. \emph{Applied Measurement In Education}, \bold{16(4)}, 277--298.
 #' \item Magis, D., Raiche, G. & Beland, S. (2012) A didactic presentation of Snijders's l[sub]z[/sub] index of person fit with emphasis on response model selection and ability estimation. \emph{Journal of Educational and Behavioral Statistics}, \bold{37(1)}, 57--81.
 #' \item Meijer, R. R. & Sijtsma, K. (2001) Methodology review: Evaluating person fit. \emph{Applied Psychological Measurement}, \bold{25(2)}, 107--135.
@@ -39,19 +41,20 @@
 #' @example ./R/.examples_pfit.R
 #' @keywords Person fit, LZ-Index, Infit-Outfit
 #' @export
-Pfit <- function(respm,pp,fitindices) UseMethod("Pfit",object=pp)
+Pfit <- function(respm,pp,fitindices,se=FALSE) UseMethod("Pfit",object=pp)
 # ------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 
 #'@method Pfit fourpl
 #'@export
-  Pfit.fourpl <- function(respm, pp, fitindices=c("lz","lzstar","infitoutfit")){
+  Pfit.fourpl <- function(respm, pp, fitindices=c("lz","lzstar","infit","outfit"),se=FALSE){
 
     if(any(pp$type%in%c("eap","robust"))) stop("Only 'mle','wle' and 'map' ability estimates are supported \n")
 
     pfitfunctions <- list("lz" = lz,
                           "lzstar" = lzstar,
-                          "infitoutfit" = InfitOutfit
+                          "infit" = Infit,
+                          "outfit" = Outfit
     )
     
     fitindices <- match.arg(fitindices, several.ok = TRUE)  
@@ -71,10 +74,21 @@ Pfit <- function(respm,pp,fitindices) UseMethod("Pfit",object=pp)
     
     out <- mapply(function(x,y) do.call("y",x), x=args, y=pfitfunctions_red,SIMPLIFY = FALSE)
     names(out) <- names(pfitfunctions_red)
+    
+    if(se){
+      if(any(fitindices=="lz")){
+        lz.se <- jackknife(data = respm, pp=pp, fit="lz")
+        out$lz <- cbind(out$lz,"SE"=lz.se)
+      }
+      if(any(fitindices=="lzstar")){
+        lzstar.se <- jackknife(data = respm, pp=pp, fit="lzstar")
+        out$lzstar <- cbind(out$lzstar,"SE"=lzstar.se)
+      }
+    }
+    
     class(out) <- append(class(out),"PPfit")
     return(out)
   }
-  
   
   # ------------------------------------------------------------------------------------------------------------------------------------------------------------
   
@@ -82,13 +96,14 @@ Pfit <- function(respm,pp,fitindices) UseMethod("Pfit",object=pp)
   #' 
   #' @method Pfit gpcm
   #' @export
-  Pfit.gpcm <- function(respm, pp, fitindices=c("infitoutfit")){
+  Pfit.gpcm <- function(respm, pp, fitindices=c("infit","outfit")){
     if(any(pp$type%in%c("map","eap","robust"))) stop("Only 'mle' and 'wle' ability estimates are supported \n")
     
-    if(!all(fitindices%in%c("infitoutfit"))){ warning("Only 'infitoutfit' are currently supported. The calculation is executed with infitoutfit \n"); fitindices <- "infitoutfit"}
+    if(!all(fitindices%in%c("infit","outfit"))){ warning("Only 'infit and outfit' are currently supported. The calculation is executed with infitoutfit \n"); fitindices <- "infitoutfit"}
     if(any(pp$ipar$slopes>1)) warning("Currently only the PCM-Modell is supported \n")
     
-    pfitfunctions <- list("infitoutfit" = InfitOutfitpoly)
+    pfitfunctions <- list("infit" = Infitpoly,
+                          "outit" = Outfitpoly)
 
     fitindices <- match.arg(fitindices, several.ok = TRUE)  
 

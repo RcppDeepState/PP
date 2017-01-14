@@ -6,9 +6,9 @@
 \alias{Pfit.gpcm4pl}
 \title{Person-Fit statistics}
 \usage{
-Pfit(respm, pp, fitindices)
+Pfit(respm, pp, fitindices, se = FALSE)
 
-\method{Pfit}{gpcm}(respm, pp, fitindices = c("infitoutfit"))
+\method{Pfit}{gpcm}(respm, pp, fitindices = c("infit", "outfit"))
 
 \method{Pfit}{gpcm4pl}(respm, pp, fitindices)
 }
@@ -17,7 +17,9 @@ Pfit(respm, pp, fitindices)
 
 \item{pp}{object of the class fourpl with estimated person parameter}
 
-\item{fitindices}{character vector of desired person fit statistics c("lz","lzstar","infitoutfit")}
+\item{fitindices}{character vector of desired person fit statistics c("lz","lzstar","infit","outfit")}
+
+\item{se}{logical: if true standard errors are computed using jackknife method}
 }
 \value{
 list of person parameter
@@ -135,6 +137,7 @@ Jan Steinfeld
 \item Armstrong, R. D., Stoumbos, Z. G., Kung, M. T. & Shi, M. (2007). On the performance of the lz person-fit statistic.  \emph{Practical Assessment, Research & Evaluation}, \bold{12(16)}. Chicago	
 \item De La Torre, J., & Deng, W. (2008). Improving Person-Fit Assessment by Correcting the Ability Estimate and Its Reference Distribution. Journal of Educational Measurement, \bold{45(2)}, 159-177.
 \item Drasgow, F., Levine, M. V. & Williams, E. A. (1985) Appropriateness measurement with polychotomous item response models and standardized indices. \emph{British Journal of Mathematical and Statistical Psychology}, \bold{38(1)}, 67--86.
+\item Efron, B., & Stein, C. (1981). The jackknife estimate of variance. \emph{The Annals of Statistics}, \bold{9(3)}, 586-596.	
 \item Karabatsos, G. (2003) Comparing the Aberrant Response Detection Performance of Thirty-Six Person-Fit Statistics. \emph{Applied Measurement In Education}, \bold{16(4)}, 277--298.
 \item Magis, D., Raiche, G. & Beland, S. (2012) A didactic presentation of Snijders's l[sub]z[/sub] index of person fit with emphasis on response model selection and ability estimation. \emph{Journal of Educational and Behavioral Statistics}, \bold{37(1)}, 57--81.
 \item Meijer, R. R. & Sijtsma, K. (2001) Methodology review: Evaluating person fit. \emph{Applied Psychological Measurement}, \bold{25(2)}, 107--135.
