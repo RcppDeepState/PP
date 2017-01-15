@@ -99,7 +99,7 @@ pfit1pl_map_l <- Pfit(respm=awm,pp=res1plmap,fitindices="lzstar")
 ## ----plot, echo=FALSE, message=FALSE, warning=FALSE----------------------
 # eine Grafik erzeugen
 
-res.pp <- Pfit(respm=awm,pp=res1plmle,fitindices=c("lzstar"),se=TRUE)
+res.pp <- Pfit(respm=awm,pp=res1plmle,fitindices=c("lzstar"),SE=TRUE)
 x<-seq(-4,4,length=200)
 s = 1
 mu = 0
@@ -112,7 +112,7 @@ rug(res.pp$lzstar[,"lzstar"],col="red")
 # zweite Grafik erzeugen
 x <- 1:nrow(res.pp$lzstar)
 avg <- res.pp$lzstar[,"lzstar"]
-sdev <- res.pp$lzstar[,"SE"]
+sdev <- res.pp$lzstar[,"lzs_se"]
 
 plot(avg, x,
      xlim=range(c(avg-sdev, avg+sdev)),

@@ -74,10 +74,10 @@ if(all(items == "all")) # all variables are items
   respm <- as.matrix(respdf[ , items, drop=FALSE])
   }
 # if not a matrix, extract the items and convert to matrix
-args_4pl  <- setdiff(formalArgs(PP_4pl), all_pts)
-args_gpcm <- setdiff(formalArgs(PP_gpcm), all_pts)
-args_all <- setdiff(formalArgs(PPall), all_pts)
-args_pfit <- setdiff(formalArgs(Pfit), all_pts)
+args_4pl  <- setdiff(names(formals(PP_4pl)), all_pts)
+args_gpcm <- setdiff(names(formals(PP_gpcm)), all_pts)
+args_all <- setdiff(names(formals(PPall)), all_pts)
+args_pfit <- setdiff(names(formals(Pfit)), all_pts)
 
 # check if first element is character
 if(is.character(respm[1,1])) stop("At least one response is of type character!\n")
