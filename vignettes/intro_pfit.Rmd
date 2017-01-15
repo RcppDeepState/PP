@@ -80,28 +80,28 @@ After the estimation of the person parameter we are able to calculate the person
 ## LZ*-Index ##### 
 pfit1pl_lz <- Pfit(respm=awm,pp=res1plwle,fitindices="lzstar")
 ## LZ*-Index combined with Infit-Outfit ##### 
-pfit1pl_li <- Pfit(respm=awm,pp=res1plwle,fitindices=c("lzstar","infitoutfit"))
+pfit1pl_li <- Pfit(respm=awm,pp=res1plwle,fitindices=c("lzstar","infit","outfit"))
 # ------------------------------------------------------------------------
 ## 2PL model ##### 
 # ------------------------------------------------------------------------
 ## LZ*-Index ##### 
 pfit2pl_lz <- Pfit(respm=awm,pp=res2plwle,fitindices="lzstar")
 ## LZ*-Index combined with Infit-Outfit ##### 
-pfit2pl_li <- Pfit(respm=awm,pp=res2plwle,fitindices=c("lzstar","infitoutfit"))
+pfit2pl_li <- Pfit(respm=awm,pp=res2plwle,fitindices=c("lzstar","infit","outfit"))
 # ------------------------------------------------------------------------
 ## 3PL model ##### 
 # ------------------------------------------------------------------------
 ## LZ*-Index ##### 
 pfit3pl_lz <- Pfit(respm=awm,pp=res3plwle,fitindices="lzstar")
 ## LZ*-Index combined with Infit-Outfit ##### 
-pfit3pl_li <- Pfit(respm=awm,pp=res3plwle,fitindices=c("lzstar","infitoutfit"))
+pfit3pl_li <- Pfit(respm=awm,pp=res3plwle,fitindices=c("lzstar","infit","outfit"))
 # ------------------------------------------------------------------------
 ## 4PL model ##### 
 # ------------------------------------------------------------------------
 ## LZ*-Index ##### 
 pfit4pl_lz <- Pfit(respm=awm,pp=res4plwle,fitindices="lzstar")
 ## LZ*-Index combined with Infit-Outfit ##### 
-pfit4pl_li <- Pfit(respm=awm,pp=res4plwle,fitindices=c("lzstar","infitoutfit"))
+pfit4pl_li <- Pfit(respm=awm,pp=res4plwle,fitindices=c("lzstar","infit","outfit"))
 ```
 
 We can also use different person parameter estimates.
