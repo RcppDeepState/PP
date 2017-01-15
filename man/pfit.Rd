@@ -69,7 +69,7 @@ Pfit(respm=awm,pp=res1plwle,fitindices="lzstar")
 Pfit(respm=awm,pp=res1plmle,fitindices="lzstar")
 Pfit(respm=awm,pp=res1plmap,fitindices="lzstar")
 ## LZ*-Index combined with Infit-Outfit ##### 
-Pfit(respm=awm,pp=res1plwle,fitindices=c("lzstar","infitoutfit"))
+Pfit(respm=awm,pp=res1plwle,fitindices=c("lzstar","infit","outfit"))
 # ------------------------------------------------------------------------
 
 ##########################################################################
@@ -86,7 +86,7 @@ res2plwle <- PP_4pl(respm = awm,thres = diffpar, slopes = sl,type = "wle")
 Pfit(respm=awm,pp=res2plwle,fitindices="lzstar")
 Pfit(respm=awm,pp=res2plmle,fitindices="lzstar")
 ## LZ*-Index combined with Infit-Outfit ##### 
-Pfit(respm=awm,pp=res2plwle,fitindices=c("lzstar","infitoutfit"))
+Pfit(respm=awm,pp=res2plwle,fitindices=c("lzstar","infit","outfit"))
 # ------------------------------------------------------------------------
 
 ##########################################################################
@@ -105,7 +105,7 @@ res3plwle <- PP_4pl(respm = awm,thres = diffpar,
 Pfit(respm=awm,pp=res3plwle,fitindices="lzstar")
 Pfit(respm=awm,pp=res3plmle,fitindices="lzstar")
 ## LZ*-Index combined with Infit-Outfit ##### 
-Pfit(respm=awm,pp=res3plwle,fitindices=c("lzstar","infitoutfit"))
+Pfit(respm=awm,pp=res3plwle,fitindices=c("lzstar","infit","outfit"))
 # ------------------------------------------------------------------------
 
 ##########################################################################
@@ -124,7 +124,7 @@ res4plwle <- PP_4pl(respm = awm,thres = diffpar,
 Pfit(respm=awm,pp=res4plwle,fitindices="lzstar")
 Pfit(respm=awm,pp=res4plmle,fitindices="lzstar")
 ## LZ*-Index combined with Infit-Outfit ##### 
-Pfit(respm=awm,pp=res4plwle,fitindices=c("lzstar","infitoutfit"))
+Pfit(respm=awm,pp=res4plwle,fitindices=c("lzstar","infit","outfit"))
 # ------------------------------------------------------------------------
 
 ##########################################################################
