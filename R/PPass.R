@@ -27,7 +27,6 @@ PPass <- function(...) UseMethod("PPass")
 #' 
 #' @param fitindices A character vector which denotes the fit indices to compute.
 #' 
-#' 
 #' @details PPass fuses Person Parameter estimation and Person Fit computation into a single function.
 #' 
 #' @return The original data.frame and
@@ -91,7 +90,7 @@ if(mod %in% c("1PL","2PL","3PL","4PL"))
   
 ########### CALCULATE PERSON FIT ###############################
 
-fit_calc <- Pfit(respm=respm,pp=pp_est,fitindices=fitindices)
+fit_calc <- Pfit(respm=respm,pp=pp_est,fitindices=fitindices,...)
 # rename the colnames and combine to data.frame  
 for(l in names(fit_calc)){
     colnames(fit_calc[[l]]) <- paste0(l,"_",colnames(fit_calc[[l]]))
@@ -168,7 +167,7 @@ PPass.Rm <- function(RMobj, fitindices= c("lz","lz_star","infit","outfit"), ...)
 
   ########### CALCULATE PERSON FIT ###############################  
 
-  fit_calc <- Pfit(respm=RMobj$X,pp=pp_est,fitindices=fitindices)
+  fit_calc <- Pfit(respm=RMobj$X,pp=pp_est,fitindices=fitindices,...)
   # rename the colnames and combine to data.frame  
   for(l in names(fit_calc)){
     colnames(fit_calc[[l]]) <- paste0(l,"_",colnames(fit_calc[[l]]))

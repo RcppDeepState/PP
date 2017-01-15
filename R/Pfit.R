@@ -12,10 +12,11 @@
 #'@param respm	      numeric response matrix
 #'@param pp 		      object of the class fourpl with estimated person parameter
 #'@param fitindices		character vector of desired person fit statistics c("lz","lzstar","infit","outfit")
-#'@param se		        logical: if true standard errors are computed using jackknife method
+#'@param SE		        logical: if true standard errors are computed using jackknife method
 #'
-#' @return list of person parameter
-#'
+#' @return list of person-fits for each person-fit statistic
+#' 
+#' 
 #' @rdname pfit
 #' @seealso \link{PPall}, \link{PP_4pl}, \link{PPass}
 #'
@@ -41,13 +42,13 @@
 #' @example ./R/.examples_pfit.R
 #' @keywords Person fit, LZ-Index, Infit-Outfit
 #' @export
-Pfit <- function(respm,pp,fitindices,se=FALSE) UseMethod("Pfit",object=pp)
+Pfit <- function(respm,pp,fitindices,SE=FALSE) UseMethod("Pfit",object=pp)
 # ------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 
 #'@method Pfit fourpl
 #'@export
-  Pfit.fourpl <- function(respm, pp, fitindices=c("lz","lzstar","infit","outfit"),se=FALSE){
+  Pfit.fourpl <- function(respm, pp, fitindices=c("lz","lzstar","infit","outfit"),SE=FALSE){
 
     if(any(pp$type%in%c("eap","robust"))) stop("Only 'mle','wle' and 'map' ability estimates are supported \n")
 
@@ -75,7 +76,7 @@ Pfit <- function(respm,pp,fitindices,se=FALSE) UseMethod("Pfit",object=pp)
     out <- mapply(function(x,y) do.call("y",x), x=args, y=pfitfunctions_red,SIMPLIFY = FALSE)
     names(out) <- names(pfitfunctions_red)
     
-    if(se){
+    if(SE){
       if(any(fitindices=="lz")){
         lz.se <- jackknife(data = respm, pp=pp, fit="lz")
         out$lz <- cbind(out$lz,"SE"=lz.se)

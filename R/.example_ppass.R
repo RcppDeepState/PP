@@ -45,7 +45,7 @@ awm <- as.data.frame(awm)
 
 # estimate ability parameter and personfit
 out <- PPass(respdf = awm,thres = diffpar, items="all",
-             mod=c("1PL"), fitindices= c("lz","lzstar","infitoutfit"))
+             mod=c("1PL"), fitindices= c("lz","lzstar","infit","outfit"))
 
 # show first rows of person parameter
 head(out$personparameter)

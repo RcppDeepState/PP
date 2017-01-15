@@ -6,7 +6,7 @@
 \alias{Pfit.gpcm4pl}
 \title{Person-Fit statistics}
 \usage{
-Pfit(respm, pp, fitindices, se = FALSE)
+Pfit(respm, pp, fitindices, SE = FALSE)
 
 \method{Pfit}{gpcm}(respm, pp, fitindices = c("infit", "outfit"))
 
@@ -19,10 +19,10 @@ Pfit(respm, pp, fitindices, se = FALSE)
 
 \item{fitindices}{character vector of desired person fit statistics c("lz","lzstar","infit","outfit")}
 
-\item{se}{logical: if true standard errors are computed using jackknife method}
+\item{SE}{logical: if true standard errors are computed using jackknife method}
 }
 \value{
-list of person parameter
+list of person-fits for each person-fit statistic
 }
 \description{
 Compute several person fit statistic for the 1-PL, 2-PL, 3-PL and 4-PL.
@@ -69,7 +69,7 @@ Pfit(respm=awm,pp=res1plwle,fitindices="lzstar")
 Pfit(respm=awm,pp=res1plmle,fitindices="lzstar")
 Pfit(respm=awm,pp=res1plmap,fitindices="lzstar")
 ## LZ*-Index combined with Infit-Outfit ##### 
-Pfit(respm=awm,pp=res1plwle,fitindices=c("lzstar","infitoutfit"))
+Pfit(respm=awm,pp=res1plwle,fitindices=c("lzstar","infit","outfit"))
 # ------------------------------------------------------------------------
 
 ##########################################################################
@@ -86,7 +86,7 @@ res2plwle <- PP_4pl(respm = awm,thres = diffpar, slopes = sl,type = "wle")
 Pfit(respm=awm,pp=res2plwle,fitindices="lzstar")
 Pfit(respm=awm,pp=res2plmle,fitindices="lzstar")
 ## LZ*-Index combined with Infit-Outfit ##### 
-Pfit(respm=awm,pp=res2plwle,fitindices=c("lzstar","infitoutfit"))
+Pfit(respm=awm,pp=res2plwle,fitindices=c("lzstar","infit","outfit"))
 # ------------------------------------------------------------------------
 
 ##########################################################################
@@ -105,7 +105,7 @@ res3plwle <- PP_4pl(respm = awm,thres = diffpar,
 Pfit(respm=awm,pp=res3plwle,fitindices="lzstar")
 Pfit(respm=awm,pp=res3plmle,fitindices="lzstar")
 ## LZ*-Index combined with Infit-Outfit ##### 
-Pfit(respm=awm,pp=res3plwle,fitindices=c("lzstar","infitoutfit"))
+Pfit(respm=awm,pp=res3plwle,fitindices=c("lzstar","infit","outfit"))
 # ------------------------------------------------------------------------
 
 ##########################################################################
@@ -124,7 +124,7 @@ res4plwle <- PP_4pl(respm = awm,thres = diffpar,
 Pfit(respm=awm,pp=res4plwle,fitindices="lzstar")
 Pfit(respm=awm,pp=res4plmle,fitindices="lzstar")
 ## LZ*-Index combined with Infit-Outfit ##### 
-Pfit(respm=awm,pp=res4plwle,fitindices=c("lzstar","infitoutfit"))
+Pfit(respm=awm,pp=res4plwle,fitindices=c("lzstar","infit","outfit"))
 # ------------------------------------------------------------------------
 
 ##########################################################################
