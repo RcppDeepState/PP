@@ -93,11 +93,11 @@ Infitpoly <- function( data,
   df      <- N.mat - 1 
   
   out <- cbind(
-    "Chisq"       = round(chisq,3),
-    "df"          = df,
-    "pvalue"      = round(pvalue,3),
-    "infit"       = round(Vn,6),
-    "infit.t"     = round(ti,6)
+    "infit"    = round(Vn,6),
+    "in_t"     = round(ti,6),
+    "in_chisq" = round(chisq,3),
+    "in_df"    = df,
+    "in_pv"    = round(pvalue,3)
   )
   return(out)
 }

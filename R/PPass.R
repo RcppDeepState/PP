@@ -53,7 +53,11 @@ PPass <- function(...) UseMethod("PPass")
 PPass.default <- function(respdf, items="all", mod=c("1PL","2PL","3PL","4PL","PCM","GPCM","MIXED"), fitindices= c("lz","lzstar","infit","outfit"), ...)
 {
 
-  
+  # catch additional arguments
+  all_pts <- list(...)
+  args_4pl <- setdiff(formalArgs(PP_4pl), all_pts)
+  args_pfit <- setdiff(formalArgs(Pfit), all_pts)
+
 ########### ESTIMATE PERSON PARAMETERS ###############################  
   
 ## checks concering the input  

@@ -93,11 +93,12 @@ Outfitpoly <- function( data,
   df      <- N.mat - 1 
   
   out <- cbind(
-    "Chisq"       = round(chisq,3),
-    "df"          = df,
-    "pvalue"      = round(pvalue,3),
-    "outfit"      = round(Un,6),
-    "outfit.t"    = round(tu,6)
+    "outfit"   = round(Un,6),
+    "ou_t"     = round(tu,6),
+    "ou_chisq" = round(chisq,3),
+    "ou_df"    = df,
+    "ou_pv"    = round(pvalue,3)
+
   )
   return(out)
 }

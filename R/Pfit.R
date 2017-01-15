@@ -79,11 +79,11 @@ Pfit <- function(respm,pp,fitindices,SE=FALSE) UseMethod("Pfit",object=pp)
     if(SE){
       if(any(fitindices=="lz")){
         lz.se <- jackknife(data = respm, pp=pp, fit="lz")
-        out$lz <- cbind(out$lz,"SE"=lz.se)
+        out$lz <- cbind(out$lz,"lz_se"=lz.se)
       }
       if(any(fitindices=="lzstar")){
         lzstar.se <- jackknife(data = respm, pp=pp, fit="lzstar")
-        out$lzstar <- cbind(out$lzstar,"SE"=lzstar.se)
+        out$lzstar <- cbind(out$lzstar,"lzs_se"=lzstar.se)
       }
     }
     
