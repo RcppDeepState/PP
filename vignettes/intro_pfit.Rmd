@@ -118,6 +118,8 @@ pfit1pl_wle_l <- Pfit(respm=awm,pp=res1plwle,fitindices="lzstar")
 ## map ####
 pfit1pl_map_l <- Pfit(respm=awm,pp=res1plmap,fitindices="lzstar")
 ```
+
+If desired you can simply plot the results of the person-fit statistics as shown below.
 ```{r plot, echo=FALSE, message=FALSE, warning=FALSE}
 # eine Grafik erzeugen
 
@@ -138,9 +140,9 @@ sdev <- res.pp$lzstar[,"SE"]
 
 plot(avg, x,
      xlim=range(c(avg-sdev, avg+sdev)),
-     pch=19, ylab="Persons", xlab="Person-Fit +/- SD",
-     main="Plot of Person-Fit with error bars"
+     pch=19, ylab="Person", xlab="Person-Fit +/- SD",
+     main="Plot of Person-Fit with SE"
 )
 arrows(avg-sdev, x, avg+sdev, length=0.05, angle=90, code=3)
-abline(v=mean(avg),col = "red", lwd = 3)
+abline(v=0,col = "red", lwd = 3)
 ```

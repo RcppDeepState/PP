@@ -99,7 +99,7 @@ Pfit <- function(respm,pp,fitindices,se=FALSE) UseMethod("Pfit",object=pp)
   Pfit.gpcm <- function(respm, pp, fitindices=c("infit","outfit")){
     if(any(pp$type%in%c("map","eap","robust"))) stop("Only 'mle' and 'wle' ability estimates are supported \n")
     
-    if(!all(fitindices%in%c("infit","outfit"))){ warning("Only 'infit and outfit' are currently supported. The calculation is executed with infitoutfit \n"); fitindices <- "infitoutfit"}
+    if(!all(fitindices%in%c("infit","outfit"))){ warning("Only 'infit and outfit' are currently supported. The calculation is executed with infit outfit \n"); fitindices <- c("infit","outfit")}
     if(any(pp$ipar$slopes>1)) warning("Currently only the PCM-Modell is supported \n")
     
     pfitfunctions <- list("infit" = Infitpoly,
