@@ -35,7 +35,10 @@ NAMESPACE: $(R_FILES)
 
 rhub: $(R_FILES)
 	Rscript -e "library(roxygen2);roxygenize('../PP')"
-	Rscript -e "library(rhub); check(platform = 'debian-gcc-devel')" > ../ruhub.log
+	Rscript -e "library(rhub); check(platform = 'debian-gcc-devel')" > ../ruhub_deb.log
+	Rscript -e "library(rhub); check_with_sanitizers()" > ../ruhub_san.log
+	Rscript -e "library(rhub); check_on_windows()" > ../ruhub_win.log
+
 
 clean:
 	-rm -f ../$(PKG_NAME)_*.tar.gz
