@@ -84,7 +84,7 @@ args_gpcm <- all_pts[names(all_pts)%in%args_gpcm]
 args_all <- setdiff(names(formals(PPall)), all_pts)
 args_all <- all_pts[names(all_pts)%in%args_all]
 args_pfit <- setdiff(names(formals(Pfit)), all_pts)
-args_pfit <- all_pts[names(all_pts)%in%args_pfit]
+args_pfit <- all_pts[args_pfit]
 # check if first element is character
 if(is.character(respm[1,1])) stop("At least one response is of type character!\n")
 
@@ -102,7 +102,8 @@ if(mod %in% c("1PL","2PL","3PL","4PL"))
   
 ########### CALCULATE PERSON FIT ###############################
 args_pfit[[2]] <- pp_est
-names(args_pfit)[[2]] <- "pp"
+names(args_pfit)[2] <- "pp"
+args_pfit <- args_pfit[names(args_pfit)%in%names(formals(Pfit))]
 #fit_calc <- Pfit(respm=respm,pp=pp_est,fitindices=fitindices,...)
 fit_calc <- do.call(Pfit,args_pfit)
 # rename the colnames and combine to data.frame  
