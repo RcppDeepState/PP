@@ -54,7 +54,7 @@ PPass.default <- function(respdf, items="all", mod=c("1PL","2PL","3PL","4PL","PC
 {
 
   # catch additional arguments
-  all_pts <- list(...)
+  all_pts <- list(respdf,items,mod,fitindices,...)
 
 
 ########### ESTIMATE PERSON PARAMETERS ###############################  
@@ -73,18 +73,24 @@ if(all(items == "all")) # all variables are items
   rest  <- respdf[ , -items, drop=FALSE]
   respm <- as.matrix(respdf[ , items, drop=FALSE])
   }
+
+all_pts$respdf <- respm
+names(all_pts)[grep("respdf",names(all_pts))] <- "respm"
 # if not a matrix, extract the items and convert to matrix
 args_4pl  <- setdiff(names(formals(PP_4pl)), all_pts)
+args_4pl <- all_pts[names(all_pts)%in%args_4pl]
 args_gpcm <- setdiff(names(formals(PP_gpcm)), all_pts)
+args_gpcm <- all_pts[names(all_pts)%in%args_gpcm]
 args_all <- setdiff(names(formals(PPall)), all_pts)
+args_all <- all_pts[names(all_pts)%in%args_all]
 args_pfit <- setdiff(names(formals(Pfit)), all_pts)
-
+args_pfit <- all_pts[names(all_pts)%in%args_pfit]
 # check if first element is character
 if(is.character(respm[1,1])) stop("At least one response is of type character!\n")
 
 if(mod %in% c("1PL","2PL","3PL","4PL"))
   {
-  pp_est <- PP_4pl(respm, ...)
+  pp_est <- do.call(PP_4pl,args_4pl)
   } else if(mod %in% c("PCM", "GPCM"))
     {
     pp_est <- PP_gpcm(respm, ...)
@@ -95,8 +101,10 @@ if(mod %in% c("1PL","2PL","3PL","4PL"))
   
   
 ########### CALCULATE PERSON FIT ###############################
-
-fit_calc <- Pfit(respm=respm,pp=pp_est,fitindices=fitindices,...)
+args_pfit[[2]] <- pp_est
+names(args_pfit)[[2]] <- "pp"
+#fit_calc <- Pfit(respm=respm,pp=pp_est,fitindices=fitindices,...)
+fit_calc <- do.call(Pfit,args_pfit)
 # rename the colnames and combine to data.frame  
 #for(l in names(fit_calc)){
 #    colnames(fit_calc[[l]]) <- paste0(l,"_",colnames(fit_calc[[l]]))
