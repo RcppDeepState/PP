@@ -54,7 +54,7 @@ PPass.default <- function(respdf, items="all", mod=c("1PL","2PL","3PL","4PL","PC
 {
 
   # catch additional arguments
-  all_pts <- list(respdf,items,mod,fitindices,...)
+  all_pts <- list(respdf,...)
 
 
 ########### ESTIMATE PERSON PARAMETERS ###############################  
