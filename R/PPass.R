@@ -55,7 +55,7 @@ PPass.default <- function(respdf, items="all", mod=c("1PL","2PL","3PL","4PL","PC
 
   # catch additional arguments
   all_pts <- list(respdf,...)
-
+  fitindices <- match.arg(fitindices, several.ok = TRUE)  
 
 ########### ESTIMATE PERSON PARAMETERS ###############################  
   
@@ -85,6 +85,7 @@ args_all <- setdiff(names(formals(PPall)), all_pts)
 args_all <- all_pts[names(all_pts)%in%args_all]
 args_pfit <- setdiff(names(formals(Pfit)), all_pts)
 args_pfit <- all_pts[args_pfit]
+args_pfit$fitindices <- fitindices
 # check if first element is character
 if(is.character(respm[1,1])) stop("At least one response is of type character!\n")
 
