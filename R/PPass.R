@@ -52,69 +52,65 @@ PPass <- function(...) UseMethod("PPass")
 
 PPass.default <- function(respdf, items="all", mod=c("1PL","2PL","3PL","4PL","PCM","GPCM","MIXED"), fitindices= c("lz","lzstar","infit","outfit"), ...)
 {
-
+  
   # catch additional arguments
   all_pts <- list(respdf,...)
   fitindices <- match.arg(fitindices, several.ok = TRUE)  
-
-########### ESTIMATE PERSON PARAMETERS ###############################  
   
-## checks concering the input  
+  ########### ESTIMATE PERSON PARAMETERS ###############################  
   
-stopifnot(is.data.frame(respdf)) # muss ein df sein als input
-stopifnot((is.numeric(items) & all(items >= 1)) | all(items == "all")) # indices oder alles
+  ## checks concering the input  
+  stopifnot(is.data.frame(respdf)) # muss ein df sein als input
+  stopifnot((is.numeric(items) & all(items >= 1)) | all(items == "all")) # indices oder alles
   
-## create matrix, keep the rest
-if(all(items == "all")) # all variables are items
+  ## create matrix, keep the rest
+  if(all(items == "all")) # all variables are items
   {
     respm <- as.matrix(respdf)
   } else {
     
-  rest  <- respdf[ , -items, drop=FALSE]
-  respm <- as.matrix(respdf[ , items, drop=FALSE])
+    rest  <- respdf[ , -items, drop=FALSE]
+    respm <- as.matrix(respdf[ , items, drop=FALSE])
   }
-
-all_pts$respdf <- respm
-names(all_pts)[grep("respdf",names(all_pts))] <- "respm"
-# if not a matrix, extract the items and convert to matrix
-args_4pl  <- setdiff(names(formals(PP_4pl)), all_pts)
-args_4pl <- all_pts[names(all_pts)%in%args_4pl]
-args_gpcm <- setdiff(names(formals(PP_gpcm)), all_pts)
-args_gpcm <- all_pts[names(all_pts)%in%args_gpcm]
-args_all <- setdiff(names(formals(PPall)), all_pts)
-args_all <- all_pts[names(all_pts)%in%args_all]
-args_pfit <- setdiff(names(formals(Pfit)), all_pts)
-args_pfit <- all_pts[args_pfit]
-args_pfit$fitindices <- fitindices
-# check if first element is character
-if(is.character(respm[1,1])) stop("At least one response is of type character!\n")
-
-if(mod %in% c("1PL","2PL","3PL","4PL"))
+  
+  # collect the arguments and change data argument
+  all_pts$respdf <- respm
+  names(all_pts)[grep("respdf",names(all_pts))] <- "respm"
+  args_4pl  <- setdiff(names(formals(PP_4pl)), all_pts)
+  args_4pl <- all_pts[names(all_pts)%in%args_4pl]
+  args_gpcm <- setdiff(names(formals(PP_gpcm)), all_pts)
+  args_gpcm <- all_pts[names(all_pts)%in%args_gpcm]
+  args_all <- setdiff(names(formals(PPall)), all_pts)
+  args_all <- all_pts[names(all_pts)%in%args_all]
+  args_pfit <- setdiff(names(formals(Pfit)), all_pts)
+  args_pfit <- all_pts[args_pfit]
+  args_pfit$fitindices <- fitindices
+  # check if first element is character
+  if(is.character(respm[1,1])) stop("At least one response is of type character!\n")
+  
+  if(mod %in% c("1PL","2PL","3PL","4PL"))
   {
-  pp_est <- do.call(PP_4pl,args_4pl)
+    pp_est <- do.call(PP_4pl,args_4pl)
   } else if(mod %in% c("PCM", "GPCM"))
-    {
+  {
     pp_est <- PP_gpcm(respm, ...)
-     
-    } else if("MIXED"){ # mixed
-            pp_est <- PPall(respm, ...)
-            }
+    
+  } else if("MIXED"){ # mixed
+    pp_est <- PPall(respm, ...)
+  }
   
-  
-########### CALCULATE PERSON FIT ###############################
-args_pfit[[2]] <- pp_est
-names(args_pfit)[2] <- "pp"
-args_pfit <- args_pfit[names(args_pfit)%in%names(formals(Pfit))]
-#fit_calc <- Pfit(respm=respm,pp=pp_est,fitindices=fitindices,...)
-fit_calc <- do.call(Pfit,args_pfit)
-# rename the colnames and combine to data.frame  
-#for(l in names(fit_calc)){
-#    colnames(fit_calc[[l]]) <- paste0(l,"_",colnames(fit_calc[[l]]))
-#  }
-fit_calc <- do.call(cbind,fit_calc)
-########### PUT IT ALL TOGETHER ############################### 
+  ########### CALCULATE PERSON FIT ###############################
+  # first we have to store the estimated person parameter
+  args_pfit[[2]] <- pp_est
+  names(args_pfit)[2] <- "pp"
+  # this is needed to make shure, that no 'NA' arguments are in the list
+  args_pfit <- args_pfit[names(args_pfit)%in%names(formals(Pfit))] 
+  fit_calc <- do.call(Pfit,args_pfit)
+  # cbind all pers fits together
+  fit_calc <- do.call(cbind,fit_calc)
+  ########### PUT IT ALL TOGETHER ############################### 
   out <- list("personparameter"=pp_est,"personfit"=fit_calc)
-return(out)
+  return(out)
   
 }
 
@@ -136,58 +132,84 @@ return(out)
 #' 
 PPass.Rm <- function(RMobj, fitindices= c("lz","lz_star","infit","outfit"), ...)
 {
-
-  # geht leider nicht anders weil sowohl PCM als auch RM die Klassen Rm als auch eRm haben.
   
+  # catch additional arguments
+  all_pts <- list(RMobj,...)
+  fitindices <- match.arg(fitindices, several.ok = TRUE)  
+  
+  # ---------------------------------------------------
+  # collect the arguments and change data argument
+  all_pts$RMobj <- RMobj$X
+  names(all_pts)[grep("RMobj",names(all_pts))] <- "respm"
+  # --------------
+  args_4pl  <- setdiff(names(formals(PP_4pl)), all_pts)
+  args_4pl <- all_pts[names(all_pts)%in%args_4pl]
+  # --------------
+  args_gpcm <- setdiff(names(formals(PP_gpcm)), all_pts)
+  args_gpcm <- all_pts[names(all_pts)%in%args_gpcm]
+  # --------------
+  args_pfit <- setdiff(names(formals(Pfit)), all_pts)
+  args_pfit <- all_pts[args_pfit]
+  args_pfit$fitindices <- fitindices
+  # ---------------------------------------------------
+  
+  # geht leider nicht anders weil sowohl PCM als auch RM die Klassen Rm als auch eRm haben.
   if(RMobj$model == "RM")
+  {
+    args_4pl <- append( args_4pl,list("thres"=RMobj$betapar * (-1)) )
+   
+    # pp_est <- PP_4pl(respm=RMobj$X, thres=RMobj$betapar * (-1), ...)
+    pp_est <- do.call(PP_4pl,args_4pl)
+    
+    
+  } else if(RMobj$model == "PCM")
+  {
+    
+    # get threshold parameters:
+    
+    # create threshold matrix:
+    tps <- eRm::thresholds(RMobj)$threshpar
+    
+    len1        <- apply(RMobj$X, 2, function(x) length(unique(x))-1)
+    itemss      <- unlist(lapply(1:length(len1), function(x) rep(x, each=len1[x])))
+    wohin_zeile <- unlist(lapply(len1, function(x) 1:x))
+    
+    names(wohin_zeile) <- NULL
+    
+    thres <- matrix(NA,ncol=ncol(RMobj$X), nrow=max(len1))
+    
+    for(i in 1:length(tps))
     {
+      thres[wohin_zeile[i], itemss[i]] <- tps[i]
+    }
     
-    pp_est <- PP_4pl(respm=RMobj$X, thres=RMobj$betapar * (-1), ...)
+    thres <- rbind(0,thres)
+    slopes <- rep(1,ncol(thres))
     
-
+    ########### ESTIMATE PERSON PARAMETERS ###############################  
+    args_gpcm <- append( args_gpcm,list("thres"=thres, slopes=slopes) )
+    # pp_est <- PP_gpcm(respm=RMobj$X, thres=thres, slopes=slopes, ...)
+    pp_est <- do.call(PP_gpcm,args_gpcm)
     
-    } else if(RMobj$model == "PCM")
-      {
-       
-      # get threshold parameters:
-      
-      # create threshold matrix:
-      tps <- eRm::thresholds(RMobj)$threshpar
-      
-      len1        <- apply(RMobj$X, 2, function(x) length(unique(x))-1)
-      itemss      <- unlist(lapply(1:length(len1), function(x) rep(x, each=len1[x])))
-      wohin_zeile <- unlist(lapply(len1, function(x) 1:x))
-      
-      names(wohin_zeile) <- NULL
-      
-      thres <- matrix(NA,ncol=ncol(RMobj$X), nrow=max(len1))
-      
-      for(i in 1:length(tps))
-      {
-        thres[wohin_zeile[i], itemss[i]] <- tps[i]
-      }
-      
-      thres <- rbind(0,thres)
-      slopes <- rep(1,ncol(thres))
-      
-      ########### ESTIMATE PERSON PARAMETERS ###############################  
-      
-      pp_est <- PP_gpcm(respm=RMobj$X, thres=thres, slopes=slopes, ...)
-       
-      
-      } else {
-        
-        stop("I don't know this model!")
-        
-      }
-
+  } else {
+    
+    stop("I don't know this model!")
+    
+  }
+  
+  
   ########### CALCULATE PERSON FIT ###############################  
-
-  fit_calc <- Pfit(respm=RMobj$X,pp=pp_est,fitindices=fitindices,...)
-  # rename the colnames and combine to data.frame  
-  #for(l in names(fit_calc)){
-  #  colnames(fit_calc[[l]]) <- paste0(l,"_",colnames(fit_calc[[l]]))
-  #}
+  # first we have to store the estimated person parameter
+  args_pfit[[2]] <- pp_est
+  names(args_pfit)[2] <- "pp"
+  
+  # this is needed to make shure, that no 'NA' arguments are in the list
+  args_pfit <- args_pfit[names(args_pfit)%in%names(formals(Pfit))] 
+  fit_calc <- do.call(Pfit,args_pfit)
+  # cbind all pers fits together
+  fit_calc <- do.call(cbind,fit_calc)
+  # fit_calc <- Pfit(respm=RMobj$X,pp=pp_est,fitindices=fitindices,...)
+  # cbind all pers fits together
   fit_calc <- do.call(cbind,fit_calc)
   ########### PUT IT ALL TOGETHER ############################### 
   out <- list("personparameter"=pp_est,"personfit"=fit_calc)
