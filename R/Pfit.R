@@ -97,7 +97,8 @@ Pfit <- function(respm,pp,fitindices,SE=FALSE) UseMethod("Pfit",object=pp)
   #' 
   #' @method Pfit gpcm
   #' @export
-  Pfit.gpcm <- function(respm, pp, fitindices=c("infit","outfit")){
+  Pfit.gpcm <- function(respm, pp, fitindices=c("infit","outfit"),SE=FALSE){
+    if(SE){warning("There is no jacknife currently supported. \n")}
     if(any(pp$type%in%c("map","eap","robust"))) stop("Only 'mle' and 'wle' ability estimates are supported \n")
     
     if(!all(fitindices%in%c("infit","outfit"))){ warning("Only 'infit and outfit' are currently supported. The calculation is executed with infit outfit \n"); fitindices <- c("infit","outfit")}

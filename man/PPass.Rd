@@ -12,7 +12,7 @@ PPass(...)
   "4PL", "PCM", "GPCM", "MIXED"), fitindices = c("lz", "lzstar", "infit",
   "outfit"), ...)
 
-\method{PPass}{Rm}(RMobj, fitindices = c("lz", "lz_star", "infit", "outfit"),
+\method{PPass}{Rm}(RMobj, fitindices = c("lz", "lzstar", "infit", "outfit"),
   ...)
 }
 \arguments{
