@@ -130,7 +130,7 @@ PPass.default <- function(respdf, items="all", mod=c("1PL","2PL","3PL","4PL","PC
 #' @method PPass Rm
 #' 
 #' 
-PPass.Rm <- function(RMobj, fitindices= c("lz","lz_star","infit","outfit"), ...)
+PPass.Rm <- function(RMobj, fitindices= c("lz","lzstar","infit","outfit"), ...)
 {
   
   # catch additional arguments
@@ -206,8 +206,6 @@ PPass.Rm <- function(RMobj, fitindices= c("lz","lz_star","infit","outfit"), ...)
   # this is needed to make shure, that no 'NA' arguments are in the list
   args_pfit <- args_pfit[names(args_pfit)%in%names(formals(Pfit))] 
   fit_calc <- do.call(Pfit,args_pfit)
-  # cbind all pers fits together
-  fit_calc <- do.call(cbind,fit_calc)
   # fit_calc <- Pfit(respm=RMobj$X,pp=pp_est,fitindices=fitindices,...)
   # cbind all pers fits together
   fit_calc <- do.call(cbind,fit_calc)
