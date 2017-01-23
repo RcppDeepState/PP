@@ -104,9 +104,9 @@ Pfit <- function(respm,pp,fitindices,SE=FALSE) UseMethod("Pfit",object=pp)
     if(any(pp$ipar$slopes>1)) warning("Currently only the PCM-Modell is supported \n")
     
     pfitfunctions <- list("infit" = Infitpoly,
-                          "outit" = Outfitpoly)
+                          "outfit" = Outfitpoly)
 
-    fitindices <- match.arg(fitindices, several.ok = TRUE)  
+     fitindices <- match.arg(fitindices, several.ok = TRUE)  
 
     pfitfunctions_red <- pfitfunctions[names(pfitfunctions)%in%fitindices]
     
