@@ -1,7 +1,7 @@
 Package: PP
 Type: Package
 Title: Person Parameter estimation
-Version: 0.6.0-03
+Version: 0.6.0-04
 Date: 2017-02-09
 Authors@R: c(
     person("Reif", "Manuel", email = "manuel.reif@gmail.com", role = c("cre","aut")),
@@ -24,7 +24,8 @@ Suggests:
     testthat,
     roxygen2,
     knitr,
-    eRm
+    eRm,
+    data.table
 Imports:
     Rcpp (>= 0.11.2)
 LinkingTo: Rcpp
