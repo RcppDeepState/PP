@@ -124,11 +124,11 @@ Pfit <- function(respm,pp,fitindices,SE=FALSE) UseMethod("Pfit",object=pp)
   }
   # ------------------------------------------------------------------------------------------------------------------------------------------------------------
   
-  #' @rdname pfit
-  #' 
-  #' @method Pfit gpcm4pl
-  #' @export
-  Pfit.gpcm4pl <- function(respm, pp, fitindices){
-      cat("the mixed method for person fits is not yet implemented \n")
-  }
+ # #' @rdname pfit
+#  #' 
+#  #' @method Pfit gpcm4pl
+#  #' @export
+#  Pfit.gpcm4pl <- function(respm, pp, fitindices){
+#      cat("the mixed method for person fits is not yet implemented \n")
+#  }
   # ------------------------------------------------------------------------------------------------------------------------------------------------------------
