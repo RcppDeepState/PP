@@ -95,10 +95,9 @@ awm <- as.data.frame(awm)
 out <- PPass(respdf = awm,thres = diffpar, items="all",
              mod=c("1PL"), fitindices= c("lz","lzstar","infit","outfit"))
 
-# show first rows of person parameter
-head(out$personparameter)
-# show first rows of person fit
-head(out$personfit)
+# show first rows
+head(out)
+
 }
 \author{
 Manuel Reif, Jan Steinfeld
