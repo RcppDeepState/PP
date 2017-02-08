@@ -1,6 +1,9 @@
 PP
 ==
 
+[CRAN\_Status\_Badge](http://www.r-pkg.org/badges/version/PP)](https://cran.r-project.org/package=PP) 
+[downloads](http://cranlogs.r-pkg.org/badges/grand-total/PP)
+
 ### 0.5.3 is on cran now
 
 
