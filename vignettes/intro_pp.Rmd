@@ -4,24 +4,18 @@
 -->
 # Getting started with PP
 
-First of all a few questions, whether the `PP` package is the one you are looking for.
+Is the `PP` package the right package for you?
 
 
 1. You have a data set with item responses from several persons
-2. You have item parameter estimates (e.g. difficulty parameters) from these items from (perhaps from a former application of these items)
+2. You have item parameter estimates (e.g. difficulty parameters) from these items (perhaps from a former application of these items)
 3. and these items follow the 1/2/3/4-PL model or the generalized partial credit model
 4. You are interested in estimating each persons **ability** with traditional approaches (mle, wle, map, eap) or
 5. drawing **plausible values** for each person e.g. to apply secondary analysis or
 6. getting **robust** ability estimates with Jackknife Methods or with weighted likelihood approaches
 
 
-If you agree to question 1-3 and at least to one of question 3-6, then this package could be the right one for your tasks.
-
-
-In future versions:
-
-1. The range of model will be enlarged - especially estimators for the nominal response model and the nested logit model are planned to be integrated
-2. **Personfit** statistics will be added for getting insights in response processes and to identify suspicious response patterns
+If you agree to question 1-3 and at least to one of question 4-6, load the package an start estimating person parameters.
 
 
 Now a simple example.
@@ -52,6 +46,7 @@ dim(fourpl_df)
 
 head(fourpl_df)
 
+# extracting the information
 diff_par <- attr(fourpl_df,"diffpar")
 slope_par <- attr(fourpl_df,"slopes")
 
@@ -135,7 +130,7 @@ In the last step, we add the estimates to the data.frame we extracted the item r
 
 ```{r edit}
 
-dafest <- data.frame(fourpl_df,res1plmle$resPP$resPP)
+dafest <- data.frame(fourpl_df, res1plmle$resPP$resPP)
 
 head(dafest,10)
 ```
