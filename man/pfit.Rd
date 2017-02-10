@@ -3,15 +3,12 @@
 \name{Pfit}
 \alias{Pfit}
 \alias{Pfit.gpcm}
-\alias{Pfit.gpcm4pl}
 \title{Person-Fit statistics}
 \usage{
 Pfit(respm, pp, fitindices, SE = FALSE)
 
 \method{Pfit}{gpcm}(respm, pp, fitindices = c("infit", "outfit"),
   SE = FALSE)
-
-\method{Pfit}{gpcm4pl}(respm, pp, fitindices)
 }
 \arguments{
 \item{respm}{numeric response matrix}
