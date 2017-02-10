@@ -146,7 +146,6 @@ if(is.null(theta_start))
 # a thres-vector is allowed - but for the internal routines
 # it had to be reshaped as a matrix
 
-  
 if(is.matrix(thres))
   {
     #iimm <- nrow(thres) == 1
@@ -242,7 +241,7 @@ cat("type =",type,"\n")
   if(type=="mle" | type=="robust")
   {
     resPPx <- ansol(respm,maxsc)  
-    respm <- respm[!is.na(resPPx[,2]),]
+    respm <- respm[!is.na(resPPx[,2]),,drop=FALSE]
   }
   
   

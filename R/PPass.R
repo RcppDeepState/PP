@@ -109,7 +109,8 @@ PPass.default <- function(respdf, items="all", mod=c("1PL","2PL","3PL","4PL","PC
   # cbind all pers fits together
   fit_calc <- do.call(cbind,fit_calc)
   ########### PUT IT ALL TOGETHER ############################### 
-  out <- list("personparameter"=pp_est,"personfit"=fit_calc)
+  #out <- list("personparameter"=pp_est,"personfit"=fit_calc)
+  out <- data.frame(pp_est[["resPP"]][["resPP"]], fit_calc)
   return(out)
   
 }
@@ -210,7 +211,15 @@ PPass.Rm <- function(RMobj, fitindices= c("lz","lzstar","infit","outfit"), ...)
   # cbind all pers fits together
   fit_calc <- do.call(cbind,fit_calc)
   ########### PUT IT ALL TOGETHER ############################### 
-  out <- list("personparameter"=pp_est,"personfit"=fit_calc)
+  #out <- list("personparameter"=pp_est,"personfit"=fit_calc)
+  
+  # if(class(pp_est)[1] == "gpcm")
+  #   {
+  #   out <- data.frame(pp_est[["resPP"]][["resPP"]], fit_calc)
+  #   } else {
+  #          out <- data.frame(pp_est[["resPP"]][["resPP"]], fit_calc)  
+  #          }
+  out <- data.frame(pp_est[["resPP"]][["resPP"]], fit_calc) 
   return(out)
 }
 
