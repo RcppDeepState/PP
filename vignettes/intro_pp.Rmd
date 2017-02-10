@@ -156,7 +156,7 @@ So, this was what we were finally looking for.
 
 ## Parameters and Person Fit 
 
-For estimating person parameters and examining person fit in one step, use `PPass()` (for assessment). Using this function has several advantages over the using the other methods consecutively.
+For estimating person parameters and examining person fit in one step, use `PPass()` (for ass stands for *assessment*). Using this function has several advantages over the using the other methods consecutively.
 
 1. you ony need 1 Function
 2. the data input format now is a `data.frame`
@@ -165,7 +165,7 @@ For estimating person parameters and examining person fit in one step, use `PPas
 
 ```{r ppass}
 
-PPass(fourpl_df, items = 3:14, mod="2PL", thres = diff_par, slopes = slope_par, type = "wle")
+pres <- PPass(fourpl_df, items = 3:14, mod="2PL", thres = diff_par, slopes = slope_par, type = "wle")
 
 
 ```
