@@ -21,6 +21,21 @@ Pfit(respm, pp, fitindices, SE = FALSE)
 }
 \value{
 list of person-fits for each person-fit statistic
+
+\itemize{
+\item the list of person-fits contains the calculated person-fit (like lz, lzstar) and also additional information like p-value or standard error if desired.
+\item the additional information is provided after the short form of the personfit
+\item  lz (lz)
+\item  lzstar (lzs)
+\item  infit (in)
+\item  outfit (ou)
+\item  _unst: unstandardised
+\item  _se: standard error
+\item  _t: t-value
+\item  _chisq: $chi^2$-value
+\item  _df: defrees of freedom
+\item  _pv: p-value
+}
 }
 \description{
 Compute several person fit statistic for the 1-PL, 2-PL, 3-PL and 4-PL.
@@ -148,7 +163,7 @@ Jan Steinfeld
 }
 }
 \seealso{
-\link{PPall}, \link{PP_4pl}, \link{PPass}
+\link{PPall}, \link{PP_4pl}, \link{PPass}, \link{intro_pfit}
 }
 \keyword{Infit-Outfit}
 \keyword{LZ-Index,}
