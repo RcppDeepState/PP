@@ -18,6 +18,9 @@ lzstar <- function(
   ai <- slopes
   ci <- lowerAs
   di <- higherAs
+  # processed Items 
+  Xproc <- 1 * !is.na(data)  
+  Nproc <- rowSums(Xproc) #instead on ncol(data)
   
   # calculate the propability of each pearson to NOT solve an item
   submatrix <-   t(outer(thetas,betas,'-'))*ai
@@ -50,13 +53,13 @@ lzstar <- function(
         r0 <-  (mu - thetas) / sigma^2
       }
   wi            <- log( Pi / Qi )
-  Wn            <- rowSums( (data - Pi) * wi ,na.rm=TRUE)
-  sigmaNtheta2  <- rowSums(wi^2 * Pi  * Qi) / ncol(data)
+  Wn            <- rowSums( Xproc*(data - Pi) * wi ,na.rm=TRUE)
+  sigmaNtheta2  <- rowSums(wi^2 * Pi  * Qi) / Nproc
   cn            <- rowSums(d1Pi * wi) / rowSums(d1Pi * ri)
   widach        <- wi - cn * ri
-  tau2          <- rowSums(widach^2 * Pi * Qi) / ncol(data)
+  tau2          <- rowSums(widach^2 * Pi * Qi) / Nproc
   
-  lzstern       <- (Wn + cn*r0) / sqrt(ncol(data) * tau2)
+  lzstern       <- (Wn + cn*r0) / sqrt(Nproc * tau2)
   lzstern <- round(lzstern,6)
   out <- matrix(lzstern,ncol=1)
   colnames(out) <- "lzstar"

@@ -66,10 +66,9 @@ simdat4pl <- sim_4pl(beta=seq(-4,4,length.out=7), alpha=sl,
 head(simdat4pl)
 
 }
-\author{
-Manuel Reif
-}
 \seealso{
 \link{sim_gpcm}, \link{PP_4pl}
 }
-
+\author{
+Manuel Reif
+}

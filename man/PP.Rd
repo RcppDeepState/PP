@@ -26,9 +26,6 @@ res3plwle <- PP_4pl(respm = awm,thres = diffpar, slopes = sl,lowerA = la,type = 
 # MAP estimation
 res3plmap <- PP_4pl(respm = awm,thres = diffpar, slopes = sl,lowerA = la,type = "map")
 }
-\author{
-Manuel Reif
-}
 \references{
 Barton, M. A., & Lord, F. M. (1981). An Upper Asymptote for the Three-Parameter Logistic Item-Response Model.
 
@@ -45,4 +42,6 @@ Yen, Y.-C., Ho, R.-G., Liao, W.-W., Chen, L.-J., & Kuo, C.-C. (2012). An empiric
 \seealso{
 \link{PPass}, \link{PP_gpcm}, \link{PP_4pl}, \link{PPall}
 }
-
+\author{
+Manuel Reif
+}

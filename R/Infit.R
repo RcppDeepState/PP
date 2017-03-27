@@ -4,14 +4,16 @@ Infit <- function( data,
                    lowerAs=NULL, 
                    slopes=NULL, 
                    higherAs=NULL,... ){
-  
   if(is.null(slopes)) slopes <- rep(1,length(betas))
   if(is.null(lowerAs))lowerAs <- rep(0,length(betas))
   if(is.null(higherAs))higherAs <- rep(1,length(betas))
   
   if(!all(apply(data,2,function(x) { all(na.omit(x) %in% 0:1) }))) stop("Please check the input, only 0/1/NA are allowed \n")
   X <- data
-  L <- ncol(X)
+  # processed Items 
+  Xproc <- 1 * !is.na(X)  
+  L <- rowSums(Xproc)
+
   N <- as.numeric(apply(X,1,function(x) sum(!is.na(x))))
   
   ai <- slopes
@@ -31,8 +33,9 @@ Infit <- function( data,
   k  <- as.vector( sapply( k_temp, function(x) seq(0,x) ) )
   # second: calculate for each the Prop
   
+
   # ------------------------------------------------  
-  Qni <- Pni * ( 1-Pni )
+  Qni <- Xproc * (Pni * ( 1-Pni ))
   
   # Variance of xni
   Wni <- ( ( (0-Pni)^2 ) * (1-Pni) ) + ( ( (1-Pni)^2 ) * Pni)
@@ -41,7 +44,7 @@ Infit <- function( data,
   Cni <- ( ( (0-Pni)^4 ) * (1-Pni) ) + ( ( (1-Pni)^4 ) * Pni)
   
   # Score Residual: (Pni ist in der Literatru Eni)
-  Yni <- X - Pni
+  Yni <- Xproc * (X - Pni)
   
   # Standardized Residual (Qni ist in der Literatur Wni)
   Zni <- Yni / sqrt( Qni )

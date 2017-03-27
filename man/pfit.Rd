@@ -142,9 +142,6 @@ Pfit(respm=awm,pp=res4plwle,fitindices=c("lzstar","infit","outfit"))
 
 ##########################################################################
 }
-\author{
-Jan Steinfeld
-}
 \references{
 \itemize{
 \item Armstrong, R. D., Stoumbos, Z. G., Kung, M. T. & Shi, M. (2007). On the performance of the lz person-fit statistic.  \emph{Practical Assessment, Research & Evaluation}, \bold{12(16)}. Chicago	
@@ -165,8 +162,10 @@ Jan Steinfeld
 \seealso{
 \link{PPall}, \link{PP_4pl}, \link{PPass}, \link{intro_pfit}
 }
+\author{
+Jan Steinfeld
+}
 \keyword{Infit-Outfit}
 \keyword{LZ-Index,}
 \keyword{Person}
 \keyword{fit,}
-
