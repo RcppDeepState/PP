@@ -1,6 +1,6 @@
 <!--
 %\VignetteEngine{knitr::knitr}
-%\VignetteIndexEntry{Getting started with Personfit in PP}
+%\VignetteIndexEntry{Getting started with Person-Fit in PP}
 -->
 # Getting started with Person-Fit functions
 
@@ -133,3 +133,23 @@ pfit1pl_map_l <- Pfit(respm=awm,pp=res1plmap,fitindices="lzstar")
 
 If desired you can simply plot the results of the person-fit statistics as shown below.
 ![plot of chunk plot](figure/plot-1.png)![plot of chunk plot](figure/plot-2.png)
+
+
+Interpretation of Person Fit Hier ein paar angeben und Bezug zur Literatur nehmen!
+
+**Literatur**
+
+- Armstrong, R. D., Stoumbos, Z. G., Kung, M. T. & Shi, M. (2007). On the performance of the lz person-fit statistic.
+- De La Torre, J., & Deng, W. (2008). Improving Person-Fit Assessment by Correcting the Ability Estimate and Its Reference Distribution. Journal of Educational Measurement, , 159-177. 
+- Drasgow, F., Levine, M. V. & Williams, E. A. (1985) Appropriateness measurement with polychotomous item response models and standardized indices. 67-86.
+- Efron, B., & Stein, C. (1981). The jackknife estimate of variance. 586-596.
+- Karabatsos, G. (2003) Comparing the Aberrant Response Detection Performance of Thirty-Six Person-Fit Statistics. 277-298. 
+- Magis, D., Raiche, G. & Beland, S. (2012) A didactic presentation of Snijders's lz index of person fit with emphasis on response model selection and ability estimation. 57-81. 
+- Meijer, R. R. & Sijtsma, K. (2001) Methodology review: Evaluating person fit.107-135. 
+- Molenaar, I. W. & Hoijtink, H. (1990) The many null distributions of person fit indices. 75-106. 
+- Mousavi, A. & Cui, Y. Evaluate the performance of and of person fit: A simulation study.
+- Reise, S. P. (1990). A comparison of item-and person-fit methods of assessing model-data fit in IRT. 127-137. 
+- Snijders, T. B. (2001) Asymptotic null distribution of person fit statistics with estimated person parameter. 331-342. 
+- Wright, B. D. & Masters, G. N. (1990). Computation of OUTFIT and INFIT Statistics. 3:4, 84-85. 
+- Wright, B. D., & Masters, G. N. (1982). MESA Press, 5835 S. Kimbark Avenue, Chicago, IL 60637.
+

@@ -129,9 +129,6 @@ summary(respmixed_eap)
 summary(respmixed_rob)
 
 }
-\author{
-Manuel Reif
-}
 \references{
 Baker, Frank B., and Kim, Seock-Ho (2004). Item Response Theory - Parameter Estimation Techniques. CRC-Press.
 
@@ -158,4 +155,6 @@ Yen, Y.-C., Ho, R.-G., Liao, W.-W., Chen, L.-J., & Kuo, C.-C. (2012). An empiric
 \seealso{
 \link{PPass}, \link{PP_gpcm}, \link{PP_4pl}, \link{JKpp}, \link{PV}
 }
-
+\author{
+Manuel Reif
+}

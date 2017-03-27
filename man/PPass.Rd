@@ -2,8 +2,8 @@
 % Please edit documentation in R/PPass.R
 \name{PPass}
 \alias{PPass}
-\alias{PPass.Rm}
 \alias{PPass.default}
+\alias{PPass.Rm}
 \title{Person Assessment function}
 \usage{
 PPass(...)
@@ -99,10 +99,9 @@ out <- PPass(respdf = awm,thres = diffpar, items="all",
 head(out)
 
 }
-\author{
-Manuel Reif, Jan Steinfeld
-}
 \seealso{
 \link{PP_4pl}, \link{PP_gpcm}, \link{PPall}, \link{Pfit}
 }
-
+\author{
+Manuel Reif, Jan Steinfeld
+}

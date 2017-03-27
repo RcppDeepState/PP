@@ -1,7 +1,7 @@
 Outfitpoly <- function( data,
-                             thetas,
-                             thresholds, 
-                             slopes=NULL
+                        thetas,
+                        thresholds, 
+                        slopes=NULL
 ){
   # ------------------------------------------------------------------------------------------------
   betas <- as.vector(apply(thresholds[-1,],2,cumsum))
@@ -80,7 +80,7 @@ Outfitpoly <- function( data,
   
   # OUTFIT MEANSQ
   Un <- rowSums( ((Zni.mat)^2), na.rm=TRUE ) / N.mat
-
+  
   # standardized INFIT
   # Variance term
   varInfit <- rowSums(Cni.mat / Wni.mat^2,na.rm=TRUE ) / (N.mat^2) - (1/N.mat)
@@ -98,7 +98,7 @@ Outfitpoly <- function( data,
     "ou_chisq" = round(chisq,3),
     "ou_df"    = df,
     "ou_pv"    = round(pvalue,3)
-
+    
   )
   return(out)
 }

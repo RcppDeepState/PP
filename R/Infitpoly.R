@@ -1,7 +1,7 @@
 Infitpoly <- function( data,
-                             thetas,
-                             thresholds, 
-                             slopes=NULL
+                       thetas,
+                       thresholds, 
+                       slopes=NULL
 ){
   # ------------------------------------------------------------------------------------------------
   betas <- as.vector(apply(thresholds[-1,],2,cumsum))

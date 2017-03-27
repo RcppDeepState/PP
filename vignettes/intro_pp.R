@@ -8,6 +8,7 @@ dim(fourpl_df)
 
 head(fourpl_df)
 
+# extracting the information
 diff_par <- attr(fourpl_df,"diffpar")
 slope_par <- attr(fourpl_df,"slopes")
 
@@ -50,7 +51,7 @@ summary(res1plmle)
 
 ## ----edit----------------------------------------------------------------
 
-dafest <- data.frame(fourpl_df,res1plmle$resPP$resPP)
+dafest <- data.frame(fourpl_df, res1plmle$resPP$resPP)
 
 head(dafest,10)
 
@@ -63,7 +64,7 @@ summary(res1plwle)
 
 ## ----ppass---------------------------------------------------------------
 
-PPass(fourpl_df, items = 3:14, mod="2PL", thres = diff_par, slopes = slope_par, type = "wle")
+pres <- PPass(fourpl_df, items = 3:14, mod="2PL", thres = diff_par, slopes = slope_par, type = "wle")
 
 
 

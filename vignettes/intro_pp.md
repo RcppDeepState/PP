@@ -39,14 +39,7 @@ Getting the data inside the R workspace is quite easy in this case, because we m
 
 ```r
 library(PP)
-```
 
-```
-## PP package calling ...
-## Follow this project on github: https://github.com/manuelreif/PP.git
-```
-
-```r
 data(fourpl_df)
 
 dim(fourpl_df)
@@ -187,10 +180,10 @@ summary(res1plmle)
 ```
 
 ```
-## PP Version:  0.6.0.2 
+## PP Version:  0.6.0.4 
 ## 
 ##  Call: PP_4pl(respm = itmat, thres = diff_par, slopes = slope_par, type = "mle") 
-## - job started @ Fri Feb 10 11:33:42 2017 
+## - job started @ Sun Mar 26 18:11:58 2017 
 ## 
 ## Estimation type: mle 
 ## 
@@ -285,10 +278,10 @@ summary(res1plwle)
 ```
 
 ```
-## PP Version:  0.6.0.2 
+## PP Version:  0.6.0.4 
 ## 
 ##  Call: PP_4pl(respm = itmat, thres = diff_par, slopes = slope_par, type = "wle") 
-## - job started @ Fri Feb 10 11:33:42 2017 
+## - job started @ Sun Mar 26 18:11:58 2017 
 ## 
 ## Estimation type: wle 
 ## 
