@@ -183,7 +183,7 @@ summary(res1plmle)
 ## PP Version:  0.6.0.4 
 ## 
 ##  Call: PP_4pl(respm = itmat, thres = diff_par, slopes = slope_par, type = "mle") 
-## - job started @ Sun Mar 26 18:11:58 2017 
+## - job started @ Sat Apr  1 13:26:26 2017 
 ## 
 ## Estimation type: mle 
 ## 
@@ -281,7 +281,7 @@ summary(res1plwle)
 ## PP Version:  0.6.0.4 
 ## 
 ##  Call: PP_4pl(respm = itmat, thres = diff_par, slopes = slope_par, type = "wle") 
-## - job started @ Sun Mar 26 18:11:58 2017 
+## - job started @ Sat Apr  1 13:26:26 2017 
 ## 
 ## Estimation type: wle 
 ## 
