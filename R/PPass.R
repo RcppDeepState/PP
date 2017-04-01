@@ -169,22 +169,25 @@ PPass.Rm <- function(RMobj, fitindices= c("lz","lzstar","infit","outfit"), ...)
     # get threshold parameters:
     
     # create threshold matrix:
-    tps <- eRm::thresholds(RMobj)$threshpar
+    #tps <- eRm::thresholds(RMobj)$threshpar
     
-    len1        <- apply(RMobj$X, 2, function(x) length(unique(x))-1)
-    itemss      <- unlist(lapply(1:length(len1), function(x) rep(x, each=len1[x])))
-    wohin_zeile <- unlist(lapply(len1, function(x) 1:x))
+    #len1        <- apply(RMobj$X, 2, function(x) length(unique(x))-1)
+    #itemss      <- unlist(lapply(1:length(len1), function(x) rep(x, each=len1[x])))
+    #wohin_zeile <- unlist(lapply(len1, function(x) 1:x))
     
-    names(wohin_zeile) <- NULL
+    #names(wohin_zeile) <- NULL
     
-    thres <- matrix(NA,ncol=ncol(RMobj$X), nrow=max(len1))
+    #thres <- matrix(NA,ncol=ncol(RMobj$X), nrow=max(len1))
     
-    for(i in 1:length(tps))
-    {
-      thres[wohin_zeile[i], itemss[i]] <- tps[i]
-    }
-    
-    thres <- rbind(0,thres)
+    #for(i in 1:length(tps))
+    #{
+    #  thres[wohin_zeile[i], itemss[i]] <- tps[i]
+    #}
+    tps <- eRm::thresholds(RMobj)$threshtable[[1]]
+    tps <- t(tps)
+    tps[1,] <- 0
+    thres <- tps
+    # thres <- rbind(0,thres)
     slopes <- rep(1,ncol(thres))
     
     ########### ESTIMATE PERSON PARAMETERS ###############################  
