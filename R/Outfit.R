@@ -12,8 +12,7 @@ Outfit <- function( data,
   X <- data
   # processed Items 
   Xproc <- 1 * !is.na(X)  
-  L <- rowSums(Xproc)
-  
+ 
   N <- as.numeric(apply(X,1,function(x) sum(!is.na(x))))
   
   ai <- slopes
@@ -27,23 +26,19 @@ Outfit <- function( data,
   # probabilit. of solving an Item Expected Response (in der Literatur Pi nik)
   Pni     <- t( ci + (di-ci)/(1+exp(-submatrix)) )
   # --------------------------------------------------------------------------------
-  
-  # first: finde the k categories of each item
-  k_temp <- apply(X,2,max,na.rm=TRUE)
-  k  <- as.vector( sapply( k_temp, function(x) seq(0,x) ) )
   # second: calculate for each the Prop
   
   # ------------------------------------------------  
   Qni <- Xproc * Pni * ( 1-Pni )
   
   # Variance of xni
-  Wni <- ( ( (0-Pni)^2 ) * (1-Pni) ) + ( ( (1-Pni)^2 ) * Pni)
+  Wni <- Xproc * ( (((0-Pni)^2) * (1-Pni)) + (((1-Pni)^2) * Pni) )
   
   # Kurtosis of xni
-  Cni <- ( ( (0-Pni)^4 ) * (1-Pni) ) + ( ( (1-Pni)^4 ) * Pni)
+  Cni <- Xproc * ( (((0-Pni)^4) * (1-Pni)) + (((1-Pni)^4) * Pni) )
   
   # Score Residual: (Pni ist in der Literatru Eni)
-  Yni <- Xproc * X - Pni
+  Yni <- Xproc * (X - Pni)
   
   # Standardized Residual (Qni ist in der Literatur Wni)
   Zni <- Yni / sqrt( Qni )

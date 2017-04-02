@@ -12,8 +12,6 @@ Infit <- function( data,
   X <- data
   # processed Items 
   Xproc <- 1 * !is.na(X)  
-  L <- rowSums(Xproc)
-
   N <- as.numeric(apply(X,1,function(x) sum(!is.na(x))))
   
   ai <- slopes
@@ -22,31 +20,25 @@ Infit <- function( data,
   # calculate the propability of each pearson to not solve an item
   submatrix <- (matrix( thetas, ncol = nrow( data ), nrow = ncol( data ) ,byrow = TRUE) - betas) * ai
   
-  
   # --------------------------------------------------------------------------------
   # probabilit. of solving an Item Expected Response (in der Literatur Pi nik)
   Pni     <- t( ci + (di-ci)/(1+exp(-submatrix)) )
   # --------------------------------------------------------------------------------
   
-  # first: finde the k categories of each item
-  k_temp <- apply(X,2,max,na.rm=TRUE)
-  k  <- as.vector( sapply( k_temp, function(x) seq(0,x) ) )
   # second: calculate for each the Prop
-  
-
   # ------------------------------------------------  
   Qni <- Xproc * (Pni * ( 1-Pni ))
   
   # Variance of xni
-  Wni <- ( ( (0-Pni)^2 ) * (1-Pni) ) + ( ( (1-Pni)^2 ) * Pni)
+  Wni <- Xproc * ( (((0-Pni)^2) * (1-Pni) ) + (((1-Pni)^2) * Pni) )
   
   # Kurtosis of xni
-  Cni <- ( ( (0-Pni)^4 ) * (1-Pni) ) + ( ( (1-Pni)^4 ) * Pni)
+  Cni <- Xproc * ( (((0-Pni)^4) * (1-Pni)) + (((1-Pni)^4) * Pni) )
   
-  # Score Residual: (Pni ist in der Literatru Eni)
+  # Score Residual: (Pni in literature Eni)
   Yni <- Xproc * (X - Pni)
   
-  # Standardized Residual (Qni ist in der Literatur Wni)
+  # Standardized Residual (Qni in literature Wni)
   Zni <- Yni / sqrt( Qni )
   
   # Fit Mean Square
