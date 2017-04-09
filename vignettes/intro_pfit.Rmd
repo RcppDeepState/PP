@@ -147,7 +147,8 @@ arrows(avg-sdev, x, avg+sdev, length=0.05, angle=90, code=3)
 abline(v=0,col = "red", lwd = 3)
 ```
 
-
+Example with real data. First we have to load the dataset
+data(pp_amt)
 Interpretation of Person Fit Hier ein paar angeben und Bezug zur Literatur nehmen!
 
 **Literatur**
