@@ -7,3 +7,11 @@
 #' @seealso \link{sim_4pl}
 #' @name fourpl_df
 NULL
+
+#' real data set ...
+#' 
+#'
+#' @format A data.frame with 60 rows and 14 columns.
+#' @seealso \link{PPass}
+#' @name pp_amt
+NULL
