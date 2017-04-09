@@ -10,9 +10,10 @@ Outfitpoly <- function( data,
   # ------------------------------------------------------------------------------------------------
   #  information
   X <- data
-  L <- ncol(X)
-  N <- apply(X,1,function(x) sum(!is.na(x)))
+  N.mat <- apply(X, 1, function(x){ length(na.exclude(x)) })
   k <- apply(X,2,max,na.rm=TRUE)
+  # processed Items 
+  Xproc <- 1 * !is.na(X)  
   # ------------------------------------------------------------------------------------------------
   # parameter information
   ai <- slope
@@ -30,7 +31,6 @@ Outfitpoly <- function( data,
   theta_mat <- matrix( thetas, nrow = nrow( X ), ncol = sum( k ) ) 
   # ------------------------------------------------------------------------------------------------
   theta_mat_kat <- tcrossprod(theta_mat , diag(k_seq))
-  
   # ---------------------------------------------
   submatrix_pijx <- (t(theta_mat_kat) - betas) #* ai 
   
@@ -43,40 +43,40 @@ Outfitpoly <- function( data,
       dev <- kat / nom
       return(dev)
     })
-    
     return(tmp)   
   })
-  
-  
+
   cat_pijx <- lapply(cat_pijx_0,function(x){
     x <- x[-1,]
   })
+  
   Pijx <- t(do.call(rbind,cat_pijx))
+  Pijx <- Xproc[,k_item] * Pijx
+  
   Emat.l <- tcrossprod(Pijx , t(diag(k_seq)))
   Emat <- tapply(1:length(betas),k_item,function(x) rowSums(Emat.l[,x],na.rm=TRUE))
   
   Eij <- t(do.call(rbind,Emat))
+  Eij <- Xproc * Eij
   
   Pijx.0 <- t(do.call(rbind,cat_pijx_0))
-  Emat.l.0 <- tcrossprod(Pijx.0 , t(diag(k_seq1)))
-  Emat.0 <- tapply(1:length(k_seq1),k_item0,function(x) rowSums(Emat.l.0[,x],na.rm=TRUE))
+  Pijx.0 <- Xproc[,k_item0] * Pijx.0
   
   Eij.0 <- t( apply(Eij[,k_item0],1,function(x) {k_seq0 - x}) )
+  Eij.0 <- Xproc[,k_item0] * Eij.0
   
   # Variance
   Vmat.cat <- (Eij.0^2)*Pijx.0
   Vmat.l <- tapply(1:length(k_seq0),k_item0,function(x) rowSums(Vmat.cat[,x],na.rm=TRUE))
-  Wni.mat <- t(do.call(rbind,Vmat.l))
+  Wni.mat <- Xproc * t(do.call(rbind,Vmat.l))
   
   Cmat.cat <- (Eij.0)^4*Pijx.0
   Cmat.l <- tapply(1:length(k_seq0),k_item0, function(x) {rowSums(Cmat.cat[,x],na.rm=TRUE)})
-  Cni.mat <- t(do.call(rbind,Cmat.l))
-  
-  
+  Cni.mat <- Xproc * t(do.call(rbind,Cmat.l))
+
   Yni.mat <- X - Eij
   Zni.mat <- Yni.mat / sqrt( Wni.mat )
-  yni2.mat <- Zni.mat^2
-  N.mat <- apply(X, 1L, function(x){ length(na.exclude(x)) })
+  zni2.mat <- Zni.mat^2
   
   # OUTFIT MEANSQ
   Un <- rowSums( ((Zni.mat)^2), na.rm=TRUE ) / N.mat
@@ -88,8 +88,8 @@ Outfitpoly <- function( data,
   tu <- ( (Un^(1/3)) - 1)*(3/sqrt(varInfit))+(sqrt(varInfit)/3)
   
   # additional output
-  chisq   <- rowSums( ((Zni.mat)^2), na.rm=TRUE )
-  pvalue  <- 1 - pchisq(rowSums( ((Zni.mat)^2), na.rm=TRUE ), N.mat-1 )
+  chisq   <- rowSums( (zni2.mat), na.rm=TRUE )
+  pvalue  <- 1 - pchisq(rowSums( (zni2.mat), na.rm=TRUE ), N.mat-1 )
   df      <- N.mat - 1 
   
   out <- cbind(
