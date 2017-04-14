@@ -135,7 +135,10 @@ If desired you can simply plot the results of the person-fit statistics as shown
 ![plot of chunk plot](figure/plot-1.png)![plot of chunk plot](figure/plot-2.png)
 
 Example with real data. First we have to load the dataset
-data(pp_amt)
+
+
+
+
 Interpretation of Person Fit Hier ein paar angeben und Bezug zur Literatur nehmen!
 
 **Literatur**
