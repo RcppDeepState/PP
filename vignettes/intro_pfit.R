@@ -101,8 +101,8 @@ pfit1pl_map_l <- Pfit(respm=awm,pp=res1plmap,fitindices="lzstar")
 
 res.pp <- Pfit(respm=awm,pp=res1plmle,fitindices=c("lzstar"),SE=TRUE)
 x<-seq(-4,4,length=200)
-s = 1
-mu = 0
+s <- 1
+mu <- 0
 y <- (1/(s*sqrt(2*pi))) * exp(-((x-mu)^2)/(2*s^2))
 plot(x,y, type="l", lwd=2, col = "blue", xlim = c(-4,4),xlab="", ylab="")
 title(main="Density plot of lz* Person-Fit", xlab="density", ylab="score")
@@ -113,6 +113,40 @@ rug(res.pp$lzstar[,"lzstar"],col="red")
 x <- 1:nrow(res.pp$lzstar)
 avg <- res.pp$lzstar[,"lzstar"]
 sdev <- res.pp$lzstar[,"lzs_se"]
+
+plot(avg, x,
+     xlim=range(c(avg-sdev, avg+sdev)),
+     pch=19, ylab="Person", xlab="Person-Fit +/- SD",
+     main="Plot of Person-Fit with SE"
+)
+arrows(avg-sdev, x, avg+sdev, length=0.05, angle=90, code=3)
+abline(v=0,col = "red", lwd = 3)
+
+## ----example-2-----------------------------------------------------------
+data(pp_amt)
+betas <- pp_amt$betas$Itemparameter
+diffpar <- pp_amt$Itemparameter
+# slope parameters
+awm <- pp_amt$daten_amt[,grep("i\\d{1,3}",colnames(pp_amt$daten_amt))]
+
+# estimate ability parameter and personfit
+# compute also SE, takes a while
+out <- PPass(respdf = awm,thres = betas, items="all",
+             mod=c("1PL"), fitindices= c("lz","lzstar","infit","outfit"),SE=TRUE)
+lim <- max(abs(c(min(out$estimate),max(out$estimate))))
+x <- seq(-lim,lim,length=200)
+s  <- 1
+mu <- 0
+y <- (1/(s*sqrt(2*pi))) * exp(-((x-mu)^2)/(2*s^2))
+plot(x,y, type="l", lwd=2, col = "blue", xlim = c(-lim,lim),xlab="", ylab="")
+title(main="Density plot of lz* Person-Fit", xlab="density", ylab="score")
+lines(density(out[,"lzstar"], bw = 0.5), lwd = 2, lty = 2)
+rug(out[,"lzstar"],col="red")
+
+# zweite Grafik erzeugen
+x <- 1:nrow(out)
+avg <- out[,"lzstar"]
+sdev <- out[,"lz_se"]
 
 plot(avg, x,
      xlim=range(c(avg-sdev, avg+sdev)),
