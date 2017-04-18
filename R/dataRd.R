@@ -8,9 +8,14 @@
 #' @name fourpl_df
 NULL
 
-#' real data set ...
+#' Real data set
 #' 
-#'
+#' This dataset contains real data from the 'Adaptive Matrices Test' (AMT).
+#' Assesses logical reasoning as an indicator of general intelligence. The ability to identify regularities and draw logical conclusions is a very good predictor of long-term success at work.
+#' 
+#' The data are provided from the Unitersity of Vienna, Faculty of Psychology, Department of Psychological Assessment.
+#' Thanks to Schuhfried.
+#' 
 #' @format A data.frame with 60 rows and 14 columns.
 #' @seealso \link{PPass}
 #' @name pp_amt
