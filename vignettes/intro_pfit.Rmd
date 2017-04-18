@@ -2,7 +2,7 @@
 output: 
   html_document: 
     toc: yes
-    bibliography: literatur.bib
+bibliography: literatur.bib
 ---
 <!--
 %\VignetteEngine{knitr::knitr}
@@ -134,7 +134,7 @@ x<-seq(-4,4,length=200)
 s <- 1
 mu <- 0
 y <- (1/(s*sqrt(2*pi))) * exp(-((x-mu)^2)/(2*s^2))
-plot(x,y, type="l", lwd=2, col = "blue", xlim = c(-4,4),xlab="", ylab="")
+plot(x,y, type="l", lwd=2, col = "blue", xlim = c(-8.5,8.5),xlab="", ylab="")
 title(main="Density plot of lz* Person-Fit", xlab="density", ylab="score")
 lines(density(res.pp$lzstar[,"lzstar"], bw = 0.5), lwd = 2, lty = 2)
 rug(res.pp$lzstar[,"lzstar"],col="red")
@@ -211,5 +211,5 @@ $$
 \end{aligned}
 $$
 **selected Literatur**
-
-
+nocite: | 
+  @drasgow1985appropriateness
