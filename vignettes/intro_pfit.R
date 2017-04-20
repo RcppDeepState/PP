@@ -1,7 +1,7 @@
 ## ----settings------------------------------------------------------------
 knitr::opts_chunk$set(message = FALSE, results='hide')
 
-## ----start---------------------------------------------------------------
+## ----start, message=FALSE, warning=FALSE---------------------------------
 library(PP)
 
 set.seed(1337)
@@ -16,7 +16,7 @@ ua     <- round(runif(15,0.8,1),2)
 # simulate response matrix
 awm <- matrix(sample(0:1,100*15,replace=TRUE),ncol=15)
 
-## ----1pl-----------------------------------------------------------------
+## ----1pl, message=FALSE, warning=FALSE-----------------------------------
 # MLE
 res1plmle <- PP_4pl(respm = awm,thres = diffpar,type = "mle")
 # WLE
@@ -24,7 +24,7 @@ res1plwle <- PP_4pl(respm = awm,thres = diffpar,type = "wle")
 # MAP estimation
 res1plmap <- PP_4pl(respm = awm,thres = diffpar,type = "map")
 
-## ----234-pl--------------------------------------------------------------
+## ----234-pl, message=FALSE, warning=FALSE--------------------------------
 
 # ------------------------------------------------------------------------
 ## 2PL model ##### 
@@ -53,7 +53,7 @@ res4plmle <- PP_4pl(respm = awm,thres = diffpar,
 res4plwle <- PP_4pl(respm = awm,thres = diffpar,
                     slopes = sl,lowerA = la,upperA=ua,type = "wle")
 
-## ----pfit----------------------------------------------------------------
+## ----pfit, message=FALSE, warning=FALSE----------------------------------
 
 # ------------------------------------------------------------------------
 ## 1PL model ##### 
@@ -84,7 +84,7 @@ pfit4pl_lz <- Pfit(respm=awm,pp=res4plwle,fitindices="lzstar")
 ## LZ*-Index combined with Infit-Outfit ##### 
 pfit4pl_li <- Pfit(respm=awm,pp=res4plwle,fitindices=c("lzstar","infit","outfit"))
 
-## ----wle-----------------------------------------------------------------
+## ----wle, message=FALSE, warning=FALSE-----------------------------------
 # ------------------------------------------------------------------------
 ## 1PL model ##### 
 # ------------------------------------------------------------------------
@@ -96,7 +96,7 @@ pfit1pl_wle_l <- Pfit(respm=awm,pp=res1plwle,fitindices="lzstar")
 ## map ####
 pfit1pl_map_l <- Pfit(respm=awm,pp=res1plmap,fitindices="lzstar")
 
-## ----plot, echo=FALSE, message=FALSE, warning=FALSE----------------------
+## ----example-1, message=FALSE, warning=FALSE-----------------------------
 # eine Grafik erzeugen
 
 res.pp <- Pfit(respm=awm,pp=res1plmle,fitindices=c("lzstar"),SE=TRUE)
@@ -104,7 +104,7 @@ x<-seq(-4,4,length=200)
 s <- 1
 mu <- 0
 y <- (1/(s*sqrt(2*pi))) * exp(-((x-mu)^2)/(2*s^2))
-plot(x,y, type="l", lwd=2, col = "blue", xlim = c(-4,4),xlab="", ylab="")
+plot(x,y, type="l", lwd=2, col = "blue", xlim = c(-8.5,8.5),xlab="", ylab="")
 title(main="Density plot of lz* Person-Fit", xlab="density", ylab="score")
 lines(density(res.pp$lzstar[,"lzstar"], bw = 0.5), lwd = 2, lty = 2)
 rug(res.pp$lzstar[,"lzstar"],col="red")
@@ -122,7 +122,7 @@ plot(avg, x,
 arrows(avg-sdev, x, avg+sdev, length=0.05, angle=90, code=3)
 abline(v=0,col = "red", lwd = 3)
 
-## ----example-2-----------------------------------------------------------
+## ----example-2, message=FALSE, warning=FALSE-----------------------------
 data(pp_amt)
 betas <- pp_amt$betas$Itemparameter
 diffpar <- pp_amt$Itemparameter
@@ -130,9 +130,19 @@ diffpar <- pp_amt$Itemparameter
 awm <- pp_amt$daten_amt[,grep("i\\d{1,3}",colnames(pp_amt$daten_amt))]
 
 # estimate ability parameter and personfit
-# compute also SE, takes a while
-out <- PPass(respdf = awm,thres = betas, items="all",
+# the computation of the standard error takes a while, therefore we use only a part of the provided data
+set.seed(1800)
+# sample items
+sampi <- order(sample(1:ncol(awm),40,replace = F))
+# sample persons
+sampp <- order(sample(1:nrow(awm),100,replace = F))
+awm.samp <- awm[sampp,sampi]
+# apply(awm.samp, 2, function(x)!all(is.na(x)))
+awm.samp <- awm.samp[apply(awm.samp, 1, function(x)!all(is.na(x))),] #only persons with no NA
+out <- PPass(respdf = awm.samp,thres = betas[sampi], items="all",type = "wle",
              mod=c("1PL"), fitindices= c("lz","lzstar","infit","outfit"),SE=TRUE)
+
+# first example of illustration
 lim <- max(abs(c(min(out$estimate),max(out$estimate))))
 x <- seq(-lim,lim,length=200)
 s  <- 1
@@ -143,16 +153,18 @@ title(main="Density plot of lz* Person-Fit", xlab="density", ylab="score")
 lines(density(out[,"lzstar"], bw = 0.5), lwd = 2, lty = 2)
 rug(out[,"lzstar"],col="red")
 
-# zweite Grafik erzeugen
+# second example of illustration
 x <- 1:nrow(out)
 avg <- out[,"lzstar"]
-sdev <- out[,"lz_se"]
+sdev <- out[,"lzs_se"]
 
 plot(avg, x,
+     yaxt="n",
      xlim=range(c(avg-sdev, avg+sdev)),
      pch=19, ylab="Person", xlab="Person-Fit +/- SD",
      main="Plot of Person-Fit with SE"
 )
+axis(side=2, at = c(1:nrow(out)),labels = c(1:nrow(out)), las = 2,cex.axis=0.66)
 arrows(avg-sdev, x, avg+sdev, length=0.05, angle=90, code=3)
 abline(v=0,col = "red", lwd = 3)
 

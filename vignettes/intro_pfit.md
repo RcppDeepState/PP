@@ -1,10 +1,16 @@
+---
+output: 
+  html_document: 
+    toc: yes
+bibliography: literatur.bib
+---
 <!--
 %\VignetteEngine{knitr::knitr}
 %\VignetteIndexEntry{Getting started with Person-Fit in PP}
 -->
 # Getting started with Person-Fit functions
 
-A brief introduction in the currently implemented person fit functions will be added soon. Currently the **LZ, LZ*** and also the **Infit-Outfit-Statistics** are implemented. We also added the Infit-Outfit-Functions for the Partial-Credit Model. Meanwhile we are working on plots for a better understanding of the person misfit as well as on inference statistic methods.
+A brief introduction of all currently implemented person-fit functions will be added soon. Currently the **LZ, LZ*** and also the **Infit-Outfit-Statistics** are implemented. We also added the Infit-Outfit-Functions for the Partial-Credit Model. Meanwhile we are working on plots for a better understanding of the person misfit as well as on inference statistic methods.
 
 
 ```r
@@ -40,14 +46,6 @@ res1plmle <- PP_4pl(respm = awm,thres = diffpar,type = "mle")
 res1plwle <- PP_4pl(respm = awm,thres = diffpar,type = "wle")
 # MAP estimation
 res1plmap <- PP_4pl(respm = awm,thres = diffpar,type = "map")
-```
-
-```
-## Warning in PP_4pl(respm = awm, thres = diffpar, type = "map"): all mu's are set to 0!
-```
-
-```
-## Warning in PP_4pl(respm = awm, thres = diffpar, type = "map"): all sigma2's are set to 1!
 ```
 
 We also support the 2PL, 3PL and 4PL Model:
@@ -132,7 +130,39 @@ pfit1pl_map_l <- Pfit(respm=awm,pp=res1plmap,fitindices="lzstar")
 ```
 
 If desired you can simply plot the results of the person-fit statistics as shown below.
-![plot of chunk plot](figure/plot-1.png)![plot of chunk plot](figure/plot-2.png)
+
+```r
+# eine Grafik erzeugen
+
+res.pp <- Pfit(respm=awm,pp=res1plmle,fitindices=c("lzstar"),SE=TRUE)
+x<-seq(-4,4,length=200)
+s <- 1
+mu <- 0
+y <- (1/(s*sqrt(2*pi))) * exp(-((x-mu)^2)/(2*s^2))
+plot(x,y, type="l", lwd=2, col = "blue", xlim = c(-8.5,8.5),xlab="", ylab="")
+title(main="Density plot of lz* Person-Fit", xlab="density", ylab="score")
+lines(density(res.pp$lzstar[,"lzstar"], bw = 0.5), lwd = 2, lty = 2)
+rug(res.pp$lzstar[,"lzstar"],col="red")
+```
+
+![plot of chunk example-1](figure/example-1-1.png)
+
+```r
+# zweite Grafik erzeugen
+x <- 1:nrow(res.pp$lzstar)
+avg <- res.pp$lzstar[,"lzstar"]
+sdev <- res.pp$lzstar[,"lzs_se"]
+
+plot(avg, x,
+     xlim=range(c(avg-sdev, avg+sdev)),
+     pch=19, ylab="Person", xlab="Person-Fit +/- SD",
+     main="Plot of Person-Fit with SE"
+)
+arrows(avg-sdev, x, avg+sdev, length=0.05, angle=90, code=3)
+abline(v=0,col = "red", lwd = 3)
+```
+
+![plot of chunk example-1](figure/example-1-2.png)
 
 Example with real data. First we have to load the dataset
 
@@ -144,9 +174,19 @@ diffpar <- pp_amt$Itemparameter
 awm <- pp_amt$daten_amt[,grep("i\\d{1,3}",colnames(pp_amt$daten_amt))]
 
 # estimate ability parameter and personfit
-# compute also SE, takes a while
-out <- PPass(respdf = awm,thres = betas, items="all",
+# the computation of the standard error takes a while, therefore we use only a part of the provided data
+set.seed(1800)
+# sample items
+sampi <- order(sample(1:ncol(awm),40,replace = F))
+# sample persons
+sampp <- order(sample(1:nrow(awm),100,replace = F))
+awm.samp <- awm[sampp,sampi]
+# apply(awm.samp, 2, function(x)!all(is.na(x)))
+awm.samp <- awm.samp[apply(awm.samp, 1, function(x)!all(is.na(x))),] #only persons with no NA
+out <- PPass(respdf = awm.samp,thres = betas[sampi], items="all",type = "wle",
              mod=c("1PL"), fitindices= c("lz","lzstar","infit","outfit"),SE=TRUE)
+
+# first example of illustration
 lim <- max(abs(c(min(out$estimate),max(out$estimate))))
 x <- seq(-lim,lim,length=200)
 s  <- 1
@@ -161,39 +201,28 @@ rug(out[,"lzstar"],col="red")
 ![plot of chunk example-2](figure/example-2-1.png)
 
 ```r
-# zweite Grafik erzeugen
+# second example of illustration
 x <- 1:nrow(out)
 avg <- out[,"lzstar"]
-sdev <- out[,"lz_se"]
+sdev <- out[,"lzs_se"]
 
 plot(avg, x,
+     yaxt="n",
      xlim=range(c(avg-sdev, avg+sdev)),
      pch=19, ylab="Person", xlab="Person-Fit +/- SD",
      main="Plot of Person-Fit with SE"
 )
+axis(side=2, at = c(1:nrow(out)),labels = c(1:nrow(out)), las = 2,cex.axis=0.66)
 arrows(avg-sdev, x, avg+sdev, length=0.05, angle=90, code=3)
 abline(v=0,col = "red", lwd = 3)
 ```
 
 ![plot of chunk example-2](figure/example-2-2.png)
 
+**Interpretation of some selected person-fit statistics.**
+In the second example we used the provided real dataset of the 'Adaptive Matrices Test'. Theses data where collected at the Unitersity of Vienna, Fakulty of Psychology, Department of Psychological Assessment. In the second plot we used only a subset of the provided data, because the computation of the standard error (here we used a jackknife [@efron1981jackknife]) takes a while.
+@magis2012didactic and also @armstrong2007performance provide useful information for the inrepretation of the lz [@drasgow1985appropriateness] and lz* [@Snijders2001lzstar] person-fit index.
+The interpretation of the lz-values is very simple. The smaller (negative) the values, the stronger the indicated misfit. The lz-values ar asymptotically standard normally distributed. @molenaar1990many (and others) showed, that the asymptotically standard normal distrubution only holds, if the $\theta$ values are known. To overcome thes problem @snijders2001asymptotic intruduced his lz* person-fit index. The inrepration of this index does not change. In summary @magis2012didactic propose if the lz* index is lower than a certain critical value $z_\alpha$, than this person-fit value indicates a misfit.
 
-
-Interpretation of Person Fit Hier ein paar angeben und Bezug zur Literatur nehmen!
 
 **Literatur**
-
-- Armstrong, R. D., Stoumbos, Z. G., Kung, M. T. & Shi, M. (2007). On the performance of the lz person-fit statistic.
-- De La Torre, J., & Deng, W. (2008). Improving Person-Fit Assessment by Correcting the Ability Estimate and Its Reference Distribution. Journal of Educational Measurement, , 159-177. 
-- Drasgow, F., Levine, M. V. & Williams, E. A. (1985) Appropriateness measurement with polychotomous item response models and standardized indices. 67-86.
-- Efron, B., & Stein, C. (1981). The jackknife estimate of variance. 586-596.
-- Karabatsos, G. (2003) Comparing the Aberrant Response Detection Performance of Thirty-Six Person-Fit Statistics. 277-298. 
-- Magis, D., Raiche, G. & Beland, S. (2012) A didactic presentation of Snijders's lz index of person fit with emphasis on response model selection and ability estimation. 57-81. 
-- Meijer, R. R. & Sijtsma, K. (2001) Methodology review: Evaluating person fit.107-135. 
-- Molenaar, I. W. & Hoijtink, H. (1990) The many null distributions of person fit indices. 75-106. 
-- Mousavi, A. & Cui, Y. Evaluate the performance of and of person fit: A simulation study.
-- Reise, S. P. (1990). A comparison of item-and person-fit methods of assessing model-data fit in IRT. 127-137. 
-- Snijders, T. B. (2001) Asymptotic null distribution of person fit statistics with estimated person parameter. 331-342. 
-- Wright, B. D. & Masters, G. N. (1990). Computation of OUTFIT and INFIT Statistics. 3:4, 84-85. 
-- Wright, B. D., & Masters, G. N. (1982). MESA Press, 5835 S. Kimbark Avenue, Chicago, IL 60637.
-

@@ -27,8 +27,8 @@ list of person-fits for each person-fit statistic
 \item the additional information is provided after the short form of the personfit
 \item  lz (lz)
 \item  lzstar (lzs)
-\item  infit (in)
-\item  outfit (ou)
+\item  infit the mean-square statistic (in)
+\item  outfit the mean-square statistic (ou)
 \item  _unst: unstandardised
 \item  _se: standard error
 \item  _t: t-value
@@ -41,9 +41,9 @@ list of person-fits for each person-fit statistic
 Compute several person fit statistic for the 1-PL, 2-PL, 3-PL and 4-PL.
 }
 \details{
-Please note that currently only the likelihood based LZ-Index (Drasgow, Levine, and Williams, 1985) and LZ*-Index (Snijders, 2001) are implemented. Also, we support the INFIT-OUTIFT (Wright and Masters, 1982, 1990) statistic as well as the polytomouse version of INFIT-OUTFIT. Other person fit statistics will be added soon.
+Please note that currently only the likelihood based LZ-Index (Drasgow, Levine, and Williams, 1985) and LZ*-Index (Snijders, 2001) are implemented. Also the INFIT-OUTIFT (Wright and Masters, 1982, 1990) statistic as well as the polytomouse version of INFIT-OUTFIT are supported. Other person fit statistics will be added soon.
 
-The calculation of the person fit statistics requires the numeric response-matrix as well as an object of the fourpl-class. So first you should estimate the person parameter and afterwards calculate the person fit statistics.
+The calculation of the person fit statistics requires the numeric response-matrix as well as an object of the fourpl-class. So first you should estimate the person parameter and afterwards calculate the person fit statistics. You could also use our PPass-function to estimate the person parameter and calculate the desired person fit simultaneously.
 It is possible to calculate several person fit statistics at once, you only have to specify them in a vector.
 
 For the Partial Credit model we currently support the infit-outfit statistic. Please submit also the numeric response-matrix as well as the estimated person parameter with an gpcm-class.
