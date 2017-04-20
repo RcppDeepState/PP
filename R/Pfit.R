@@ -1,6 +1,6 @@
 #' Person-Fit statistics
 #' 
-#' Compute several person fit statistic for the 1-PL, 2-PL, 3-PL and 4-PL. 
+#' Compute several person fit statistic for the 1-PL, 2-PL, 3-PL, 4-PL and PCM. 
 #'
 #' Please note that currently only the likelihood based LZ-Index (Drasgow, Levine, and Williams, 1985) and LZ*-Index (Snijders, 2001) are implemented. Also the INFIT-OUTIFT (Wright and Masters, 1982, 1990) statistic as well as the polytomouse version of INFIT-OUTFIT are supported. Other person fit statistics will be added soon.
 #' 
@@ -21,8 +21,8 @@
 #' \item the additional information is provided after the short form of the personfit
 #' \item  lz (lz)
 #' \item  lzstar (lzs)
-#' \item  infit (in)
-#' \item  outfit (ou)
+#' \item  infit the mean-square statistic (in)
+#' \item  outfit the mean-square statistic (ou)
 #' \item  _unst: unstandardised
 #' \item  _se: standard error
 #' \item  _t: t-value
