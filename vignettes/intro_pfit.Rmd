@@ -10,7 +10,7 @@ bibliography: literatur.bib
 -->
 # Getting started with Person-Fit functions
 
-A brief introduction in the currently implemented person fit functions will be added soon. Currently the **LZ, LZ*** and also the **Infit-Outfit-Statistics** are implemented. We also added the Infit-Outfit-Functions for the Partial-Credit Model. Meanwhile we are working on plots for a better understanding of the person misfit as well as on inference statistic methods.
+A brief introduction of all currently implemented person-fit functions will be added soon. Currently the **LZ, LZ*** and also the **Infit-Outfit-Statistics** are implemented. We also added the Infit-Outfit-Functions for the Partial-Credit Model. Meanwhile we are working on plots for a better understanding of the person misfit as well as on inference statistic methods.
 
 ```{r settings}
 knitr::opts_chunk$set(message = FALSE, results='hide')
@@ -18,7 +18,7 @@ knitr::opts_chunk$set(message = FALSE, results='hide')
 
 Now a simple example will be given.
 First, we will simulate some data for our hands on example:
-```{r start}
+```{r start, message=FALSE, warning=FALSE}
 library(PP)
 
 set.seed(1337)
@@ -36,7 +36,7 @@ awm <- matrix(sample(0:1,100*15,replace=TRUE),ncol=15)
 
 We will start with a simple 1PL-Model. First, we have to estimate the person parameters. Here we have to choose an estimation method. It is important, that you can choose **mle, wle or map** only for the LZ and LZ* Index. For the Infit-Outfit statistic we support **mle and wle** estimates.
 
-```{r 1pl}
+```{r 1pl, message=FALSE, warning=FALSE}
 # MLE
 res1plmle <- PP_4pl(respm = awm,thres = diffpar,type = "mle")
 # WLE
@@ -46,7 +46,7 @@ res1plmap <- PP_4pl(respm = awm,thres = diffpar,type = "map")
 ```
 
 We also support the 2PL, 3PL and 4PL Model:
-```{r 234-pl}
+```{r 234-pl, message=FALSE, warning=FALSE}
 
 # ------------------------------------------------------------------------
 ## 2PL model ##### 
@@ -78,7 +78,7 @@ res4plwle <- PP_4pl(respm = awm,thres = diffpar,
 
 After the estimation of the person parameter we are able to calculate the person fits. At this point you are able to calculate only one kind of personfit as well as all various simultaneously (as shown next).
 
-```{r pfit}
+```{r pfit, message=FALSE, warning=FALSE}
 
 # ------------------------------------------------------------------------
 ## 1PL model ##### 
@@ -112,7 +112,7 @@ pfit4pl_li <- Pfit(respm=awm,pp=res4plwle,fitindices=c("lzstar","infit","outfit"
 
 We can also use different person parameter estimates.
 
-```{r wle}
+```{r wle, message=FALSE, warning=FALSE}
 # ------------------------------------------------------------------------
 ## 1PL model ##### 
 # ------------------------------------------------------------------------
@@ -126,7 +126,7 @@ pfit1pl_map_l <- Pfit(respm=awm,pp=res1plmap,fitindices="lzstar")
 ```
 
 If desired you can simply plot the results of the person-fit statistics as shown below.
-```{r plot, echo=FALSE, message=FALSE, warning=FALSE}
+```{r example-1, message=FALSE, warning=FALSE}
 # eine Grafik erzeugen
 
 res.pp <- Pfit(respm=awm,pp=res1plmle,fitindices=c("lzstar"),SE=TRUE)
@@ -154,7 +154,7 @@ abline(v=0,col = "red", lwd = 3)
 ```
 
 Example with real data. First we have to load the dataset
-```{r example-2}
+```{r example-2, message=FALSE, warning=FALSE}
 data(pp_amt)
 betas <- pp_amt$betas$Itemparameter
 diffpar <- pp_amt$Itemparameter
@@ -201,15 +201,10 @@ arrows(avg-sdev, x, avg+sdev, length=0.05, angle=90, code=3)
 abline(v=0,col = "red", lwd = 3)
 ```
 
-Interpretation of some selected person-fit statistics.
-Einleitung Unterschied zwischen L0 und LZ*. Dann Beispiel für die Interpretation (Verweisen auf Drasgow)
+**Interpretation of some selected person-fit statistics.**
+In the second example we used the provided real dataset of the 'Adaptive Matrices Test'. Theses data where collected at the Unitersity of Vienna, Fakulty of Psychology, Department of Psychological Assessment. In the second plot we used only a subset of the provided data, because the computation of the standard error (here we used a jackknife [@efron1981jackknife]) takes a while.
+@magis2012didactic and also @armstrong2007performance provide useful information for the inrepretation of the lz [@drasgow1985appropriateness] and lz* [@Snijders2001lzstar] person-fit index.
+The interpretation of the lz-values is very simple. The smaller (negative) the values, the stronger the indicated misfit. The lz-values ar asymptotically standard normally distributed. @molenaar1990many (and others) showed, that the asymptotically standard normal distrubution only holds, if the $\theta$ values are known. To overcome thes problem @snijders2001asymptotic intruduced his lz* person-fit index. The inrepration of this index does not change. In summary @magis2012didactic propose if the lz* index is lower than a certain critical value $z_\alpha$, than this person-fit value indicates a misfit.
 
-$$
-\begin{aligned}
-  \dot{x} & = \sigma(y-x) \\
-  \dot{y} & = \rho x- y - xz 
-\end{aligned}
-$$
-**selected Literatur**
-nocite: | 
-  @drasgow1985appropriateness
+
+**Literatur**
