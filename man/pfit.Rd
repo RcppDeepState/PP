@@ -160,7 +160,7 @@ Pfit(respm=awm,pp=res4plwle,fitindices=c("lzstar","infit","outfit"))
 }
 }
 \seealso{
-\link{PPall}, \link{PP_4pl}, \link{PPass}, \link{intro_pfit}
+\link{PPall}, \link{PP_4pl}, \link{PPass}
 }
 \author{
 Jan Steinfeld
