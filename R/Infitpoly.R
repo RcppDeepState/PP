@@ -98,8 +98,8 @@ Infitpoly <- function( data,
   df      <- N.mat - 1 
   
   out <- cbind(
-    "infit"    = round(Vn,3),
-    "in_t"     = round(ti,3),
+    "infit"    = round(Vn,6),
+    "in_t"     = round(ti,6),
     "in_chisq" = round(chisq,3),
     "in_df"    = df,
     "in_pv"    = round(pvalue,3)
