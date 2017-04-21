@@ -32,7 +32,7 @@
 #' }
 #' 
 #' @rdname pfit
-#' @seealso \link{PPall}, \link{PP_4pl}, \link{PPass}, \link{intro_pfit}
+#' @seealso \link{PPall}, \link{PP_4pl}, \link{PPass}
 #'
 #'
 #'@author Jan Steinfeld
