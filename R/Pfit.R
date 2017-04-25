@@ -19,16 +19,16 @@
 #' \itemize{
 #' \item the list of person-fits contains the calculated person-fit (like lz, lzstar) and also additional information like p-value or standard error if desired.
 #' \item the additional information is provided after the short form of the personfit
-#' \item  lz (lz)
-#' \item  lzstar (lzs)
-#' \item  infit the mean-square statistic (in)
-#' \item  outfit the mean-square statistic (ou)
-#' \item  _unst: unstandardised
-#' \item  _se: standard error
-#' \item  _t: t-value
-#' \item  _chisq: $chi^2$-value
-#' \item  _df: defrees of freedom
-#' \item  _pv: p-value
+#' \item lz (lz)
+#' \item lzstar (lzs)
+#' \item infit the mean-square statistic (in)
+#' \item outfit the mean-square statistic (ou)
+#' \item _unst: unstandardised
+#' \item _se: standard error
+#' \item _t: t-value
+#' \item _chisq: $chi^2$-value
+#' \item _df: defrees of freedom
+#' \item _pv: p-value
 #' }
 #' 
 #' @rdname pfit
