@@ -16,7 +16,24 @@ NULL
 #' The data are provided from the Unitersity of Vienna, Faculty of Psychology, Department of Psychological Assessment.
 #' Thanks to Schuhfried.
 #' 
-#' @format A data.frame with 60 rows and 14 columns.
+#' @format A list with two data.frame. The first list 'daten_amt' contains 299 columns and 710 rows. Each row contains data from one person. The second data.frame 'betas' contains the difficulty parameter (1PL).
+#' @source Division of Psychological Assessment and Applied Psychometrics, Fakulty of Psychology, University of Vienna
+#' \itemize{
+#' \item ID: id of person
+#' \item AGE: age in years
+#' \item AGEMON: age in month
+#' \item TE_GA: self-assessment ist coded with TE, otherwise GA
+#' \item FORM: version of the test
+#' \item TIME1: start time
+#' \item TIME2: end time
+#' \item REL: reliability for each person
+#' \item i: items
+#' }
+#' @references 
+#' \itemize{
+#' \item Hornke, L. F., Etzel, S., & Rettig, K. (2003). Manual Adaptive Matrices Test (AMT). \emph{Mödling: SCHUHFRIED GmbH}.
+#' }
+#' 
 #' @seealso \link{PPass}
 #' @name pp_amt
 NULL
