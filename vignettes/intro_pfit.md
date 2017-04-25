@@ -220,7 +220,8 @@ abline(v=0,col = "red", lwd = 3)
 ![plot of chunk example-2](figure/example-2-2.png)
 
 **Interpretation of some selected person-fit statistics.**
-In the second example we used the provided real dataset of the 'Adaptive Matrices Test'. Theses data where collected at the Unitersity of Vienna, Fakulty of Psychology, Department of Psychological Assessment. In the second plot we used only a subset of the provided data, because the computation of the standard error (here we used a jackknife [@efron1981jackknife]) takes a while.
+
+In the second example we used the provided real dataset of the 'Adaptive Matrices Test'. Theses data where collected at the Unitersity of Vienna, Fakulty of Psychology, Division of Psychological Assessment and Applied Psychometrics. In the second plot we used only a subset of the provided data, because the computation of the standard error (here we used a jackknife [@efron1981jackknife]) takes a while.
 @magis2012didactic and also @armstrong2007performance provide useful information for the inrepretation of the lz [@drasgow1985appropriateness] and lz* [@Snijders2001lzstar] person-fit index.
 The interpretation of the lz-values is very simple. The smaller (negative) the values, the stronger the indicated misfit. The lz-values ar asymptotically standard normally distributed. @molenaar1990many (and others) showed, that the asymptotically standard normal distrubution only holds, if the $\theta$ values are known. To overcome thes problem @snijders2001asymptotic intruduced his lz* person-fit index. The inrepration of this index does not change. In summary @magis2012didactic propose if the lz* index is lower than a certain critical value $z_\alpha$, than this person-fit value indicates a misfit.
 
