@@ -28,7 +28,7 @@ Thanks to Schuhfried.
 }
 \references{
 \itemize{
-\item Hornke, L. F., Etzel, S., & Rettig, K. (2003). Manual Adaptive Matrices Test (AMT). \emph{Mödling: SCHUHFRIED GmbH}.
+\item Hornke, L. F., Etzel, S., & Rettig, K. (2003). Manual Adaptive Matrices Test (AMT). \emph{Moedling: SCHUHFRIED GmbH}.
 }
 }
 \seealso{
