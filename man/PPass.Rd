@@ -89,9 +89,9 @@ ua     <- round(runif(15,0.8,1),2)
 # response matrix
 awm <- matrix(sample(0:1,100*15,replace=TRUE),ncol=15)
 awm <- as.data.frame(awm)
-# estimate ability parameter
+# estimate person parameter
 
-# estimate ability parameter and personfit
+# estimate person parameter and person fit
 out <- PPass(respdf = awm,thres = diffpar, items="all",
              mod=c("1PL"), fitindices= c("lz","lzstar","infit","outfit"))
 
