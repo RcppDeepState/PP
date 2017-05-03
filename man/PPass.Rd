@@ -50,6 +50,21 @@ PPass fuses Person Parameter estimation and Person Fit computation into a single
 library(eRm)
 
 
+### real data ##########
+
+data(pp_amt)
+
+d <- pp_amt$daten_amt
+
+rd_res <- PPass(respdf = d, 
+                items = 8:ncol(d),
+                mod="1PL",
+                thres = pp_amt$betas[,2], 
+                fitindices = "lz")
+
+head(rd_res)
+
+
 ## ========== RM - eRm 
 my_data <- eRm::sim.rasch(200, 12)
 my_rm <- eRm::RM(my_data)
