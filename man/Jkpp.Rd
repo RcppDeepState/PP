@@ -209,12 +209,13 @@ res_jk115 <- JKpp(respmixed_wle)
 
 
 }
+\author{
+Manuel Reif
+}
 \references{
 Wainer, H., & Wright, B. D. (1980). Robust estimation of ability in the Rasch model. Psychometrika, 45(3), 373-391.
 }
 \seealso{
 \link{PP_gpcm}, \link{PP_4pl}, \link{PPall}
 }
-\author{
-Manuel Reif
-}
+

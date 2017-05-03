@@ -180,6 +180,9 @@ res1plrob <- PP_4pl(respm = AWM,thres = diffpar, type = "robust")
 summary(res1plrob)
 
 }
+\author{
+Manuel Reif
+}
 \references{
 Baker, Frank B., and Kim, Seock-Ho (2004). Item Response Theory - Parameter Estimation Techniques. CRC-Press.
 
@@ -202,9 +205,7 @@ Yen, Y.-C., Ho, R.-G., Liao, W.-W., Chen, L.-J., & Kuo, C.-C. (2012). An empiric
 \seealso{
 \link{PPass}, \link{PPall}, \link{PP_gpcm}, \link{JKpp}, \link{PV}
 }
-\author{
-Manuel Reif
-}
 \keyword{4pl}
 \keyword{Parameters,}
 \keyword{Person}
+
