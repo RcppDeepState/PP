@@ -3,13 +3,12 @@
 \name{pp_amt}
 \alias{pp_amt}
 \title{Adaptive Matrices Test data}
-\format{A list with two data.frames. The first data.frame 'daten_amt' contains 299 columns and 710 rows. Each row contains responses from on examinee. The second data.frame 'betas' contains the difficulty parameter (1PL) (These parameters came with the raw-score extraction.).}
+\format{A list with two data.frames. The first data.frame 'daten_amt' contains 298 columns and 710 rows. Each row contains responses from on examinee. The second data.frame 'betas' contains the difficulty parameter (1PL) (These parameters came with the raw-score extraction.).}
 \source{
 Division of Psychological Assessment and Applied Psychometrics, Fakulty of Psychology, University of Vienna
 \itemize{
 \item ID: id of person
-\item AGE: age in years
-\item AGEMON: age in month
+\item AGE: age in years (with ages below 18 and above 34 are collapsed)
 \item TE_GA:
 \itemize{
 \item TE: self-assessment. To pass a psychological assessment course, the students have to complete several hours self assessment on a bunch of tests, to get familiar with them.
