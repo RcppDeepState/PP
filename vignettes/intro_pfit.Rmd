@@ -213,4 +213,4 @@ In the second example we used the provided real dataset of the 'Adaptive Matrice
 The interpretation of the lz-values is very simple. The smaller (negative) the values, the stronger the indicated misfit. The lz-values ar asymptotically standard normally distributed. @molenaar1990many (and others) showed, that the asymptotically standard normal distrubution only holds, if the $\theta$ values are known. To overcome thes problem @snijders2001asymptotic intruduced his lz* person-fit index. The inrepration of this index does not change. In summary @magis2012didactic propose if the lz* index is lower than a certain critical value $z_\alpha$, than this person-fit value indicates a misfit.
 
 
-**Literatur**
+# References
