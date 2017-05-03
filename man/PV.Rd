@@ -174,6 +174,9 @@ respcmeap1
 apply(res_mixedpv_1$pvdraws,1,quantile)
 
 }
+\author{
+Manuel Reif
+}
 \references{
 Mislevy, R. J. (1991). Randomization-based inference about latent variables from complex samples. Psychometrika, 56(2), 177-196.
 
@@ -184,6 +187,4 @@ Kruschke, J. (2010). Doing Bayesian data analysis: A tutorial introduction with 
 \seealso{
 \link{PP_gpcm}, \link{PP_4pl}, \link{JKpp}
 }
-\author{
-Manuel Reif
-}
+

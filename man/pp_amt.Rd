@@ -2,16 +2,22 @@
 % Please edit documentation in R/dataRd.R
 \name{pp_amt}
 \alias{pp_amt}
-\title{Real data set}
-\format{A list with two data.frame. The first list 'daten_amt' contains 299 columns and 710 rows. Each row contains data from one person. The second data.frame 'betas' contains the difficulty parameter (1PL).}
+\title{Adaptive Matrices Test data}
+\format{A list with two data.frames. The first data.frame 'daten_amt' contains 299 columns and 710 rows. Each row contains responses from on examinee. The second data.frame 'betas' contains the difficulty parameter (1PL) (These parameters came with the raw-score extraction.).}
 \source{
 Division of Psychological Assessment and Applied Psychometrics, Fakulty of Psychology, University of Vienna
 \itemize{
 \item ID: id of person
 \item AGE: age in years
 \item AGEMON: age in month
-\item TE_GA: self-assessment ist coded with TE, otherwise GA
-\item FORM: version of the test
+\item TE_GA:
+\itemize{
+\item TE: self-assessment. To pass a psychological assessment course, the students have to complete several hours self assessment on a bunch of tests, to get familiar with them.
+\item GA: testing for an assessment report. The students also have to test other people (not psychologists nor psychology students) in order to write an assessment report.
+}
+
+
+\item FORM: There are several different versions of this test, which differ in test length, duration etc \ldots
 \item TIME1: start time
 \item TIME2: end time
 \item REL: reliability for each person
@@ -19,12 +25,12 @@ Division of Psychological Assessment and Applied Psychometrics, Fakulty of Psych
 }
 }
 \description{
-This dataset contains real data from the 'Adaptive Matrices Test' (AMT).
-Assesses logical reasoning as an indicator of general intelligence. The ability to identify regularities and draw logical conclusions is a very good predictor of long-term success at work.
+This dataset contains real data from the 'Adaptive Matrices Test' (AMT), which is a computer-administered test.
+This power test assesses logical reasoning as an indicator of general intelligence. The ability to identify regularities and draw logical conclusions is a very good predictor of long-term success at work. The dataset is sparse, because the test tailores a specific set of items for each examinee's ability level. (More information about adaptive testing: \url{https://en.wikipedia.org/wiki/Computerized_adaptive_testing})
 }
 \details{
 The data are provided from the Unitersity of Vienna, Faculty of Psychology, Department of Psychological Assessment.
-Thanks to Schuhfried.
+Thanks to Schuhfried \url{https://www.schuhfried.at/test/AMT}.
 }
 \references{
 \itemize{
@@ -34,3 +40,4 @@ Thanks to Schuhfried.
 \seealso{
 \link{PPass}
 }
+

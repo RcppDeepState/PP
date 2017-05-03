@@ -13,3 +13,4 @@ This dataset contains data simulated with the \code{sim_4pl()} function.
 \seealso{
 \link{sim_4pl}
 }
+
