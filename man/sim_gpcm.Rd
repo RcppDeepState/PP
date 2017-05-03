@@ -53,4 +53,3 @@ apply(simdat_gpcm2,2,max)
 \seealso{
 \link{sim_4pl}, \link{PP_gpcm}
 }
-
