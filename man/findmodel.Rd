@@ -75,12 +75,11 @@ summary(respmixed_eap)
 summary(respmixed_rob)
 
 }
-\author{
-Manuel Reif
-}
 \seealso{
 \link{PPall}
 }
+\author{
+Manuel Reif
+}
 \keyword{Parameters}
 \keyword{Person}
-

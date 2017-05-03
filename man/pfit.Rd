@@ -142,9 +142,6 @@ Pfit(respm=awm,pp=res4plwle,fitindices=c("lzstar","infit","outfit"))
 
 ##########################################################################
 }
-\author{
-Jan Steinfeld
-}
 \references{
 Armstrong, R. D., Stoumbos, Z. G., Kung, M. T. & Shi, M. (2007). On the performance of the lz person-fit statistic.  \emph{Practical Assessment, Research & Evaluation}, \bold{12(16)}. Chicago	
 
@@ -175,8 +172,10 @@ Wright, B. D., & Masters, G. N. (1982). \emph{Rating Scale Analysis. Rasch Measu
 \seealso{
 \link{PPall}, \link{PP_4pl}, \link{PPass}
 }
+\author{
+Jan Steinfeld
+}
 \keyword{Infit-Outfit}
 \keyword{LZ-Index,}
 \keyword{Person}
 \keyword{fit,}
-
