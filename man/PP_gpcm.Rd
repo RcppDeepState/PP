@@ -111,9 +111,6 @@ respcmmap1 <- PP_gpcm(respm = awmatrix1,thres = THRES1, slopes = sl,type = "map"
 # EAP estimation
 respcmeap1 <- PP_gpcm(respm = awmatrix1,thres = THRES1, slopes = sl,type = "eap")
 }
-\author{
-Manuel Reif
-}
 \references{
 Baker, Frank B., and Kim, Seock-Ho (2004). Item Response Theory - Parameter Estimation Techniques. CRC-Press.
 
@@ -136,7 +133,9 @@ Warm, Thomas A. (1989). Weighted Likelihood Estimation Of Ability In Item Respon
 \seealso{
 \link{PPass}, \link{PPall}, \link{PP_4pl}, \link{JKpp}, \link{PV}
 }
+\author{
+Manuel Reif
+}
 \keyword{GPCM}
 \keyword{Parameters,}
 \keyword{Person}
-
