@@ -33,9 +33,6 @@ res3plmlepfit <- Pfit(respm=awm,pp=res3plmle,fitindices=c("infit","outfit"))
 out <- PPass(respdf = data.frame(awm),thres = diffpar, items="all",
              mod=c("1PL"), fitindices= c("lz","lzstar","infit","outfit"))
 }
-\author{
-Manuel Reif and Jan Steinfeld
-}
 \references{
 Barton, M. A., & Lord, F. M. (1981). An Upper Asymptote for the Three-Parameter Logistic Item-Response Model.
 
@@ -58,4 +55,6 @@ Yen, Y.-C., Ho, R.-G., Liao, W.-W., Chen, L.-J., & Kuo, C.-C. (2012). An empiric
 \seealso{
 \link{PPass}, \link{PP_gpcm}, \link{PP_4pl}, \link{PPall}, \link{Pfit}
 }
-
+\author{
+Manuel Reif and Jan Steinfeld
+}
