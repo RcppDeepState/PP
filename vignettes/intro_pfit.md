@@ -17,6 +17,8 @@ A brief introduction of all currently implemented person-fit functions will be a
 knitr::opts_chunk$set(message = FALSE, results='hide')
 ```
 
+## First example
+
 Now a simple example will be given.
 First, we will simulate some data for our hands on example:
 
@@ -32,7 +34,7 @@ sl     <- round(runif(15,0.5,1.5),2)
 la     <- round(runif(15,0,0.25),2)
 ua     <- round(runif(15,0.8,1),2)
 
-# simulate response matrix
+# simulate response matrix (not following any IRT model)
 awm <- matrix(sample(0:1,100*15,replace=TRUE),ncol=15)
 ```
 
@@ -164,7 +166,10 @@ abline(v=0,col = "red", lwd = 3)
 
 ![plot of chunk example-1](figure/example-1-2.png)
 
-Example with real data. First we have to load the dataset
+## Real data example 
+
+
+First we have to load the dataset
 
 ```r
 data(pp_amt)

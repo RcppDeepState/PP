@@ -13,7 +13,7 @@ sl     <- round(runif(15,0.5,1.5),2)
 la     <- round(runif(15,0,0.25),2)
 ua     <- round(runif(15,0.8,1),2)
 
-# simulate response matrix
+# simulate response matrix (not following any IRT model)
 awm <- matrix(sample(0:1,100*15,replace=TRUE),ncol=15)
 
 ## ----1pl, message=FALSE, warning=FALSE-----------------------------------
