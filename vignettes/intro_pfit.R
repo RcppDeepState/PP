@@ -27,7 +27,7 @@ res1plmap <- PP_4pl(respm = awm,thres = diffpar,type = "map")
 ## ----234-pl, message=FALSE, warning=FALSE--------------------------------
 
 # ------------------------------------------------------------------------
-## 2PL model ##### 
+## 2PL model #####
 # ------------------------------------------------------------------------
 # MLE
 res2plmle <- PP_4pl(respm = awm,thres = diffpar, slopes = sl,type = "mle")
@@ -35,7 +35,7 @@ res2plmle <- PP_4pl(respm = awm,thres = diffpar, slopes = sl,type = "mle")
 res2plwle <- PP_4pl(respm = awm,thres = diffpar, slopes = sl,type = "wle")
 
 # ------------------------------------------------------------------------
-## 3PL model ##### 
+## 3PL model #####
 # ------------------------------------------------------------------------
 # MLE
 res3plmle <- PP_4pl(respm = awm,thres = diffpar,
@@ -44,7 +44,7 @@ res3plmle <- PP_4pl(respm = awm,thres = diffpar,
 res3plwle <- PP_4pl(respm = awm,thres = diffpar,
                     slopes = sl,lowerA = la,type = "wle")
 # ------------------------------------------------------------------------
-## 4PL model ##### 
+## 4PL model #####
 # ------------------------------------------------------------------------
 # MLE
 res4plmle <- PP_4pl(respm = awm,thres = diffpar,
@@ -56,39 +56,39 @@ res4plwle <- PP_4pl(respm = awm,thres = diffpar,
 ## ----pfit, message=FALSE, warning=FALSE----------------------------------
 
 # ------------------------------------------------------------------------
-## 1PL model ##### 
+## 1PL model #####
 # ------------------------------------------------------------------------
-## LZ*-Index ##### 
+## LZ*-Index #####
 pfit1pl_lz <- Pfit(respm=awm,pp=res1plwle,fitindices="lzstar")
-## LZ*-Index combined with Infit-Outfit ##### 
+## LZ*-Index combined with Infit-Outfit #####
 pfit1pl_li <- Pfit(respm=awm,pp=res1plwle,fitindices=c("lzstar","infit","outfit"))
 # ------------------------------------------------------------------------
-## 2PL model ##### 
+## 2PL model #####
 # ------------------------------------------------------------------------
-## LZ*-Index ##### 
+## LZ*-Index #####
 pfit2pl_lz <- Pfit(respm=awm,pp=res2plwle,fitindices="lzstar")
-## LZ*-Index combined with Infit-Outfit ##### 
+## LZ*-Index combined with Infit-Outfit #####
 pfit2pl_li <- Pfit(respm=awm,pp=res2plwle,fitindices=c("lzstar","infit","outfit"))
 # ------------------------------------------------------------------------
-## 3PL model ##### 
+## 3PL model #####
 # ------------------------------------------------------------------------
-## LZ*-Index ##### 
+## LZ*-Index #####
 pfit3pl_lz <- Pfit(respm=awm,pp=res3plwle,fitindices="lzstar")
-## LZ*-Index combined with Infit-Outfit ##### 
+## LZ*-Index combined with Infit-Outfit #####
 pfit3pl_li <- Pfit(respm=awm,pp=res3plwle,fitindices=c("lzstar","infit","outfit"))
 # ------------------------------------------------------------------------
-## 4PL model ##### 
+## 4PL model #####
 # ------------------------------------------------------------------------
-## LZ*-Index ##### 
+## LZ*-Index #####
 pfit4pl_lz <- Pfit(respm=awm,pp=res4plwle,fitindices="lzstar")
-## LZ*-Index combined with Infit-Outfit ##### 
+## LZ*-Index combined with Infit-Outfit #####
 pfit4pl_li <- Pfit(respm=awm,pp=res4plwle,fitindices=c("lzstar","infit","outfit"))
 
 ## ----wle, message=FALSE, warning=FALSE-----------------------------------
 # ------------------------------------------------------------------------
-## 1PL model ##### 
+## 1PL model #####
 # ------------------------------------------------------------------------
-## LZ*-Index ##### 
+## LZ*-Index #####
 ## mle ####
 pfit1pl_mle_l <- Pfit(respm=awm,pp=res1plmle,fitindices="lzstar")
 ## wle ####

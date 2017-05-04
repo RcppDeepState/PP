@@ -2,7 +2,7 @@
 %\VignetteEngine{knitr::knitr}
 %\VignetteIndexEntry{Getting started with Personfit in PP}
 -->
-# Analyzing a real data set
+# Analyzing a simulated data set
 
 
 ```{r loadall}
