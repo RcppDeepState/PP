@@ -223,20 +223,20 @@ abline(v=0,col = "red", lwd = 3)
 
 In the second example we used the provided real dataset of the 'Adaptive Matrices Test'. Theses data where collected at the Unitersity of Vienna, Fakulty of Psychology, Division of Psychological Assessment and Applied Psychometrics. In the second plot we used only a subset of the provided data, because the computation of the standard error (here we used a jackknife (Efron & Stein, 1981)) takes a while.
 Magis, Raîche & Béland (2012) and also Armstrong, Stoumbos, Kung and Shi (2007) provide useful information for the inrepretation of the lz (Drasgow, Levine & Williams, 1985) and lz* (Snijders, 2001) person-fit index.
-The interpretation of the lz-values is very simple. The smaller (negative) the values, the stronger the indicated misfit. The lz-values ar asymptotically standard normally distributed. Molenaar and Hoijtink (1990) (and others) showed, that the asymptotically standard normal distrubution only holds, if the $\theta$ values are known. To overcome thes problem Snijders (2001) intruduced his lz* person-fit index. The inrepration of this index does not change. In summary Magis, Ra?che & B?land (2012) propose if the lz* index is lower than a certain critical value $z_\alpha$, than this person-fit value indicates a misfit.
+The interpretation of the lz-values is very simple. The smaller (negative) the values, the stronger the indicated misfit. The lz-values ar asymptotically standard normally distributed. Molenaar and Hoijtink (1990) (and others) showed, that the asymptotically standard normal distrubution only holds, if the $\theta$ values are known. To overcome thes problem Snijders (2001) intruduced his lz* person-fit index. The inrepration of this index does not change. In summary Magis, Raîche & Béland (2012) propose if the lz* index is lower than a certain critical value $z_\alpha$, than this person-fit value indicates a misfit.
 
 
 # References
-Armstrong, R.D., Z.G. Stoumbos, M.T. Kung, and M. Shi. 2007. On the Performance of the Lz Person-Fit Statistic. \emph{Practical Assessment, Research & Evaluation}. 12(16).
+Armstrong, R.D., Z.G. Stoumbos, M.T. Kung, and M. Shi. 2007. On the Performance of the Lz Person-Fit Statistic. *Practical Assessment, Research & Evaluation*, 12(16).
 
-Drasgow, F., M.V. Levine, and E.A. Williams. 1985. Appropriateness Measurement with Polychotomous Item Response Models and Standardized Indices. \emph{British Journal of Mathematical and Statistical Psychology}. 38(1). Wiley Online Library: 67-86.
+Drasgow, F., M.V. Levine, and E.A. Williams. 1985. Appropriateness Measurement with Polychotomous Item Response Models and Standardized Indices. *British Journal of Mathematical and Statistical Psychology*, 38(1). Wiley Online Library: 67-86.
 
-Efron, B., and C. Stein. 1981. The Jackknife Estimate of Variance. \emph{The Annals of Statistics.} JSTOR, 586-96.
+Efron, B., and C. Stein. 1981. The Jackknife Estimate of Variance. *The Annals of Statistics JSTOR*, 586-96.
 
-Magis, D., G. Raîche, and S. Béland. 2012. A Didactic Presentation of Snijders's Lz* Index of Person Fit with Emphasis on Response Model Selection and Ability Estimation. \emph{Journal of Educational and Behavioral Statistics} 37(1). SAGE Publications Sage CA: Los Angeles, CA: 57-81.
+Magis, D., G. Raîche, and S. Béland. 2012. A Didactic Presentation of Snijders's Lz* Index of Person Fit with Emphasis on Response Model Selection and Ability Estimation *Journal of Educational and Behavioral Statistics*, 37(1). SAGE Publications Sage CA: Los Angeles, CA: 57-81.
 
-Molenaar, I.W., and H. Hoijtink. 1990. The Many Null Distributions of Person Fit Indices. \emph{Psychometrika} 55(1). Springer: 75-106.
+Molenaar, I.W., and H. Hoijtink. 1990. The Many Null Distributions of Person Fit Indices. *Psychometrika*, 55(1). Springer: 75-106.
 
-Snijders, T.AB. 2001. Asymptotic Null Distribution of Person Fit Statistics with Estimated Person Parameter. \emph{Psychometrika}, 66(3). Springer: 331-342.
+Snijders, T.AB. 2001. Asymptotic Null Distribution of Person Fit Statistics with Estimated Person Parameter. *Psychometrika*}, 66(3). Springer: 331-342.
 
-Snijders, T.B. 2001. Asymptotic Null Distribution of Person Fit Statistics with Estimated Person Parameter. \emph{Rasch Measurement Transactions} 66(3): 331-342.
+Snijders, T.B. 2001. Asymptotic Null Distribution of Person Fit Statistics with Estimated Person Parameter. *Rasch Measurement Transactions*, 66(3): 331-342.
